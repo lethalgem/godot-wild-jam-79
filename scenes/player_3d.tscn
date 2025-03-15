@@ -31,6 +31,10 @@ fov = 38.0
 
 [node name="DebugStateLabel3D" type="Label3D" parent="."]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.07848, 0)
+billboard = 2
+text = "State"
+font_size = 87
 
 [node name="MouseModeController" type="Node3D" parent="."]
 script = ExtResource("4_4jfb6")
