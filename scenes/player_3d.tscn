@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8t036440xf3"]
+
+[ext_resource type="Script" uid="uid://brn3k1ki4wtq1" path="res://scripts/player_3d.gd" id="1_2djwe"]
+[ext_resource type="PackedScene" uid="uid://prh35jb6tjtd" path="res://assets/models/sophia/sophia_skin.tscn" id="1_52vux"]
+[ext_resource type="Script" uid="uid://jj4ic7xob8qc" path="res://scripts/camera_anchor.gd" id="2_reoop"]
+[ext_resource type="Script" uid="uid://rhfih0pkbaki" path="res://scripts/mouse_mode_controller.gd" id="4_4jfb6"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_52vux"]
+height = 1.8
+radius = 0.6
+
+[node name="Player3D" type="CharacterBody3D"]
+script = ExtResource("1_2djwe")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, -0.2)
+shape = SubResource("CylinderShape3D_52vux")
+
+[node name="SophiaSkin" parent="." instance=ExtResource("1_52vux")]
+unique_name_in_owner = true
+
+[node name="CameraAnchor" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+script = ExtResource("2_reoop")
+
+[node name="Camera3D" type="Camera3D" parent="CameraAnchor"]
+unique_name_in_owner = true
+transform = Transform3D(-1, -2.99003e-08, 8.21505e-08, 0, 0.939693, 0.34202, -8.74228e-08, 0.34202, -0.939693, 0, 4.59, -10)
+fov = 38.0
+
+[node name="DebugStateLabel3D" type="Label3D" parent="."]
+unique_name_in_owner = true
+
+[node name="MouseModeController" type="Node3D" parent="."]
+script = ExtResource("4_4jfb6")
