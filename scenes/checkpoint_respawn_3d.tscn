@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://vtkc3myfd1i6"]
+
+[ext_resource type="Script" uid="uid://dfgactjfxrvls" path="res://scripts/checkpoint_respawn.gd" id="1_20r7v"]
+[ext_resource type="Texture2D" uid="uid://ck54ycnjosij8" path="res://assets/textures/prototype_surface_2.png" id="2_5l2dp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hgk4f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2icy0"]
+albedo_color = Color(0.578026, 0, 0.272894, 1)
+albedo_texture = ExtResource("2_5l2dp")
+
+[sub_resource type="BoxMesh" id="BoxMesh_82env"]
+material = SubResource("StandardMaterial3D_2icy0")
+
+[node name="CheckpointRespawn3D" type="Area3D"]
+script = ExtResource("1_20r7v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_hgk4f")
+debug_color = Color(0.676788, 0, 0.194063, 0.42)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_82env")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

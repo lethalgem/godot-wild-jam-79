@@ -1,17 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://j4c625fopnpl"]
+[gd_scene load_steps=6 format=3 uid="uid://j4c625fopnpl"]
 
 [ext_resource type="Script" uid="uid://c77ex4bjt8oh5" path="res://scripts/timer_trigger_3d.gd" id="1_yy7gg"]
+[ext_resource type="Texture2D" uid="uid://ck54ycnjosij8" path="res://assets/textures/prototype_surface_2.png" id="2_b605b"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b605b"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rdkpx"]
+albedo_color = Color(0, 0.867791, 0.906626, 0.243137)
+albedo_texture = ExtResource("2_b605b")
+
 [sub_resource type="BoxMesh" id="BoxMesh_yy7gg"]
+material = SubResource("StandardMaterial3D_rdkpx")
 
 [node name="TimerTrigger3D" type="Area3D"]
 script = ExtResource("1_yy7gg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_b605b")
-debug_color = Color(0.932011, 0.164976, 0.508585, 0.42)
+debug_color = Color(4.21144e-07, 0.342898, 0.210233, 0.42)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_yy7gg")

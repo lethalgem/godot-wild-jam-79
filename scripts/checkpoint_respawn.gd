@@ -1,5 +1,5 @@
 @tool
-class_name TimerTrigger3D extends Area3D
+class_name CheckpointRespawn3D extends Area3D
 
 signal player_entered
 
@@ -11,11 +11,11 @@ func _ready():
 	if not Engine.is_editor_hint():
 		debug_mesh.visible = false
 
-func _process(_delta):
+func _process(delta):
 	if collision_shape.shape.size != size:
 		collision_shape.shape.size = size
 		debug_mesh.mesh.size = size
 
 func _on_body_entered(body):
 	if body is Player3D:
-		player_entered.emit()
+		player_entered.emit(self)
