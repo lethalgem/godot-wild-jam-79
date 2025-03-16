@@ -329,7 +329,7 @@ class StateDoubleJump extends State:
 
 class StateDash extends State:
 	var dash_distance := 10.0 # meters
-	var dash_time := 1.5 # second
+	var dash_time := 0.15 # second
 	
 	var _elapsed_time := 0.0
 	
@@ -337,19 +337,17 @@ class StateDash extends State:
 		super("Dash", init_player)
 		
 	func enter():
-		# Step 1: Get Current Position
-		var current_position = player.global_position
-		# Step 2: Get horizontal forward vector & # Step 3: Lenghten by distance (10m)
 		# Ignore y velocity so the skin stays up right
 		# Add position to make everything relative to where the player is
 		var dash_endpoint := (player.velocity * Vector3(1, 0, 1)).normalized() * dash_distance + player.global_position
-		#if not (dash_endpoint - player.global_position).is_zero_approx():
-			#player.skin.look_at(dash_endpoint)
-		# Step 4: Assign new position to Player3D
+
 		if player.velocity.is_zero_approx():
 			dash_endpoint = player.skin.get_global_transform().basis.z * dash_distance + player.global_position
 		
-		player.global_position = dash_endpoint
+		#player.global_position = dash_endpoint
+		
+		var tween = player.create_tween()
+		tween.tween_property(player,"global_position",dash_endpoint,dash_time).set_ease(Tween.EASE_IN_OUT)
 	
 	func update(delta: float) -> Events:
 		_elapsed_time += delta
