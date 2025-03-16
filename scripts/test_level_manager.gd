@@ -11,3 +11,7 @@ func _on_checkpoint_respawn_3d_player_entered(checkpoint:CheckpointRespawn3D):
 func _input(event):
 	if event.is_action_pressed("respawn"):
 		player.global_position = current_checkpoint.global_position
+
+
+func _on_death_plane_3d_player_entered():
+	player.global_position = current_checkpoint.global_position

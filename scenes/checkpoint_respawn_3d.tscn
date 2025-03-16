@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ck54ycnjosij8" path="res://assets/textures/prototype_surface_2.png" id="2_5l2dp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hgk4f"]
+size = Vector3(10, 5, 10)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2icy0"]
 albedo_color = Color(0.578026, 0, 0.272894, 1)
@@ -11,6 +12,7 @@ albedo_texture = ExtResource("2_5l2dp")
 
 [sub_resource type="BoxMesh" id="BoxMesh_82env"]
 material = SubResource("StandardMaterial3D_2icy0")
+size = Vector3(10, 5, 10)
 
 [node name="CheckpointRespawn3D" type="Area3D"]
 script = ExtResource("1_20r7v")

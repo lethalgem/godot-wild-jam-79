@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cxxybm06lsqvr"]
+[gd_scene load_steps=10 format=3 uid="uid://cxxybm06lsqvr"]
 
 [ext_resource type="Script" uid="uid://y8065w35x8ex" path="res://scripts/test_level_manager.gd" id="1_hidvt"]
 [ext_resource type="Texture2D" uid="uid://djv1jsrblx6cb" path="res://assets/textures/prototype_surface_1.png" id="1_p1gcm"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cfcdfh2hxyn7a" path="res://scenes/growing_platform_3d.tscn" id="3_b5onc"]
 [ext_resource type="PackedScene" uid="uid://j4c625fopnpl" path="res://scenes/timer_trigger_3d.tscn" id="4_uxpu0"]
 [ext_resource type="PackedScene" uid="uid://vtkc3myfd1i6" path="res://scenes/checkpoint_respawn_3d.tscn" id="5_rbj8j"]
+[ext_resource type="PackedScene" uid="uid://d2rnwb6em08gc" path="res://scenes/death_plane_3d.tscn" id="7_q5oqk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qm5my"]
 albedo_color = Color(0.207843, 1, 1, 1)
@@ -69,8 +70,13 @@ size = Vector3(10, 5, 10)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.0267, -0.499329, 53.3421)
 size = Vector3(10, 5, 10)
 
+[node name="DeathPlane3D" parent="." instance=ExtResource("7_q5oqk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.43191, -11.2855, 9.5695)
+size = Vector3(250, 5, 250)
+
 [connection signal="player_entered" from="TimerTrigger3D" to="GrowingPlatform" method="_on_timer_trigger_3d_player_entered"]
 [connection signal="player_entered" from="TimerTrigger3D" to="GrowingPlatform2" method="_on_timer_trigger_3d_player_entered"]
 [connection signal="player_entered" from="TimerTrigger3D" to="GrowingPlatform3" method="_on_timer_trigger_3d_player_entered"]
 [connection signal="player_entered" from="CheckpointRespawn3D" to="." method="_on_checkpoint_respawn_3d_player_entered"]
 [connection signal="player_entered" from="CheckpointRespawn3D2" to="." method="_on_checkpoint_respawn_3d_player_entered"]
+[connection signal="player_entered" from="DeathPlane3D" to="." method="_on_death_plane_3d_player_entered"]
