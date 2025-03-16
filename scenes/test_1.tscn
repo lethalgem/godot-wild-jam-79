@@ -34,4 +34,5 @@ environment = SubResource("Environment_b5onc")
 
 [node name="Player3D" parent="." instance=ExtResource("2_qm5my")]
 max_speed = 20.0
+camera_fov_dashing = 62
 max_air_control_speed = 20.0

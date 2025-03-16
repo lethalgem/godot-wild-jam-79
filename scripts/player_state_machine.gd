@@ -285,8 +285,11 @@ class StateDash extends State:
 	
 	var dash_distance := 10.0 # meters
 	var dash_time := 0.15 # second
+	var camera_fov := 45 # degrees
+	var camera_zoom_time = 0.25 # seconds
 	
 	var _elapsed_time := 0.0
+	var _initial_camera_fov: float
 	
 	func _init(init_player: Player3D) -> void:
 		super("Dash", init_player)
@@ -307,11 +310,17 @@ class StateDash extends State:
 		var tween = player.create_tween()
 		tween.tween_property(player, "global_position", dash_endpoint, dash_time).set_ease(Tween.EASE_IN_OUT)
 	
+		_initial_camera_fov = player.camera_3D.fov
+		tween.parallel().tween_property(player.camera_3D, "fov", camera_fov, camera_zoom_time).set_ease(Tween.EASE_IN_OUT)
+	
 	func exit():
 		_elapsed_time = 0.0
 		
 		# Don't preserve any velocity from previous state
 		player.velocity = Vector3.ZERO
+		
+		var tween = player.create_tween()
+		tween.tween_property(player.camera_3D, "fov", _initial_camera_fov, camera_zoom_time).set_ease(Tween.EASE_IN_OUT)
 	
 	func update(delta: float) -> Events:
 		_elapsed_time += delta
