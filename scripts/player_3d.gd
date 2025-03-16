@@ -7,6 +7,10 @@ class_name Player3D extends CharacterBody3D
 ## The maximum speed the player can move at in meters per second.
 @export_range(3.0, 12.0, 0.1) var max_speed := 6.0
 
+@export_group("State DASH")
+@export_range(0, 30, 0.5) var dash_distance := 10.0
+@export_range(0, 1, 0.01) var dash_time := 0.15
+
 @export_group("State JUMPING/State DOUBLE_JUMPING")
 @export_range(3.0, 12.0, 0.1) var max_air_control_speed := 6.0
 @export_range(1.0, 30.0, 0.1) var jump_velocity := 20.0
@@ -40,6 +44,8 @@ func _ready() -> void:
 	double_jump.camera_zoom_time = camera_zoom_time_jumping
 	
 	var dash := PlayerStateMachine.StateDash.new(self)
+	dash.dash_distance = dash_distance
+	dash.dash_time = dash_time
 
 	state_machine.transitions = {
 		idle: {
