@@ -15,5 +15,10 @@ material = SubResource("StandardMaterial3D_f4yqo")
 script = ExtResource("1_f4yqo")
 
 [node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 5, 0)
+debug_shape_thickness = 5
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

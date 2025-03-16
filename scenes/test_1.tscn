@@ -37,6 +37,9 @@ max_air_control_speed = 20.0
 
 [node name="GrowingPlatform" parent="." instance=ExtResource("3_b5onc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.551519, 1.3292, 10.3438)
+move_time = 2.0
+movement_delay = 3.0
+final_relative_pos = Vector3(0, 20, 0)
 
 [node name="TimerTrigger3D" parent="." instance=ExtResource("4_uxpu0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09353, 0.509963, -53.2536)

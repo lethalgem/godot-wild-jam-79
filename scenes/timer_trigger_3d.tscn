@@ -3,10 +3,8 @@
 [ext_resource type="Script" uid="uid://c77ex4bjt8oh5" path="res://scripts/timer_trigger_3d.gd" id="1_yy7gg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b605b"]
-size = Vector3(10, 1, 10)
 
 [sub_resource type="BoxMesh" id="BoxMesh_yy7gg"]
-size = Vector3(10, 1, 10)
 
 [node name="TimerTrigger3D" type="Area3D"]
 script = ExtResource("1_yy7gg")
