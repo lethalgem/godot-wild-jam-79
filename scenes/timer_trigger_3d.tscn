@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://j4c625fopnpl"]
+
+[ext_resource type="Script" uid="uid://c77ex4bjt8oh5" path="res://scripts/timer_trigger_3d.gd" id="1_yy7gg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b605b"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_yy7gg"]
+size = Vector3(10, 1, 10)
+
+[node name="TimerTrigger3D" type="Area3D"]
+script = ExtResource("1_yy7gg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_b605b")
+debug_color = Color(0.932011, 0.164976, 0.508585, 0.42)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_yy7gg")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

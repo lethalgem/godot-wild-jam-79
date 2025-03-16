@@ -223,7 +223,6 @@ class StateWalk extends State:
 			return Events.PLAYER_FELL
 		return Events.NONE
 
-
 class StateJump extends State:
 
 	var jump_velocity := 15.0

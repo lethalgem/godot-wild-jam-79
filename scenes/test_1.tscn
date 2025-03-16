@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cxxybm06lsqvr"]
+[gd_scene load_steps=7 format=3 uid="uid://cxxybm06lsqvr"]
 
 [ext_resource type="Texture2D" uid="uid://djv1jsrblx6cb" path="res://assets/textures/prototype_surface_1.png" id="1_p1gcm"]
 [ext_resource type="PackedScene" uid="uid://c8t036440xf3" path="res://scenes/player_3d.tscn" id="2_qm5my"]
+[ext_resource type="PackedScene" uid="uid://cfcdfh2hxyn7a" path="res://scenes/growing_platform_3d.tscn" id="3_b5onc"]
+[ext_resource type="PackedScene" uid="uid://j4c625fopnpl" path="res://scenes/timer_trigger_3d.tscn" id="4_uxpu0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qm5my"]
 albedo_color = Color(0.207843, 1, 1, 1)
@@ -32,3 +34,12 @@ environment = SubResource("Environment_b5onc")
 max_speed = 20.0
 camera_fov_dashing = 62
 max_air_control_speed = 20.0
+
+[node name="GrowingPlatform" parent="." instance=ExtResource("3_b5onc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.551519, 1.3292, 10.3438)
+
+[node name="TimerTrigger3D" parent="." instance=ExtResource("4_uxpu0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09353, 0.509963, -53.2536)
+size = Vector3(10, 1, 10)
+
+[connection signal="player_entered" from="TimerTrigger3D" to="GrowingPlatform" method="_on_timer_trigger_3d_player_entered"]
