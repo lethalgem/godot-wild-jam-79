@@ -25,6 +25,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
 top_level = true
 script = ExtResource("2_reoop")
 player = NodePath("..")
+camera_rotation_sensitivity = 725.0
 
 [node name="Camera3D" type="Camera3D" parent="CameraAnchor"]
 unique_name_in_owner = true

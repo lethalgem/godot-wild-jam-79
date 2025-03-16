@@ -1,8 +1,9 @@
 extends Node3D
 
 @export var player: Player3D
-## How fast the camera rotates when moved by the player
-@export var camera_rotation_sensitivity := 100.0
+## How fast the camera rotates when moved by the player.
+## Lower value makes rotations faster.
+@export_range (100,1000, 1) var camera_rotation_sensitivity := 100.0
 ## How fast the camera follows the player, lower values result in a higher amount of lag
 @export var lag_factor := 5.0
 
