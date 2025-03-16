@@ -9,6 +9,7 @@ enum Events {
 	PLAYER_LANDED,
 	PLAYER_DOUBLE_JUMPED,
 	PLAYER_DASHED,
+	PLAYER_FELL,
 }
 
 
@@ -156,10 +157,15 @@ class StateIdle extends State:
 
 	func update(_delta: float) -> Events:
 		var input_vector := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+		
+		# Idle shouldn't preserve any horizontal velocity from previous states
+		const GRAVITY := 40.0
+		player.velocity = Vector3(0, GRAVITY * _delta * -1 + player.velocity.y, 0)
+		player.move_and_slide()
 
 		# multiply by inverse x and y to account for skin's local axes.
 		# Add position to make everything relative to where the player is
-		var look_at_direction := (player.velocity * Vector3(-1, 1 , -1)).normalized() + player.global_position
+		var look_at_direction := (player.velocity * Vector3(-1, 0 , -1)).normalized() + player.global_position
 		if not (look_at_direction - player.global_position).is_zero_approx():
 			player.skin.look_at(look_at_direction)
 
@@ -169,6 +175,8 @@ class StateIdle extends State:
 			return Events.PLAYER_JUMPED
 		elif Input.is_action_just_pressed("dash"):
 			return Events.PLAYER_DASHED
+		elif player.velocity.y < 0:
+			return Events.PLAYER_FELL
 		return Events.NONE
 
 
@@ -194,6 +202,7 @@ class StateWalk extends State:
 		var steering_amount: float = min(steering_factor * _delta, 1.0)
 		player.velocity += steering_vector * steering_amount
 
+		# TODO: Make gravity a global parameter for the state machine. AKA the gravity for all states can be changed at once
 		const GRAVITY := 40.0 * Vector3.DOWN
 		player.velocity += GRAVITY * _delta
 		player.move_and_slide()
@@ -210,10 +219,11 @@ class StateWalk extends State:
 			return Events.PLAYER_JUMPED
 		elif Input.is_action_just_pressed("dash"):
 			return Events.PLAYER_DASHED
+		elif player.velocity.y < 0:
+			return Events.PLAYER_FELL
 		return Events.NONE
 
 
-# TODO: Adjust look_at such that we always face relative to the ground (eventually gravity when platforms can angle)
 class StateJump extends State:
 
 	var jump_velocity := 15.0
@@ -255,9 +265,6 @@ class StateJump extends State:
 		player.velocity += GRAVITY * _delta
 		player.move_and_slide()
 
-		if player.velocity.y <= 0:
-			player.skin.fall()
-
 		# multiply by inverse x and y to account for skin's local axes. Ignore y velocity so the skin stays up right
 		# Add position to make everything relative to where the player is
 		var look_at_direction := (player.velocity * Vector3(-1, 0, -1)).normalized() + player.global_position
@@ -270,64 +277,12 @@ class StateJump extends State:
 			return Events.PLAYER_DOUBLE_JUMPED
 		elif Input.is_action_just_pressed("dash"):
 			return Events.PLAYER_DASHED
+		elif player.velocity.y < 0:
+			return Events.PLAYER_FELL
 		return Events.NONE
-
-class StateDoubleJump extends State:
-	
-	var jump_velocity := 15.0
-	var max_speed := 10.0
-	var steering_factor := 20.0
-	var camera_fov := 45 # degrees
-	var camera_zoom_time = 0.25 # seconds
-
-	var _initial_camera_fov: float
-
-	func _init(init_player: Player3D) -> void:
-		super("Double Jump", init_player)
-
-	func enter() -> void:
-		player.skin.jump()
-		player.velocity.y = jump_velocity
-
-		_initial_camera_fov = player.camera_3D.fov
-
-		var tween = player.create_tween()
-		tween.parallel().tween_property(player.camera_3D, "fov", camera_fov, camera_zoom_time).set_ease(Tween.EASE_IN_OUT)
-
-	func exit() -> void:
-		var tween = player.create_tween()
-		tween.parallel().tween_property(player.camera_3D, "fov", _initial_camera_fov, camera_zoom_time).set_ease(Tween.EASE_IN_OUT)
-
-	func update(_delta: float) -> Events:
-		var input_vector := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
-		# inverse to account for positive player axes and rotate relative to camera forward
-		var direction := Vector3(-input_vector.x, 0.0, -input_vector.y).rotated(Vector3(0, 1, 0), player.camera_anchor.rotation.y)
-		var desired_ground_velocity: Vector3 = max_speed * direction
-		var steering_vector := desired_ground_velocity - player.velocity
-		steering_vector.y = 0.0
-		# We limit the steering amount to ensure the velocity can never overshoots the desired velocity.
-		var steering_amount: float = min(steering_factor * _delta, 1.0)
-		player.velocity += steering_vector * steering_amount
-
-		const GRAVITY := 40.0 * Vector3.DOWN
-		player.velocity += GRAVITY * _delta
-		player.move_and_slide()
-
-		if player.velocity.y <= 0:
-			player.skin.fall()
-
-		# multiply by inverse x and y to account for skin's local axes. Ignore y velocity so the skin stays up right
-		# Add position to make everything relative to where the player is
-		var look_at_direction := (player.velocity * Vector3(-1, 0, -1)).normalized() + player.global_position
-		if not (look_at_direction - player.global_position).is_zero_approx():
-			player.skin.look_at(look_at_direction)
-			
-		if player.is_on_floor():
-			return Events.PLAYER_LANDED
-		return Events.NONE
-
 
 class StateDash extends State:
+	
 	var dash_distance := 10.0 # meters
 	var dash_time := 0.15 # second
 	
@@ -337,22 +292,71 @@ class StateDash extends State:
 		super("Dash", init_player)
 		
 	func enter():
+		player.skin.fall()
+		
 		# Ignore y velocity so the skin stays up right
 		# Add position to make everything relative to where the player is
 		var dash_endpoint := (player.velocity * Vector3(1, 0, 1)).normalized() * dash_distance + player.global_position
 
-		if player.velocity.is_zero_approx():
+		# Dash in the skin's forward direction if the player is not moving horizontally
+		# We use velocity to determine skin direction, so we shouldn't default to this method unless static
+		if Vector2(player.velocity.x, player.velocity.z).is_zero_approx():
 			dash_endpoint = player.skin.get_global_transform().basis.z * dash_distance + player.global_position
 		
-		#player.global_position = dash_endpoint
-		
+		# Smoothly move to the dashed position
 		var tween = player.create_tween()
-		tween.tween_property(player,"global_position",dash_endpoint,dash_time).set_ease(Tween.EASE_IN_OUT)
+		tween.tween_property(player, "global_position", dash_endpoint, dash_time).set_ease(Tween.EASE_IN_OUT)
+	
+	func exit():
+		_elapsed_time = 0.0
+		
+		# Don't preserve any velocity from previous state
+		player.velocity = Vector3.ZERO
 	
 	func update(delta: float) -> Events:
 		_elapsed_time += delta
 		
-		if _elapsed_time >= 2.0:
+		if _elapsed_time >= dash_time:
 			return Events.FINISHED
 		return Events.NONE
+
+
+class StateFall extends State:
+	
+	var gravity_strength := 40.0
+	var max_speed := 10.0
+	var steering_factor := 20.0
+	
+	func _init(init_player: Player3D) -> void:
+		super("Fall", init_player)
 		
+	func enter():
+		player.skin.fall()
+	
+	func update(delta: float) -> Events:
+		player.velocity += gravity_strength * delta * Vector3.DOWN
+		player.move_and_slide()
+		
+		var input_vector := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+		# inverse to account for positive player axes and rotate relative to camera forward
+		var direction := Vector3(-input_vector.x, 0.0, -input_vector.y).rotated(Vector3(0, 1, 0), player.camera_anchor.rotation.y)
+		var desired_ground_velocity: Vector3 = max_speed * direction
+		var steering_vector := desired_ground_velocity - player.velocity
+		steering_vector.y = 0.0
+		# We limit the steering amount to ensure the velocity can never overshoots the desired velocity.
+		var steering_amount: float = min(steering_factor * delta, 1.0)
+		player.velocity += steering_vector * steering_amount
+		
+		# multiply by inverse x and y to account for skin's local axes. Ignore y velocity so the skin stays up right
+		# Add position to make everything relative to where the player is
+		var look_at_direction := (player.velocity * Vector3(-1, 0, -1)).normalized() + player.global_position
+		if not (look_at_direction - player.global_position).is_zero_approx():
+			player.skin.look_at(look_at_direction)
+		
+		if player.velocity.y >= 0:
+			return Events.PLAYER_LANDED
+		elif Input.is_action_just_pressed("jump"):
+			return Events.PLAYER_DOUBLE_JUMPED
+		elif Input.is_action_just_pressed("dash"):
+			return Events.PLAYER_DASHED
+		return Events.NONE

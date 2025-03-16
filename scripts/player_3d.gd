@@ -5,17 +5,20 @@ class_name Player3D extends CharacterBody3D
 
 @export_group("State WALKING")
 ## The maximum speed the player can move at in meters per second.
-@export_range(3.0, 12.0, 0.1) var max_speed := 6.0
+@export_range(3.0, 30.0, 0.1) var max_speed := 6.0
 
 @export_group("State DASH")
-@export_range(0, 30, 0.5) var dash_distance := 10.0
-@export_range(0, 1, 0.01) var dash_time := 0.15
+@export_range(0, 30.0, 0.5) var dash_distance := 10.0
+@export_range(0, 1.0, 0.01) var dash_time := 0.15
 
-@export_group("State JUMPING/State DOUBLE_JUMPING")
-@export_range(3.0, 12.0, 0.1) var max_air_control_speed := 6.0
+@export_group("State JUMPING & DOUBLE_JUMPING")
+@export_range(3.0, 30.0, 0.1) var max_air_control_speed := 6.0
 @export_range(1.0, 30.0, 0.1) var jump_velocity := 20.0
 @export_range(1, 179, 1) var camera_fov_jumping:= 40
 @export_range(0.001, 1, 0.01) var camera_zoom_time_jumping := 0.25
+
+@export_group("State FALLING")
+@export_range(0.0, 100.0, 0.1) var gravity_strength := 40.0
 
 @onready var skin: SophiaSkin3D = %SophiaSkin
 @onready var camera_anchor: Node3D = %CameraAnchor
@@ -37,7 +40,7 @@ func _ready() -> void:
 	jump.camera_fov = camera_fov_jumping
 	jump.camera_zoom_time = camera_zoom_time_jumping
 	
-	var double_jump := PlayerStateMachine.StateDoubleJump.new(self)
+	var double_jump := PlayerStateMachine.StateJump.new(self)
 	double_jump.max_speed = max_air_control_speed
 	double_jump.jump_velocity = jump_velocity
 	double_jump.camera_fov = camera_fov_jumping
@@ -46,31 +49,44 @@ func _ready() -> void:
 	var dash := PlayerStateMachine.StateDash.new(self)
 	dash.dash_distance = dash_distance
 	dash.dash_time = dash_time
+	
+	var fall := PlayerStateMachine.StateFall.new(self)
+	fall.gravity_strength = gravity_strength
+	fall.steering_factor = steering_factor
+	fall.max_speed = max_air_control_speed
 
+	# TODO: Only allow one extra jump and dash for each time the player enters the air (fall or jump)
 	state_machine.transitions = {
 		idle: {
 			PlayerStateMachine.Events.PLAYER_STARTED_MOVING: walk,
 			PlayerStateMachine.Events.PLAYER_JUMPED: jump,
 			PlayerStateMachine.Events.PLAYER_DASHED: dash,
+			PlayerStateMachine.Events.PLAYER_FELL: fall,
 		},
 		walk: {
 			PlayerStateMachine.Events.PLAYER_STOPPED_MOVING: idle,
 			PlayerStateMachine.Events.PLAYER_JUMPED: jump,
 			PlayerStateMachine.Events.PLAYER_DASHED: dash,
+			PlayerStateMachine.Events.PLAYER_FELL: fall,
 		},
 		jump: {
 			PlayerStateMachine.Events.PLAYER_LANDED: idle,
 			PlayerStateMachine.Events.PLAYER_DOUBLE_JUMPED : double_jump,
 			PlayerStateMachine.Events.PLAYER_DASHED: dash,
+			PlayerStateMachine.Events.PLAYER_FELL: fall,
 		},
 		double_jump: {
 			PlayerStateMachine.Events.PLAYER_LANDED: idle,
+			PlayerStateMachine.Events.PLAYER_FELL: fall,
 		},
 		dash: {
-			PlayerStateMachine.Events.PLAYER_STOPPED_MOVING: idle,
-			PlayerStateMachine.Events.PLAYER_LANDED: idle,
 			PlayerStateMachine.Events.FINISHED: idle,
 		},
+		fall: {
+			PlayerStateMachine.Events.PLAYER_LANDED: idle,
+			PlayerStateMachine.Events.PLAYER_DOUBLE_JUMPED: double_jump,
+			PlayerStateMachine.Events.PLAYER_DASHED: dash,
+		}
 	}
 
 	state_machine.activate(idle)
