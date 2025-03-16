@@ -1,12 +1,17 @@
 extends Node3D
 
-# TODO: Make the camera lag behind the player slightly, it'll make all the movement feel way juicier
-# TODO: Have the camera not move up too much with the player when jumping, they want to be able to see where they're landing
-
-@export var camera_sensitivity := 100.0
+@export var player: Player3D
+## How fast the camera rotates when moved by the player
+@export var camera_rotation_sensitivity := 100.0
+## How fast the camera follows the player, lower values result in a higher amount of lag
+@export var lag_factor := 5.0
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		rotation.y -= event.relative.x / camera_sensitivity
-		rotation.x += event.relative.y / camera_sensitivity
+		rotation.y -= event.relative.x / camera_rotation_sensitivity
+		rotation.x += event.relative.y / camera_rotation_sensitivity
 		rotation.x = clamp(rotation.x, deg_to_rad(-45), deg_to_rad(90))
+
+func _physics_process(delta: float) -> void:
+	# Lag camera behind the player
+	global_position = lerp(global_position, player.global_position, delta * lag_factor)

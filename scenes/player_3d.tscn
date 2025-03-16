@@ -19,15 +19,18 @@ shape = SubResource("CylinderShape3D_52vux")
 [node name="SophiaSkin" parent="." instance=ExtResource("1_52vux")]
 unique_name_in_owner = true
 
-[node name="CameraAnchor" type="Node3D" parent="."]
+[node name="CameraAnchor" type="Node3D" parent="." node_paths=PackedStringArray("player")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+top_level = true
 script = ExtResource("2_reoop")
+player = NodePath("..")
 
 [node name="Camera3D" type="Camera3D" parent="CameraAnchor"]
 unique_name_in_owner = true
 transform = Transform3D(-1, -2.99003e-08, 8.21505e-08, 0, 0.939693, 0.34202, -8.74228e-08, 0.34202, -0.939693, 0, 4.59, -10)
-fov = 38.0
+v_offset = 1.255
+fov = 58.3
 
 [node name="DebugStateLabel3D" type="Label3D" parent="."]
 unique_name_in_owner = true
