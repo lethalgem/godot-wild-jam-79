@@ -10,6 +10,7 @@ height = 1.8
 radius = 0.6
 
 [node name="Player3D" type="CharacterBody3D"]
+input_ray_pickable = false
 script = ExtResource("1_2djwe")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -42,3 +43,11 @@ font_size = 87
 
 [node name="MouseModeController" type="Node3D" parent="."]
 script = ExtResource("4_4jfb6")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_cull_mask = 4293918976
+shadow_enabled = true
+shadow_caster_mask = 4293918976
+directional_shadow_mode = 0
+sky_mode = 1

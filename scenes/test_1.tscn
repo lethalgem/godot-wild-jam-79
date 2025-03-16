@@ -25,10 +25,6 @@ use_collision = true
 size = Vector3(108.084, 1, 116.662)
 material = SubResource("StandardMaterial3D_qm5my")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.738373, -0.491152, -0.462142, 0, -0.685272, 0.728287, -0.674393, -0.537748, -0.505986, 0, 7.82901, 0)
-shadow_enabled = true
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_b5onc")
 
