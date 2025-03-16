@@ -13,7 +13,7 @@ func _ready():
 	if not Engine.is_editor_hint():
 		debug_mesh.visible = false
 
-func _process(delta):
+func _process(_delta):
 	if collision_shape.shape.size != size:
 		collision_shape.shape.size = size
 		debug_mesh.mesh.size = size

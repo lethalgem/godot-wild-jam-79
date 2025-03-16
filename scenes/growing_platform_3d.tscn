@@ -18,6 +18,7 @@ script = ExtResource("1_f4yqo")
 one_shot = true
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
+top_level = true
 target_position = Vector3(0, 5, 0)
 debug_shape_thickness = 5
 

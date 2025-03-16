@@ -31,18 +31,33 @@ material = SubResource("StandardMaterial3D_qm5my")
 environment = SubResource("Environment_b5onc")
 
 [node name="Player3D" parent="." instance=ExtResource("2_qm5my")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 max_speed = 20.0
 camera_fov_dashing = 62
 max_air_control_speed = 20.0
 
 [node name="GrowingPlatform" parent="." instance=ExtResource("3_b5onc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.551519, 1.3292, 10.3438)
-move_time = 2.0
-movement_delay = 3.0
-final_relative_pos = Vector3(0, 20, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -72.2371, -0.688374, -68.7504)
+move_time = 5.0
+movement_delay = 0.0
+final_relative_pos = Vector3(200, 0, 0)
+
+[node name="GrowingPlatform2" parent="." instance=ExtResource("3_b5onc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 109.148, -0.688374, -82.5443)
+move_time = 5.0
+movement_delay = 1.0
+final_relative_pos = Vector3(-200, 0, 0)
+
+[node name="GrowingPlatform3" parent="." instance=ExtResource("3_b5onc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -111.847, -0.688374, -107.359)
+move_time = 5.0
+movement_delay = 2.0
+final_relative_pos = Vector3(200, 0, 0)
 
 [node name="TimerTrigger3D" parent="." instance=ExtResource("4_uxpu0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09353, 0.509963, -53.2536)
-size = Vector3(10, 1, 10)
+size = Vector3(10, 16.395, 10)
 
 [connection signal="player_entered" from="TimerTrigger3D" to="GrowingPlatform" method="_on_timer_trigger_3d_player_entered"]
+[connection signal="player_entered" from="TimerTrigger3D" to="GrowingPlatform2" method="_on_timer_trigger_3d_player_entered"]
+[connection signal="player_entered" from="TimerTrigger3D" to="GrowingPlatform3" method="_on_timer_trigger_3d_player_entered"]

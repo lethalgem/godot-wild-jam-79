@@ -1,4 +1,6 @@
-extends Node3D
+# TODO: add spring arm
+# TODO: zoom out more when looking down, and zoom in when looking up
+class_name CameraAnchor extends Node3D
 
 @export var player: Player3D
 ## How fast the camera rotates when moved by the player.
