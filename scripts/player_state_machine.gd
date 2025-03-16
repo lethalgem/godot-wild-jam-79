@@ -7,6 +7,8 @@ enum Events {
 	PLAYER_STOPPED_MOVING,
 	PLAYER_JUMPED,
 	PLAYER_LANDED,
+	PLAYER_DOUBLE_JUMPED,
+	PLAYER_DASHED,
 }
 
 
@@ -165,6 +167,8 @@ class StateIdle extends State:
 			return Events.PLAYER_STARTED_MOVING
 		elif Input.is_action_just_pressed("jump"):
 			return Events.PLAYER_JUMPED
+		elif Input.is_action_just_pressed("dash"):
+			return Events.PLAYER_DASHED
 		return Events.NONE
 
 
@@ -204,6 +208,8 @@ class StateWalk extends State:
 			return Events.PLAYER_STOPPED_MOVING
 		elif Input.is_action_just_pressed("jump"):
 			return Events.PLAYER_JUMPED
+		elif Input.is_action_just_pressed("dash"):
+			return Events.PLAYER_DASHED
 		return Events.NONE
 
 
@@ -260,4 +266,95 @@ class StateJump extends State:
 			
 		if player.is_on_floor():
 			return Events.PLAYER_LANDED
+		elif Input.is_action_just_pressed("jump"):
+			return Events.PLAYER_DOUBLE_JUMPED
+		elif Input.is_action_just_pressed("dash"):
+			return Events.PLAYER_DASHED
 		return Events.NONE
+
+class StateDoubleJump extends State:
+	
+	var jump_velocity := 15.0
+	var max_speed := 10.0
+	var steering_factor := 20.0
+	var camera_fov := 45 # degrees
+	var camera_zoom_time = 0.25 # seconds
+
+	var _initial_camera_fov: float
+
+	func _init(init_player: Player3D) -> void:
+		super("Double Jump", init_player)
+
+	func enter() -> void:
+		player.skin.jump()
+		player.velocity.y = jump_velocity
+
+		_initial_camera_fov = player.camera_3D.fov
+
+		var tween = player.create_tween()
+		tween.parallel().tween_property(player.camera_3D, "fov", camera_fov, camera_zoom_time).set_ease(Tween.EASE_IN_OUT)
+
+	func exit() -> void:
+		var tween = player.create_tween()
+		tween.parallel().tween_property(player.camera_3D, "fov", _initial_camera_fov, camera_zoom_time).set_ease(Tween.EASE_IN_OUT)
+
+	func update(_delta: float) -> Events:
+		var input_vector := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+		# inverse to account for positive player axes and rotate relative to camera forward
+		var direction := Vector3(-input_vector.x, 0.0, -input_vector.y).rotated(Vector3(0, 1, 0), player.camera_anchor.rotation.y)
+		var desired_ground_velocity: Vector3 = max_speed * direction
+		var steering_vector := desired_ground_velocity - player.velocity
+		steering_vector.y = 0.0
+		# We limit the steering amount to ensure the velocity can never overshoots the desired velocity.
+		var steering_amount: float = min(steering_factor * _delta, 1.0)
+		player.velocity += steering_vector * steering_amount
+
+		const GRAVITY := 40.0 * Vector3.DOWN
+		player.velocity += GRAVITY * _delta
+		player.move_and_slide()
+
+		if player.velocity.y <= 0:
+			player.skin.fall()
+
+		# multiply by inverse x and y to account for skin's local axes. Ignore y velocity so the skin stays up right
+		# Add position to make everything relative to where the player is
+		var look_at_direction := (player.velocity * Vector3(-1, 0, -1)).normalized() + player.global_position
+		if not (look_at_direction - player.global_position).is_zero_approx():
+			player.skin.look_at(look_at_direction)
+			
+		if player.is_on_floor():
+			return Events.PLAYER_LANDED
+		return Events.NONE
+
+
+class StateDash extends State:
+	var dash_distance := 10.0 # meters
+	var dash_time := 1.5 # second
+	
+	var _elapsed_time := 0.0
+	
+	func _init(init_player: Player3D) -> void:
+		super("Dash", init_player)
+		
+	func enter():
+		# Step 1: Get Current Position
+		var current_position = player.global_position
+		# Step 2: Get horizontal forward vector & # Step 3: Lenghten by distance (10m)
+		# Ignore y velocity so the skin stays up right
+		# Add position to make everything relative to where the player is
+		var dash_endpoint := (player.velocity * Vector3(1, 0, 1)).normalized() * dash_distance + player.global_position
+		#if not (dash_endpoint - player.global_position).is_zero_approx():
+			#player.skin.look_at(dash_endpoint)
+		# Step 4: Assign new position to Player3D
+		if player.velocity.is_zero_approx():
+			dash_endpoint = player.skin.get_global_transform().basis.z * dash_distance + player.global_position
+		
+		player.global_position = dash_endpoint
+	
+	func update(delta: float) -> Events:
+		_elapsed_time += delta
+		
+		if _elapsed_time >= 2.0:
+			return Events.FINISHED
+		return Events.NONE
+		

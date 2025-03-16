@@ -7,7 +7,7 @@ class_name Player3D extends CharacterBody3D
 ## The maximum speed the player can move at in meters per second.
 @export_range(3.0, 12.0, 0.1) var max_speed := 6.0
 
-@export_group("State JUMPING")
+@export_group("State JUMPING/State DOUBLE_JUMPING")
 @export_range(3.0, 12.0, 0.1) var max_air_control_speed := 6.0
 @export_range(1.0, 30.0, 0.1) var jump_velocity := 20.0
 @export_range(1, 179, 1) var camera_fov_jumping:= 40
@@ -32,18 +32,38 @@ func _ready() -> void:
 	jump.jump_velocity = jump_velocity
 	jump.camera_fov = camera_fov_jumping
 	jump.camera_zoom_time = camera_zoom_time_jumping
+	
+	var double_jump := PlayerStateMachine.StateDoubleJump.new(self)
+	double_jump.max_speed = max_air_control_speed
+	double_jump.jump_velocity = jump_velocity
+	double_jump.camera_fov = camera_fov_jumping
+	double_jump.camera_zoom_time = camera_zoom_time_jumping
+	
+	var dash := PlayerStateMachine.StateDash.new(self)
 
 	state_machine.transitions = {
 		idle: {
 			PlayerStateMachine.Events.PLAYER_STARTED_MOVING: walk,
 			PlayerStateMachine.Events.PLAYER_JUMPED: jump,
+			PlayerStateMachine.Events.PLAYER_DASHED: dash,
 		},
 		walk: {
 			PlayerStateMachine.Events.PLAYER_STOPPED_MOVING: idle,
 			PlayerStateMachine.Events.PLAYER_JUMPED: jump,
+			PlayerStateMachine.Events.PLAYER_DASHED: dash,
 		},
 		jump: {
 			PlayerStateMachine.Events.PLAYER_LANDED: idle,
+			PlayerStateMachine.Events.PLAYER_DOUBLE_JUMPED : double_jump,
+			PlayerStateMachine.Events.PLAYER_DASHED: dash,
+		},
+		double_jump: {
+			PlayerStateMachine.Events.PLAYER_LANDED: idle,
+		},
+		dash: {
+			PlayerStateMachine.Events.PLAYER_STOPPED_MOVING: idle,
+			PlayerStateMachine.Events.PLAYER_LANDED: idle,
+			PlayerStateMachine.Events.FINISHED: idle,
 		},
 	}
 
