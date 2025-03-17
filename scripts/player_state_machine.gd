@@ -12,11 +12,10 @@ enum Events {
 	PLAYER_FELL,
 }
 
-
 class Blackboard extends RefCounted:
 	# shared static vars go here
 	# ex. static var camera_anchor: Camera3D = null
-	pass
+	static var player : Player3D
 
 
 class State extends RefCounted:
@@ -34,6 +33,7 @@ class State extends RefCounted:
 	func _init(init_name: String, init_player: Player3D) -> void:
 		name = init_name
 		player = init_player
+		Blackboard.player = init_player
 
 
 	## Called by the state machine on the engine's physics update tick.
@@ -126,15 +126,22 @@ class StateMachine extends Node:
 				" but the transition does not exist."
 			)
 			return
+		if event == Events.PLAYER_LANDED:
+			Blackboard.player._jump_count = 0
+		
 		var next_state =  transitions[current_state][event]
 		_transition(next_state)
 
 	func _transition(new_state: State) -> void:
+		if Blackboard.player._jump_count >= 2 and new_state is StateJump:
+			return
+		
 		current_state.exit()
 		current_state.finished.disconnect(_on_state_finished)
 		current_state = new_state
 		current_state.finished.connect(_on_state_finished.bind(current_state))
 		current_state.enter()
+	
 		if is_debugging and current_state.player.debug_state_label != null:
 			current_state.player.debug_state_label.text = current_state.name
 
@@ -223,6 +230,7 @@ class StateWalk extends State:
 			return Events.PLAYER_FELL
 		return Events.NONE
 
+
 class StateJump extends State:
 
 	var jump_velocity := 15.0
@@ -237,6 +245,7 @@ class StateJump extends State:
 		super("Jump", init_player)
 
 	func enter() -> void:
+		player._jump_count += 1
 		player.skin.jump()
 		player.velocity.y = jump_velocity
 
@@ -279,6 +288,7 @@ class StateJump extends State:
 		elif player.velocity.y < 0:
 			return Events.PLAYER_FELL
 		return Events.NONE
+
 
 class StateDash extends State:
 	

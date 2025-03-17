@@ -27,6 +27,9 @@ class_name Player3D extends CharacterBody3D
 @onready var camera_3D: Camera3D = %Camera3D
 @onready var debug_state_label = %DebugStateLabel3D
 
+var _jump_count := 0
+var _dash_count := 0
+
 func _ready() -> void:
 	var state_machine := PlayerStateMachine.StateMachine.new()
 	add_child(state_machine)
