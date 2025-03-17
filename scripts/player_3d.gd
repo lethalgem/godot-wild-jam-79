@@ -62,7 +62,7 @@ func _ready() -> void:
 	fall.steering_factor = steering_factor
 	fall.max_speed = max_air_control_speed
 
-	# TODO: Only allow one extra jump and dash for each time the player enters the air (fall or jump)
+	# TODO: Only allow one dash within a set amount of time
 	state_machine.transitions = {
 		idle: {
 			PlayerStateMachine.Events.PLAYER_STARTED_MOVING: walk,
@@ -85,6 +85,7 @@ func _ready() -> void:
 		double_jump: {
 			PlayerStateMachine.Events.PLAYER_LANDED: idle,
 			PlayerStateMachine.Events.PLAYER_FELL: fall,
+			PlayerStateMachine.Events.PLAYER_DASHED: dash,
 		},
 		dash: {
 			PlayerStateMachine.Events.FINISHED: idle,
