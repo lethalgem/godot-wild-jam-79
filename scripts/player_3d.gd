@@ -45,12 +45,6 @@ func _ready() -> void:
 	jump.camera_fov = camera_fov_jumping
 	jump.camera_zoom_time = camera_zoom_time_jumping
 	
-	var double_jump := PlayerStateMachine.StateJump.new(self)
-	double_jump.max_speed = max_air_control_speed
-	double_jump.jump_velocity = jump_velocity
-	double_jump.camera_fov = camera_fov_jumping
-	double_jump.camera_zoom_time = camera_zoom_time_jumping
-	
 	var dash := PlayerStateMachine.StateDash.new(self)
 	dash.dash_distance = dash_distance
 	dash.dash_time = dash_time
@@ -78,21 +72,16 @@ func _ready() -> void:
 		},
 		jump: {
 			PlayerStateMachine.Events.PLAYER_LANDED: idle,
-			PlayerStateMachine.Events.PLAYER_DOUBLE_JUMPED : double_jump,
+			PlayerStateMachine.Events.PLAYER_JUMPED : jump,
 			PlayerStateMachine.Events.PLAYER_DASHED: dash,
 			PlayerStateMachine.Events.PLAYER_FELL: fall,
-		},
-		double_jump: {
-			PlayerStateMachine.Events.PLAYER_LANDED: idle,
-			PlayerStateMachine.Events.PLAYER_FELL: fall,
-			PlayerStateMachine.Events.PLAYER_DASHED: dash,
 		},
 		dash: {
 			PlayerStateMachine.Events.FINISHED: idle,
 		},
 		fall: {
 			PlayerStateMachine.Events.PLAYER_LANDED: idle,
-			PlayerStateMachine.Events.PLAYER_DOUBLE_JUMPED: double_jump,
+			PlayerStateMachine.Events.PLAYER_JUMPED: jump,
 			PlayerStateMachine.Events.PLAYER_DASHED: dash,
 		}
 	}

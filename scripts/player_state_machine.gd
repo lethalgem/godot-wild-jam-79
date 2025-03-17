@@ -7,14 +7,12 @@ enum Events {
 	PLAYER_STOPPED_MOVING,
 	PLAYER_JUMPED,
 	PLAYER_LANDED,
-	PLAYER_DOUBLE_JUMPED,
 	PLAYER_DASHED,
 	PLAYER_FELL,
 }
 
 class Blackboard extends RefCounted:
 	# shared static vars go here
-	# ex. static var camera_anchor: Camera3D = null
 	static var player : Player3D
 
 
@@ -282,7 +280,7 @@ class StateJump extends State:
 		if player.is_on_floor():
 			return Events.PLAYER_LANDED
 		elif Input.is_action_just_pressed("jump"):
-			return Events.PLAYER_DOUBLE_JUMPED
+			return Events.PLAYER_JUMPED
 		elif Input.is_action_just_pressed("dash"):
 			return Events.PLAYER_DASHED
 		elif player.velocity.y < 0:
@@ -374,7 +372,7 @@ class StateFall extends State:
 		if player.velocity.y >= 0:
 			return Events.PLAYER_LANDED
 		elif Input.is_action_just_pressed("jump"):
-			return Events.PLAYER_DOUBLE_JUMPED
+			return Events.PLAYER_JUMPED
 		elif Input.is_action_just_pressed("dash"):
 			return Events.PLAYER_DASHED
 		return Events.NONE
