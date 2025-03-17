@@ -8,12 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://vtkc3myfd1i6" path="res://scenes/checkpoint_respawn_3d.tscn" id="5_rbj8j"]
 [ext_resource type="PackedScene" uid="uid://d2rnwb6em08gc" path="res://scenes/death_plane_3d.tscn" id="7_q5oqk"]
 
-[sub_resource type="Environment" id="Environment_b5onc"]
-background_mode = 1
-background_color = Color(0.890374, 0.927404, 1, 1)
-ambient_light_color = Color(1, 1, 1, 1)
-tonemap_mode = 4
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qm5my"]
 albedo_color = Color(0.207843, 1, 1, 1)
 albedo_texture = ExtResource("1_p1gcm")
@@ -22,58 +16,61 @@ uv1_triplanar = true
 uv2_scale = Vector3(0.25, 0.25, 0.25)
 uv2_triplanar = true
 
+[sub_resource type="Environment" id="Environment_b5onc"]
+background_mode = 1
+background_color = Color(0.890374, 0.927404, 1, 1)
+ambient_light_color = Color(1, 1, 1, 1)
+tonemap_mode = 4
+
 [node name="Test1" type="Node3D"]
 script = ExtResource("1_hidvt")
 
-[node name="Player3D" parent="." instance=ExtResource("2_qm5my")]
-max_speed = 20.0
-camera_fov_dashing = 62
-max_air_control_speed = 20.0
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_b5onc")
-
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.127914, -0.5, 6.2808)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -39.7671)
 use_collision = true
 size = Vector3(23.8408, 1, 28.3604)
 material = SubResource("StandardMaterial3D_qm5my")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.127914, -0.5, 35.5305)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -69.0168)
 use_collision = true
 size = Vector3(23.8408, 1, 11.9906)
 material = SubResource("StandardMaterial3D_qm5my")
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_b5onc")
+
+[node name="Player3D" parent="." instance=ExtResource("2_qm5my")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -40)
+max_speed = 20.0
+camera_fov_dashing = 62
+max_air_control_speed = 20.0
+
 [node name="TimerTrigger3D" parent="." instance=ExtResource("4_uxpu0")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.0343819, 7.50996, 35.7673)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0935302, 7.50996, -69.2536)
 size = Vector3(24.18, 16.395, 11.8)
 
 [node name="CheckpointRespawn3D" parent="." instance=ExtResource("5_rbj8j")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.264252, 11.2785, 5.688)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.136338, 11.2785, -39.1743)
 size = Vector3(24.42, 22.08, 30.625)
 
 [node name="DeathPlane3D" parent="." instance=ExtResource("7_q5oqk")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -3.30401, -11.2855, 126.387)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.43191, -11.2855, -159.873)
 size = Vector3(250, 5, 500)
 
 [node name="GrowingPlatform3D" parent="." instance=ExtResource("3_b5onc")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 92.0693, 4.76837e-07, 59.1309)
-move_time = 3.0
-movement_delay = 0.1
-final_relative_pos = Vector3(200, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.9414, 4.76837e-07, -69.6172)
+move_time = 10.0
+movement_delay = 0.0
+final_relative_pos = Vector3(100, 0, 0)
 
 [node name="GrowingPlatform3D2" parent="." instance=ExtResource("3_b5onc")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 92.1279, 5, 92.5137)
-move_time = 3.0
-movement_delay = 1.75
-final_relative_pos = Vector3(200, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73, 7, -110)
+final_relative_pos = Vector3(100, 0, 0)
 
 [node name="GrowingPlatform3D3" parent="." instance=ExtResource("3_b5onc")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 92.1279, 7, 133.514)
-move_time = 3.0
-movement_delay = 3.5
-final_relative_pos = Vector3(200, 0, 0)
+
+[node name="GrowingPlatform3D4" parent="." instance=ExtResource("3_b5onc")]
 
 [connection signal="player_entered" from="TimerTrigger3D" to="." method="_on_timer_trigger_3d_player_entered"]
 [connection signal="player_entered" from="CheckpointRespawn3D" to="." method="_on_checkpoint_respawn_3d_player_entered"]

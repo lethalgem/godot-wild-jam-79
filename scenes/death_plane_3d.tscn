@@ -1,18 +1,17 @@
 [gd_scene load_steps=6 format=3 uid="uid://d2rnwb6em08gc"]
 
 [ext_resource type="Script" uid="uid://drsqscp3ycw7r" path="res://scripts/death_plane_3d.gd" id="1_fmbri"]
-[ext_resource type="Texture2D" uid="uid://ck54ycnjosij8" path="res://assets/textures/prototype_surface_2.png" id="2_ck1o6"]
+[ext_resource type="Texture2D" uid="uid://djv1jsrblx6cb" path="res://assets/textures/prototype_surface_1.png" id="2_fmbri"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_t2wpi"]
-size = Vector3(250, 5, 250)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j3oy2"]
-albedo_color = Color(0.121569, 0.854902, 1, 0.980392)
-albedo_texture = ExtResource("2_ck1o6")
+transparency = 1
+albedo_color = Color(0.121569, 0.854902, 0, 0.607843)
+albedo_texture = ExtResource("2_fmbri")
 
 [sub_resource type="BoxMesh" id="BoxMesh_4y16y"]
 material = SubResource("StandardMaterial3D_j3oy2")
-size = Vector3(250, 5, 250)
 
 [node name="DeathPlane3D" type="Area3D"]
 script = ExtResource("1_fmbri")
