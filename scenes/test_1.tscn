@@ -54,21 +54,28 @@ size = Vector3(250, 5, 500)
 
 [node name="GrowingPlatform3D" parent="." instance=ExtResource("3_b5onc")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 92.0693, 4.76837e-07, 59.1309)
+size = Vector3(10, 5, 10)
 move_time = 3.0
 movement_delay = 0.1
 final_relative_pos = Vector3(200, 0, 0)
+minimum_branch_size = null
+branch_gap = null
 
 [node name="GrowingPlatform3D2" parent="." instance=ExtResource("3_b5onc")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 92.1279, 5, 92.5137)
 move_time = 3.0
 movement_delay = 1.75
 final_relative_pos = Vector3(200, 0, 0)
+minimum_branch_size = null
+branch_gap = null
 
 [node name="GrowingPlatform3D3" parent="." instance=ExtResource("3_b5onc")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 92.1279, 7, 139.514)
 move_time = 3.0
 movement_delay = 3.75
 final_relative_pos = Vector3(200, 0, 0)
+minimum_branch_size = null
+branch_gap = null
 
 [connection signal="player_entered" from="TimerTrigger3D" to="." method="_on_timer_trigger_3d_player_entered"]
 [connection signal="player_entered" from="CheckpointRespawn3D" to="." method="_on_checkpoint_respawn_3d_player_entered"]

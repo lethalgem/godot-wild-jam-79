@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://cfcdfh2hxyn7a"]
+
+[ext_resource type="Script" uid="uid://dunna5oxxhxu" path="res://scripts/growing_platform_3d.gd" id="1_f4yqo"]
+[ext_resource type="Texture2D" uid="uid://ck54ycnjosij8" path="res://assets/textures/prototype_surface_2.png" id="1_y6g46"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f4yqo"]
+albedo_texture = ExtResource("1_y6g46")
+uv1_triplanar = true
+uv2_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fdtsk"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_2vydv"]
+material = SubResource("StandardMaterial3D_fdtsk")
+
+[node name="GrowingPlatform3D" type="CSGBox3D"]
+use_collision = true
+size = Vector3(10, 1, 10)
+material = SubResource("StandardMaterial3D_f4yqo")
+script = ExtResource("1_f4yqo")
+final_relative_pos = Vector3(0, 5, 3.665)
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 5, 3.665)
+debug_shape_thickness = 5
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.75024, 0)
+mesh = SubResource("SphereMesh_2vydv")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
