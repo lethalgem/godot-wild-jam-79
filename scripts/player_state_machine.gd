@@ -126,12 +126,18 @@ class StateMachine extends Node:
 			return
 		if event == Events.PLAYER_LANDED:
 			Blackboard.player._jump_count = 0
-		
+			Blackboard.player._dash_count = 0
+			
+		if event == Events.PLAYER_STARTED_MOVING and Blackboard.player.velocity.y >= 0 :
+			Blackboard.player._dash_count = 0
+			
 		var next_state =  transitions[current_state][event]
 		_transition(next_state)
 
 	func _transition(new_state: State) -> void:
 		if Blackboard.player._jump_count >= 2 and new_state is StateJump:
+			return
+		if (Blackboard.player._dash_count >= 1 and current_state is StateFall) or ( Blackboard.player._dash_count >= 2 and current_state is StateIdle) and new_state is StateDash:
 			return
 		
 		current_state.exit()
@@ -153,13 +159,13 @@ class StateMachine extends Node:
 
 
 class StateIdle extends State:
-
+	
 	func _init(init_player: Player3D) -> void:
 		super("Idle", init_player)
 
 	func enter() -> void:
 		player.skin.idle()
-
+		
 	func update(_delta: float) -> Events:
 		var input_vector := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 		
@@ -302,6 +308,7 @@ class StateDash extends State:
 		super("Dash", init_player)
 		
 	func enter():
+		player._dash_count += 1
 		player.skin.fall()
 		
 		# Ignore y velocity so the skin stays up right
