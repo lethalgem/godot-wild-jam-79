@@ -126,10 +126,6 @@ class StateMachine extends Node:
 			return
 		if event == Events.PLAYER_LANDED:
 			Blackboard.player._jump_count = 0
-			Blackboard.player._dash_count = 0
-			
-		if event == Events.PLAYER_STARTED_MOVING and Blackboard.player.velocity.y >= 0 :
-			Blackboard.player._dash_count = 0
 			
 		var next_state =  transitions[current_state][event]
 		_transition(next_state)
@@ -137,8 +133,8 @@ class StateMachine extends Node:
 	func _transition(new_state: State) -> void:
 		if Blackboard.player._jump_count >= 2 and new_state is StateJump:
 			return
-		# TODO: If you single jump into dash then you cannot double jump. However, you can double jump and then dash. (Fix Double Jump to work after Jump + Dash)
-		if (Blackboard.player._dash_count >= 1 and current_state is StateFall) or ( Blackboard.player._dash_count >= 2 and current_state is StateIdle) and new_state is StateDash:
+		
+		if Blackboard.player._dash_count >= 1 and new_state is StateDash:
 			return
 		
 		current_state.exit()
@@ -300,7 +296,8 @@ class StateDash extends State:
 	var dash_distance := 10.0 # meters
 	var dash_time := 0.15 # second
 	var camera_fov := 45 # degrees
-	var camera_zoom_time = 0.25 # seconds
+	var camera_zoom_time := 0.25 # seconds
+	var dash_cooldown := 1.0 # seconds
 	
 	var _elapsed_time := 0.0
 	var _initial_camera_fov: float
@@ -310,6 +307,8 @@ class StateDash extends State:
 		
 	func enter():
 		player._dash_count += 1
+		Engine.get_main_loop().create_timer(dash_cooldown).connect("timeout", func(): player._dash_count = 0)
+		
 		player.skin.fall()
 		
 		# Ignore y velocity so the skin stays up right
