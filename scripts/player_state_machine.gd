@@ -137,6 +137,7 @@ class StateMachine extends Node:
 	func _transition(new_state: State) -> void:
 		if Blackboard.player._jump_count >= 2 and new_state is StateJump:
 			return
+		# TODO: If you single jump into dash then you cannot double jump. However, you can double jump and then dash. (Fix Double Jump to work after Jump + Dash)
 		if (Blackboard.player._dash_count >= 1 and current_state is StateFall) or ( Blackboard.player._dash_count >= 2 and current_state is StateIdle) and new_state is StateDash:
 			return
 		
