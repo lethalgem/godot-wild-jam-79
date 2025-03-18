@@ -3,16 +3,11 @@
 [ext_resource type="Script" uid="uid://y8065w35x8ex" path="res://scripts/test_level_manager.gd" id="1_hidvt"]
 [ext_resource type="Texture2D" uid="uid://djv1jsrblx6cb" path="res://assets/textures/prototype_surface_1.png" id="1_p1gcm"]
 [ext_resource type="PackedScene" uid="uid://c8t036440xf3" path="res://scenes/player_3d.tscn" id="2_qm5my"]
+[ext_resource type="Environment" uid="uid://0raosp1j8p3b" path="res://themes/world_environment.tres" id="3_33v20"]
 [ext_resource type="PackedScene" uid="uid://cfcdfh2hxyn7a" path="res://scenes/growing_platform_3d.tscn" id="3_b5onc"]
 [ext_resource type="PackedScene" uid="uid://j4c625fopnpl" path="res://scenes/timer_trigger_3d.tscn" id="4_uxpu0"]
 [ext_resource type="PackedScene" uid="uid://vtkc3myfd1i6" path="res://scenes/checkpoint_respawn_3d.tscn" id="5_rbj8j"]
 [ext_resource type="PackedScene" uid="uid://d2rnwb6em08gc" path="res://scenes/death_plane_3d.tscn" id="7_q5oqk"]
-
-[sub_resource type="Environment" id="Environment_b5onc"]
-background_mode = 1
-background_color = Color(0.890374, 0.927404, 1, 1)
-ambient_light_color = Color(1, 1, 1, 1)
-tonemap_mode = 4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qm5my"]
 albedo_color = Color(0.207843, 1, 1, 1)
@@ -31,7 +26,7 @@ camera_fov_dashing = 62
 max_air_control_speed = 20.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_b5onc")
+environment = ExtResource("3_33v20")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.127914, -0.5, 6.2808)
@@ -70,9 +65,9 @@ movement_delay = 1.75
 final_relative_pos = Vector3(200, 0, 0)
 
 [node name="GrowingPlatform3D3" parent="." instance=ExtResource("3_b5onc")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 92.1279, 7, 133.514)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 92.1279, 7, 139.514)
 move_time = 3.0
-movement_delay = 3.5
+movement_delay = 3.75
 final_relative_pos = Vector3(200, 0, 0)
 
 [connection signal="player_entered" from="TimerTrigger3D" to="." method="_on_timer_trigger_3d_player_entered"]
