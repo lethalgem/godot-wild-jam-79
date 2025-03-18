@@ -10,6 +10,7 @@ class_name Player3D extends CharacterBody3D
 @export_group("State DASHING")
 @export_range(0, 30.0, 0.5) var dash_distance := 10.0
 @export_range(0, 1.0, 0.01) var dash_time := 0.15
+@export_range(0, 10.0, 0.01) var dash_cooldown := 1.0
 @export_range(1, 179, 1) var camera_fov_dashing:= 60
 @export_range(0.001, 1, 0.01) var camera_zoom_time_dashing := 0.25
 
@@ -50,13 +51,13 @@ func _ready() -> void:
 	dash.dash_time = dash_time
 	dash.camera_fov = camera_fov_dashing
 	dash.camera_zoom_time = camera_zoom_time_dashing
+	dash.dash_cooldown = dash_cooldown
 	
 	var fall := PlayerStateMachine.StateFall.new(self)
 	fall.gravity_strength = gravity_strength
 	fall.steering_factor = steering_factor
 	fall.max_speed = max_air_control_speed
 
-	# TODO: Only allow one dash within a set amount of time
 	state_machine.transitions = {
 		idle: {
 			PlayerStateMachine.Events.PLAYER_STARTED_MOVING: walk,
