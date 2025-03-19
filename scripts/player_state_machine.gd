@@ -9,6 +9,7 @@ enum Events {
 	PLAYER_LANDED,
 	PLAYER_DASHED,
 	PLAYER_FELL,
+	PLAYER_STARTED_HANGING,
 }
 
 class Blackboard extends RefCounted:
@@ -347,6 +348,49 @@ class StateDash extends State:
 
 
 class StateFall extends State:
+	
+	var gravity_strength := 40.0
+	var max_speed := 10.0
+	var steering_factor := 20.0
+	
+	func _init(init_player: Player3D) -> void:
+		super("Fall", init_player)
+		
+	func enter():
+		player.skin.fall()
+	
+	func update(delta: float) -> Events:
+		player.velocity += gravity_strength * delta * Vector3.DOWN
+		player.move_and_slide()
+		
+		var input_vector := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+		# inverse to account for positive player axes and rotate relative to camera forward
+		var direction := Vector3(-input_vector.x, 0.0, -input_vector.y).rotated(Vector3(0, 1, 0), player.camera_anchor.rotation.y)
+		var desired_ground_velocity: Vector3 = max_speed * direction
+		var steering_vector := desired_ground_velocity - player.velocity
+		steering_vector.y = 0.0
+		# We limit the steering amount to ensure the velocity can never overshoots the desired velocity.
+		var steering_amount: float = min(steering_factor * delta, 1.0)
+		player.velocity += steering_vector * steering_amount
+		
+		# multiply by inverse x and y to account for skin's local axes. Ignore y velocity so the skin stays up right
+		# Add position to make everything relative to where the player is
+		var look_at_direction := (player.velocity * Vector3(-1, 0, -1)).normalized() + player.global_position
+		if not (look_at_direction - player.global_position).is_zero_approx():
+			player.skin.look_at(look_at_direction)
+		
+		if player.velocity.y >= 0:
+			return Events.PLAYER_LANDED
+		elif Input.is_action_just_pressed("jump"):
+			return Events.PLAYER_JUMPED
+		elif Input.is_action_just_pressed("dash"):
+			return Events.PLAYER_DASHED
+		return Events.NONE
+
+class StateWallHang extends State:
+	# TODO: make player static while hanging (how to do this while still being affected by outside physics?
+	# TODO: try requiring the key that was being pressed at when contact with the wall was made be held to stay on the wall (alternatively, try holding in the direction of the wall?)
+	# TODO: detect when a wall is hit, likely through the player's collision shape?
 	
 	var gravity_strength := 40.0
 	var max_speed := 10.0
