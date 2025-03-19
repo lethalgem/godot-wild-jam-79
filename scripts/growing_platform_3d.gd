@@ -48,10 +48,7 @@ func _process(_delta):
 			last_branch_position = branch_sphere.global_position
 			last_branch_dimension = shrink_factor * last_branch_dimension
 	else:
-		for node in get_children():
-			if node is MeshInstance3D:
-				remove_child(node)
-				node.queue_free()
+		remove_branches()
 
 
 func _on_timer_timeout():
@@ -69,3 +66,10 @@ func reset_position():
 	timer.stop()
 		
 	global_position = start_pos
+	remove_branches()
+
+func remove_branches():
+	for node in get_children():
+		if node is MeshInstance3D:
+			remove_child(node)
+			node.queue_free()
