@@ -73,7 +73,7 @@ func _ready() -> void:
 			PlayerStateMachine.Events.PLAYER_FELL: fall,
 		},
 		jump: {
-			PlayerStateMachine.Events.PLAYER_LANDED: idle,
+			PlayerStateMachine.Events.PLAYER_LANDED: walk,
 			PlayerStateMachine.Events.PLAYER_JUMPED : jump,
 			PlayerStateMachine.Events.PLAYER_DASHED: dash,
 			PlayerStateMachine.Events.PLAYER_FELL: fall,
@@ -82,7 +82,7 @@ func _ready() -> void:
 			PlayerStateMachine.Events.FINISHED: idle,
 		},
 		fall: {
-			PlayerStateMachine.Events.PLAYER_LANDED: idle,
+			PlayerStateMachine.Events.PLAYER_LANDED: walk,
 			PlayerStateMachine.Events.PLAYER_JUMPED: jump,
 			PlayerStateMachine.Events.PLAYER_DASHED: dash,
 		}
