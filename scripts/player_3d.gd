@@ -2,6 +2,8 @@ class_name Player3D extends CharacterBody3D
 
 ## Controls how quickly the player accelerates and turns on the ground.
 @export_range(1.0, 50.0, 0.1) var steering_factor := 20.0
+## Constant for gravitational force in m/s^2.
+@export_range(0.0, 200.0, 0.1) var gravity_strength := 40.0
 
 @export_group("State WALKING")
 ## The maximum speed the player can move at in meters per second.
@@ -19,9 +21,6 @@ class_name Player3D extends CharacterBody3D
 @export_range(1, 179, 1) var camera_fov_jumping:= 60
 @export_range(0.001, 1, 0.01) var camera_zoom_time_jumping := 0.25
 
-@export_group("State FALLING")
-@export_range(0.0, 100.0, 0.1) var gravity_strength := 40.0
-
 @onready var skin: SophiaSkin3D = %SophiaSkin
 @onready var camera_anchor: Node3D = %CameraAnchor
 @onready var camera_3D: Camera3D = %Camera3D
@@ -35,15 +34,18 @@ func _ready() -> void:
 	add_child(state_machine)
 
 	var idle := PlayerStateMachine.StateIdle.new(self)
+	idle.gravity_strength = gravity_strength
 
 	var walk := PlayerStateMachine.StateWalk.new(self)
 	walk.max_speed = max_speed
+	walk.gravity_strength = gravity_strength
 
 	var jump := PlayerStateMachine.StateJump.new(self)
 	jump.max_speed = max_air_control_speed
 	jump.jump_velocity = jump_velocity
 	jump.camera_fov = camera_fov_jumping
 	jump.camera_zoom_time = camera_zoom_time_jumping
+	jump.gravity_strength = gravity_strength
 	
 	var dash := PlayerStateMachine.StateDash.new(self)
 	dash.dash_distance = dash_distance

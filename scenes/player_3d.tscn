@@ -12,6 +12,11 @@ radius = 0.6
 [node name="Player3D" type="CharacterBody3D"]
 input_ray_pickable = false
 script = ExtResource("1_2djwe")
+gravity_strength = 80.0
+max_speed = 20.0
+camera_fov_dashing = 62
+max_air_control_speed = 20.0
+jump_velocity = 25.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, -0.2)

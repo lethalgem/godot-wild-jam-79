@@ -161,18 +161,19 @@ class StateMachine extends Node:
 
 class StateIdle extends State:
 	
+	var gravity_strength := 40.0
+	
 	func _init(init_player: Player3D) -> void:
 		super("Idle", init_player)
 
 	func enter() -> void:
 		player.skin.idle()
 		
-	func update(_delta: float) -> Events:
+	func update(delta: float) -> Events:
 		var input_vector := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 		
 		# Idle shouldn't preserve any horizontal velocity from previous states
-		const GRAVITY := 40.0
-		player.velocity = Vector3(0, GRAVITY * _delta * -1 + player.velocity.y, 0)
+		player.velocity = Vector3(0, gravity_strength * delta * -1 + player.velocity.y, 0)
 		player.move_and_slide()
 
 		# multiply by inverse x and y to account for skin's local axes.
@@ -196,6 +197,7 @@ class StateWalk extends State:
 
 	var max_speed = 10.0
 	var steering_factor = 20.0
+	var gravity_strength := 40.0
 
 	func _init(init_player: Player3D) -> void:
 		super("Walk", init_player)
@@ -203,7 +205,7 @@ class StateWalk extends State:
 	func enter() -> void:
 		player.skin.move()
 
-	func update(_delta: float) -> Events:
+	func update(delta: float) -> Events:
 		var input_vector := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 		# inverse to account for positive player axes and rotate relative to camera forward
 		var direction := Vector3(-input_vector.x, 0.0, -input_vector.y).rotated(Vector3(0, 1, 0), player.camera_anchor.rotation.y)
@@ -211,12 +213,10 @@ class StateWalk extends State:
 		var steering_vector := desired_ground_velocity - player.velocity
 		steering_vector.y = 0.0
 		# We limit the steering amount to ensure the velocity can never overshoots the desired velocity.
-		var steering_amount: float = min(steering_factor * _delta, 1.0)
+		var steering_amount: float = min(steering_factor * delta, 1.0)
 		player.velocity += steering_vector * steering_amount
 
-		# TODO: Make gravity a global parameter for the state machine. AKA the gravity for all states can be changed at once
-		const GRAVITY := 40.0 * Vector3.DOWN
-		player.velocity += GRAVITY * _delta
+		player.velocity += gravity_strength * delta * Vector3.DOWN
 		player.move_and_slide()
 
 		# multiply by inverse x and y to account for skin's local axes.
@@ -243,6 +243,7 @@ class StateJump extends State:
 	var steering_factor := 20.0
 	var camera_fov := 45 # degrees
 	var camera_zoom_time = 0.25 # seconds
+	var gravity_strength := 40.0
 
 	var _initial_camera_fov: float
 
@@ -263,7 +264,7 @@ class StateJump extends State:
 		var tween = player.create_tween()
 		tween.parallel().tween_property(player.camera_3D, "fov", _initial_camera_fov, camera_zoom_time).set_ease(Tween.EASE_IN_OUT)
 
-	func update(_delta: float) -> Events:
+	func update(delta: float) -> Events:
 		var input_vector := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 		# inverse to account for positive player axes and rotate relative to camera forward
 		var direction := Vector3(-input_vector.x, 0.0, -input_vector.y).rotated(Vector3(0, 1, 0), player.camera_anchor.rotation.y)
@@ -271,11 +272,10 @@ class StateJump extends State:
 		var steering_vector := desired_ground_velocity - player.velocity
 		steering_vector.y = 0.0
 		# We limit the steering amount to ensure the velocity can never overshoots the desired velocity.
-		var steering_amount: float = min(steering_factor * _delta, 1.0)
+		var steering_amount: float = min(steering_factor * delta, 1.0)
 		player.velocity += steering_vector * steering_amount
 
-		const GRAVITY := 40.0 * Vector3.DOWN
-		player.velocity += GRAVITY * _delta
+		player.velocity += gravity_strength * delta * Vector3.DOWN
 		player.move_and_slide()
 
 		# multiply by inverse x and y to account for skin's local axes. Ignore y velocity so the skin stays up right
