@@ -1,21 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://cxxybm06lsqvr"]
+[gd_scene load_steps=9 format=3 uid="uid://cxxybm06lsqvr"]
 
 [ext_resource type="Script" uid="uid://y8065w35x8ex" path="res://scripts/test_level_manager.gd" id="1_hidvt"]
-[ext_resource type="Texture2D" uid="uid://djv1jsrblx6cb" path="res://assets/textures/prototype_surface_1.png" id="1_p1gcm"]
 [ext_resource type="PackedScene" uid="uid://c8t036440xf3" path="res://scenes/player_3d.tscn" id="2_qm5my"]
 [ext_resource type="Environment" uid="uid://0raosp1j8p3b" path="res://themes/world_environment.tres" id="3_33v20"]
 [ext_resource type="PackedScene" uid="uid://cfcdfh2hxyn7a" path="res://scenes/growing_platform_3d.tscn" id="3_b5onc"]
+[ext_resource type="Material" uid="uid://woy3v4cv6ld" path="res://themes/static_test_platform.tres" id="4_33v20"]
 [ext_resource type="PackedScene" uid="uid://j4c625fopnpl" path="res://scenes/timer_trigger_3d.tscn" id="4_uxpu0"]
 [ext_resource type="PackedScene" uid="uid://vtkc3myfd1i6" path="res://scenes/checkpoint_respawn_3d.tscn" id="5_rbj8j"]
 [ext_resource type="PackedScene" uid="uid://d2rnwb6em08gc" path="res://scenes/death_plane_3d.tscn" id="7_q5oqk"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qm5my"]
-albedo_color = Color(0.207843, 1, 1, 1)
-albedo_texture = ExtResource("1_p1gcm")
-uv1_scale = Vector3(0.25, 0.25, 0.25)
-uv1_triplanar = true
-uv2_scale = Vector3(0.25, 0.25, 0.25)
-uv2_triplanar = true
 
 [node name="Test1" type="Node3D"]
 script = ExtResource("1_hidvt")
@@ -29,13 +21,13 @@ environment = ExtResource("3_33v20")
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.127914, -0.5, 6.2808)
 use_collision = true
 size = Vector3(23.8408, 1, 28.3604)
-material = SubResource("StandardMaterial3D_qm5my")
+material = ExtResource("4_33v20")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.127914, -0.5, 35.5305)
 use_collision = true
 size = Vector3(23.8408, 1, 11.9906)
-material = SubResource("StandardMaterial3D_qm5my")
+material = ExtResource("4_33v20")
 
 [node name="TimerTrigger3D" parent="." instance=ExtResource("4_uxpu0")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.0343819, 7.50996, 35.7673)
