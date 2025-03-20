@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://dk2fr766sg2lx"]
+
+[ext_resource type="Script" uid="uid://dah127ds70xyx" path="res://scripts/main_game.gd" id="1_s3esy"]
+[ext_resource type="Environment" uid="uid://0raosp1j8p3b" path="res://themes/world_environment.tres" id="2_d2op2"]
+[ext_resource type="PackedScene" uid="uid://c8t036440xf3" path="res://scenes/player_3d.tscn" id="3_0rdsr"]
+[ext_resource type="PackedScene" uid="uid://corj82sw86upa" path="res://scenes/platforming_section_template.tscn" id="4_0rdsr"]
+[ext_resource type="PackedScene" uid="uid://d2rnwb6em08gc" path="res://scenes/death_plane_3d.tscn" id="5_ipu61"]
+
+[node name="MainGame" type="Node3D"]
+script = ExtResource("1_s3esy")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("2_d2op2")
+
+[node name="Player3D" parent="." instance=ExtResource("3_0rdsr")]
+
+[node name="Platforming_Section_Template" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_0rdsr")]
+player = NodePath("../Player3D")
+
+[node name="Platforming_Section_Template2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_0rdsr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 49)
+player = NodePath("../Player3D")
+
+[node name="DeathPlane3D" parent="." instance=ExtResource("5_ipu61")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -19, 0)
+size = Vector3(100, 1, 200)

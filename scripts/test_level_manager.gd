@@ -1,13 +1,11 @@
 class_name TestLevelMananger extends Node3D
 
 @onready var player := $Player3D
-@onready var current_checkpoint := $CheckpointRespawn3D
 @onready var growing_platform := $GrowingPlatform3D
 @onready var growing_platform_2 := $GrowingPlatform3D2
 @onready var growing_platform_3 := $GrowingPlatform3D3
 
 func reset_and_respawn():
-	player.global_position = current_checkpoint.global_position
 	growing_platform.reset_position()
 	growing_platform_2.reset_position()
 	growing_platform_3.reset_position()
@@ -17,10 +15,6 @@ func _on_timer_trigger_3d_player_entered() -> void:
 	growing_platform.start_timer()
 	growing_platform_2.start_timer()
 	growing_platform_3.start_timer()
-
-
-func _on_checkpoint_respawn_3d_player_entered(checkpoint:CheckpointRespawn3D):
-	current_checkpoint = checkpoint
 	
 	
 func _input(event):

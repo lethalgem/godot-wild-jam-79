@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cxxybm06lsqvr"]
+[gd_scene load_steps=8 format=3 uid="uid://cxxybm06lsqvr"]
 
 [ext_resource type="Script" uid="uid://y8065w35x8ex" path="res://scripts/test_level_manager.gd" id="1_hidvt"]
 [ext_resource type="PackedScene" uid="uid://c8t036440xf3" path="res://scenes/player_3d.tscn" id="2_qm5my"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://cfcdfh2hxyn7a" path="res://scenes/growing_platform_3d.tscn" id="3_b5onc"]
 [ext_resource type="Material" uid="uid://woy3v4cv6ld" path="res://themes/static_test_platform.tres" id="4_33v20"]
 [ext_resource type="PackedScene" uid="uid://j4c625fopnpl" path="res://scenes/timer_trigger_3d.tscn" id="4_uxpu0"]
-[ext_resource type="PackedScene" uid="uid://vtkc3myfd1i6" path="res://scenes/checkpoint_respawn_3d.tscn" id="5_rbj8j"]
 [ext_resource type="PackedScene" uid="uid://d2rnwb6em08gc" path="res://scenes/death_plane_3d.tscn" id="7_q5oqk"]
 
 [node name="Test1" type="Node3D"]
@@ -33,10 +32,6 @@ material = ExtResource("4_33v20")
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.0343819, 7.50996, 35.7673)
 size = Vector3(24.18, 16.395, 11.8)
 
-[node name="CheckpointRespawn3D" parent="." instance=ExtResource("5_rbj8j")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.264252, 11.2785, 5.688)
-size = Vector3(24.42, 22.08, 30.625)
-
 [node name="DeathPlane3D" parent="." instance=ExtResource("7_q5oqk")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -3.30401, -11.2855, 126.387)
 size = Vector3(250, 5, 500)
@@ -61,5 +56,4 @@ movement_delay = 3.75
 final_relative_pos = Vector3(200, 0, 0)
 
 [connection signal="player_entered" from="TimerTrigger3D" to="." method="_on_timer_trigger_3d_player_entered"]
-[connection signal="player_entered" from="CheckpointRespawn3D" to="." method="_on_checkpoint_respawn_3d_player_entered"]
 [connection signal="player_entered" from="DeathPlane3D" to="." method="_on_death_plane_3d_player_entered"]
