@@ -4,7 +4,7 @@
 [ext_resource type="Environment" uid="uid://0raosp1j8p3b" path="res://themes/world_environment.tres" id="1_yuty3"]
 [ext_resource type="Material" uid="uid://woy3v4cv6ld" path="res://themes/static_test_platform.tres" id="3_jclj1"]
 [ext_resource type="PackedScene" uid="uid://vtkc3myfd1i6" path="res://scenes/checkpoint_respawn_3d.tscn" id="4_h3t1q"]
-[ext_resource type="PackedScene" uid="uid://j4c625fopnpl" path="res://scenes/timer_trigger_3d.tscn" id="6_vg5gd"]
+[ext_resource type="AudioStream" uid="uid://b4wijc4hg1dvt" path="res://assets/music/fighter-269805.mp3" id="7_a50qs"]
 [ext_resource type="PackedScene" uid="uid://d2rnwb6em08gc" path="res://scenes/death_plane_3d.tscn" id="7_vg5gd"]
 [ext_resource type="PackedScene" uid="uid://cfcdfh2hxyn7a" path="res://scenes/growing_platform_3d.tscn" id="8_a50qs"]
 
@@ -26,18 +26,8 @@ use_collision = true
 size = Vector3(9, 17, 7)
 material = ExtResource("3_jclj1")
 
-[node name="TimerTrigger3D" parent="." instance=ExtResource("6_vg5gd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 17)
-size = Vector3(9, 10, 7)
-
-[node name="Starting_Trigger_Platform" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.5, 17)
-use_collision = true
-size = Vector3(9, 17, 7)
-material = ExtResource("3_jclj1")
-
 [node name="GrowingPlatform3D" parent="." instance=ExtResource("8_a50qs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 29)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16)
 move_time = 2.0
 movement_delay = 0.1
 final_relative_pos = Vector3(0, 10, 3.665)
@@ -46,5 +36,7 @@ final_relative_pos = Vector3(0, 10, 3.665)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -24, 42)
 size = Vector3(100, 1, 100)
 
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_a50qs")
+
 [connection signal="player_entered" from="CheckpointRespawn3D" to="." method="_on_checkpoint_respawn_3d_player_entered"]
-[connection signal="player_entered" from="TimerTrigger3D" to="." method="_on_timer_trigger_3d_player_entered"]

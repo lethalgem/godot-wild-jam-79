@@ -8,5 +8,11 @@ func _ready() -> void:
 				# Reset all death planes to go to this checkpoint
 				for possible_death_plane_child in get_children():
 					if possible_death_plane_child is DeathPlane3D:
-						possible_death_plane_child.connect("player_entered", section.reset_and_respawn)
+						possible_death_plane_child.disconnect("player_entered", respawn)
+						possible_death_plane_child.connect("player_entered", respawn.bind(section))
 				)
+
+## Ensures that the music is only interrupted when we respawn and not before
+func respawn(section: PlatformingSection):
+	section.reset_and_respawn()
+	$AudioStreamPlayer.play(section.song_start)

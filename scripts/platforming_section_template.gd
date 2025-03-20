@@ -13,6 +13,7 @@ class_name PlatformingSection extends Node3D
 signal player_entered_section
 
 @export var player: Player3D
+@export var song_start := 0.0
 
 @onready var checkpoint := %CheckpointRespawn3D
 
@@ -35,6 +36,11 @@ func _ready() -> void:
 		for child in get_children():
 			if child is DeathPlane3D:
 				child.connect("player_entered", reset_and_respawn)
+		
+		var audio_player = AudioStreamPlayer3D.new()
+		add_child(audio_player)
+		audio_player.stream = preload("res://assets/music/fighter-269805.mp3")
+		audio_player.play(song_start)
 
 func reset_and_respawn():
 	player.global_position = checkpoint.global_position
@@ -42,12 +48,11 @@ func reset_and_respawn():
 		if child is GrowingPlatform3D:
 			child.reset_position()
 
-
-func _on_timer_trigger_3d_player_entered() -> void:
+func trigger_platforms():
 	for child in get_children():
 		if child is GrowingPlatform3D:
 			child.start_timer()
 
-
 func _on_checkpoint_respawn_3d_player_entered():
 	player_entered_section.emit(self)
+	trigger_platforms()
