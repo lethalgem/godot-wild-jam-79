@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://bmbjgq7h67stc"]
+
+[ext_resource type="Script" uid="uid://b3atjaf7o32s5" path="res://scripts/platforming_section_tutorial.gd" id="1_dfone"]
+[ext_resource type="Environment" uid="uid://0raosp1j8p3b" path="res://themes/world_environment.tres" id="2_p8iqt"]
+[ext_resource type="PackedScene" uid="uid://vtkc3myfd1i6" path="res://scenes/checkpoint_respawn_3d.tscn" id="3_k0bh0"]
+[ext_resource type="Material" uid="uid://woy3v4cv6ld" path="res://themes/static_test_platform.tres" id="4_m8n62"]
+[ext_resource type="PackedScene" uid="uid://cfcdfh2hxyn7a" path="res://scenes/growing_platform_3d.tscn" id="5_okkvj"]
+[ext_resource type="PackedScene" uid="uid://d2rnwb6em08gc" path="res://scenes/death_plane_3d.tscn" id="6_0aodp"]
+
+[node name="Platforming_Section_Tutorial" type="Node3D"]
+script = ExtResource("1_dfone")
+
+[node name="SectionWorldEnvironment" type="WorldEnvironment" parent="."]
+unique_name_in_owner = true
+environment = ExtResource("2_p8iqt")
+
+[node name="CheckpointRespawn3D" parent="." instance=ExtResource("3_k0bh0")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+size = Vector3(9, 10, 7)
+
+[node name="Checkpoint_Platform" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.5, 0)
+use_collision = true
+size = Vector3(9, 17, 7)
+material = ExtResource("4_m8n62")
+
+[node name="Static_Platform" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.5, 27)
+use_collision = true
+size = Vector3(9, 17, 7)
+material = ExtResource("4_m8n62")
+
+[node name="Static_Platform2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.5, 65)
+use_collision = true
+size = Vector3(9, 17, 7)
+material = ExtResource("4_m8n62")
+
+[node name="GrowingPlatform3D" parent="." instance=ExtResource("5_okkvj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, 0, 12)
+move_time = 1.0
+movement_delay = 1.7
+final_relative_pos = Vector3(50, 0, 0)
+
+[node name="GrowingPlatform3D2" parent="." instance=ExtResource("5_okkvj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 1, 53)
+move_time = 1.0
+movement_delay = 3.5
+final_relative_pos = Vector3(-50, 0, 0)
+
+[node name="GrowingPlatform3D3" parent="." instance=ExtResource("5_okkvj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 115)
+
+[node name="DeathPlane3D" parent="." instance=ExtResource("6_0aodp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -24, 42)
+size = Vector3(100, 1, 100)
+
+[connection signal="player_entered" from="CheckpointRespawn3D" to="." method="_on_checkpoint_respawn_3d_player_entered"]

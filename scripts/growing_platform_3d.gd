@@ -52,7 +52,7 @@ func _process(_delta):
 
 func _on_timer_timeout():
 	tween = create_tween()
-	tween.tween_property(self,"global_position", Vector3(-1, 1, 1) * raycast3D.target_position + global_position,move_time)
+	tween.tween_property(self,"global_position", Vector3(1, 1, 1) * raycast3D.target_position + global_position,move_time)
 
 func start_timer():
 	if movement_delay > 0:
