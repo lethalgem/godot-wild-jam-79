@@ -4,4 +4,9 @@
 background_mode = 1
 background_color = Color(0.890374, 0.927404, 1, 1)
 ambient_light_color = Color(1, 1, 1, 1)
-tonemap_mode = 4
+tonemap_mode = 2
+fog_enabled = true
+fog_light_color = Color(1, 1, 1, 1)
+fog_density = 0.0
+fog_height = -5.0
+fog_height_density = 0.2125
