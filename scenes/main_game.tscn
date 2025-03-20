@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dk2fr766sg2lx"]
+[gd_scene load_steps=6 format=3 uid="uid://dmykngb24yrgg"]
 
 [ext_resource type="Script" uid="uid://dah127ds70xyx" path="res://scripts/main_game.gd" id="1_s3esy"]
 [ext_resource type="Environment" uid="uid://0raosp1j8p3b" path="res://themes/world_environment.tres" id="2_d2op2"]
