@@ -18,4 +18,4 @@ func _process(_delta):
 
 func _on_body_entered(body):
 	if body is Player3D:
-		player_entered.emit(self)
+		player_entered.emit()
