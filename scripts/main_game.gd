@@ -8,7 +8,8 @@ func _ready() -> void:
 				# Reset all death planes to go to this checkpoint
 				for possible_death_plane_child in get_children():
 					if possible_death_plane_child is DeathPlane3D:
-						possible_death_plane_child.disconnect("player_entered", respawn)
+						if possible_death_plane_child.is_connected("player_entered", respawn):
+							possible_death_plane_child.disconnect("player_entered", respawn)
 						possible_death_plane_child.connect("player_entered", respawn.bind(section))
 				)
 
