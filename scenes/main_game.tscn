@@ -21,12 +21,12 @@ environment = ExtResource("2_d2op2")
 [node name="Player3D" parent="." instance=ExtResource("3_0rdsr")]
 
 [node name="DeathPlane3D" parent="." instance=ExtResource("5_ipu61")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -19, 0)
-size = Vector3(100, 1, 200)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -19, 419)
+size = Vector3(1000, 1, 1000)
 
 [node name="Platforming_Section_Tutorial" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_ygxny")]
 player = NodePath("../Player3D")
 
-[node name="Platforming_Section_Tutorial2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_ygxny")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 130)
+[node name="Platforming_Section_Tutorial_as_example" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_ygxny")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 132)
 player = NodePath("../Player3D")

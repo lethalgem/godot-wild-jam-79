@@ -183,10 +183,10 @@ class StateIdle extends State:
 		if not (look_at_direction - player.global_position).is_zero_approx():
 			player.skin.look_at(look_at_direction)
 
-		if not input_vector.is_zero_approx():
-			return Events.PLAYER_STARTED_MOVING
-		elif Input.is_action_just_pressed("jump"):
+		if Input.is_action_just_pressed("jump"):
 			return Events.PLAYER_JUMPED
+		elif not input_vector.is_zero_approx():
+			return Events.PLAYER_STARTED_MOVING
 		elif Input.is_action_just_pressed("dash"):
 			return Events.PLAYER_DASHED
 		elif player.velocity.y < 0:

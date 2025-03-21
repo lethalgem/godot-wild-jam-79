@@ -17,7 +17,7 @@ signal player_entered_section
 
 @onready var checkpoint := %CheckpointRespawn3D
 
-var debug_audio_player: AudioStreamPlayer3D
+var debug_audio_player: AudioStreamPlayer
 
 func _ready() -> void:
 	# Check if this is being used a section in the main game or if this is standalone and we're testing/debugging
@@ -39,9 +39,10 @@ func _ready() -> void:
 			if child is DeathPlane3D:
 				child.connect("player_entered", reset_and_respawn)
 		
-		debug_audio_player = AudioStreamPlayer3D.new()
+		debug_audio_player = AudioStreamPlayer.new()
 		add_child(debug_audio_player)
 		debug_audio_player.stream = preload("res://assets/music/fighter-269805.mp3")
+		debug_audio_player.volume_db -= 20
 		debug_audio_player.play(song_start)
 
 func reset_and_respawn():
