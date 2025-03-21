@@ -13,7 +13,10 @@ class_name GrowingPlatform3D extends CSGBox3D
 @onready var tween: Tween
 
 @onready var last_branch_dimension = min(size.x, size.y, size.z)
+@onready var initial_branch_dimension = last_branch_dimension
 @onready var last_branch_position = global_position
+@onready var original_branch_position = global_position
+
 
 var shrink_factor
 
@@ -35,6 +38,7 @@ func _process(_delta):
 	
 	if not Engine.is_editor_hint():
 		if global_position.distance_to(last_branch_position) > last_branch_dimension + branch_gap:
+			print("making branch")
 			var branch_sphere := MeshInstance3D.new()
 			var sphere_mesh := SphereMesh.new()
 			sphere_mesh.radius = last_branch_dimension / 2
@@ -65,6 +69,8 @@ func reset_position():
 	timer.stop()
 		
 	global_position = start_pos
+	last_branch_position = global_position
+	last_branch_dimension = initial_branch_dimension
 	remove_branches()
 
 func remove_branches():
