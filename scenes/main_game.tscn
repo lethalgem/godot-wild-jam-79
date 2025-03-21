@@ -27,6 +27,6 @@ size = Vector3(100, 1, 200)
 [node name="Platforming_Section_Tutorial" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_ygxny")]
 player = NodePath("../Player3D")
 
-[node name="Platforming_Section_Tutorial2_As_Example" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_ygxny")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 138)
+[node name="Platforming_Section_Tutorial2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_ygxny")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 130)
 player = NodePath("../Player3D")
