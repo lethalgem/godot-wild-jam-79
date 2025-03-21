@@ -12,8 +12,8 @@ class_name GrowingPlatform3D extends CSGBox3D
 @onready var start_pos := global_position
 @onready var tween: Tween
 
-@onready var last_branch_dimension = min(size.x, size.y, size.z)
-@onready var initial_branch_dimension = last_branch_dimension
+@onready var branch_dimension = min(size.x, size.y, size.z)
+@onready var initial_branch_dimension = branch_dimension
 @onready var last_branch_position = global_position
 @onready var original_branch_position = global_position
 
@@ -25,11 +25,6 @@ func _ready():
 		raycast3D.top_level = true
 	else:
 		raycast3D.top_level = false
-	
-	var initial_size = last_branch_dimension / 2
-	var final_size = minimum_branch_size
-	var steps = int(start_pos.distance_to(final_relative_pos))
-	shrink_factor = exp(log(final_size / initial_size) / steps)
 
 
 func _process(_delta):
@@ -37,19 +32,17 @@ func _process(_delta):
 		raycast3D.target_position = final_relative_pos
 	
 	if not Engine.is_editor_hint():
-		if global_position.distance_to(last_branch_position) > last_branch_dimension + branch_gap:
-			print("making branch")
+		if global_position.distance_to(last_branch_position) > branch_dimension + branch_gap:
 			var branch_sphere := MeshInstance3D.new()
 			var sphere_mesh := SphereMesh.new()
-			sphere_mesh.radius = last_branch_dimension / 2
-			sphere_mesh.height = last_branch_dimension
+			sphere_mesh.radius = branch_dimension / 2
+			sphere_mesh.height = branch_dimension
 			sphere_mesh.material = StandardMaterial3D.new()
 			branch_sphere.mesh = sphere_mesh
 			add_child(branch_sphere)
 			branch_sphere.global_position = global_position
 			branch_sphere.top_level = true
 			last_branch_position = branch_sphere.global_position
-			last_branch_dimension = shrink_factor * last_branch_dimension
 	else:
 		remove_branches()
 
@@ -70,7 +63,6 @@ func reset_position():
 		
 	global_position = start_pos
 	last_branch_position = global_position
-	last_branch_dimension = initial_branch_dimension
 	remove_branches()
 
 func remove_branches():
