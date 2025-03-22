@@ -12,9 +12,9 @@ func reset_and_respawn():
 
 
 func _on_timer_trigger_3d_player_entered() -> void:
-	growing_platform.start_timer()
-	growing_platform_2.start_timer()
-	growing_platform_3.start_timer()
+	growing_platform.start_timers()
+	growing_platform_2.start_timers()
+	growing_platform_3.start_timers()
 
 
 func _input(event):

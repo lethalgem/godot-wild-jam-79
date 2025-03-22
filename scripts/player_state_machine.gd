@@ -242,8 +242,6 @@ class StateJump extends State:
 	var jump_velocity := 15.0
 	var max_speed := 10.0
 	var steering_factor := 20.0
-	var camera_fov_increase := 2 # degrees
-	var camera_zoom_time = 0.25 # seconds
 	var gravity_strength := 40.0
 
 	var _initial_camera_fov: float
@@ -255,15 +253,6 @@ class StateJump extends State:
 		player._jump_count += 1
 		player.skin.jump()
 		player.velocity.y = jump_velocity
-
-		_initial_camera_fov = player.camera_3D.fov
-
-		var tween = player.create_tween()
-		tween.parallel().tween_property(player.camera_3D, "fov", _initial_camera_fov + camera_fov_increase, camera_zoom_time).set_ease(Tween.EASE_IN_OUT)
-
-	func exit() -> void:
-		var tween = player.create_tween()
-		tween.parallel().tween_property(player.camera_3D, "fov", _initial_camera_fov, camera_zoom_time).set_ease(Tween.EASE_IN_OUT)
 
 	func update(delta: float) -> Events:
 		var input_vector := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
@@ -303,7 +292,6 @@ class StateDash extends State:
 	var camera_zoom_time = 0.15 # seconds
 	
 	var _elapsed_time := 0.0
-	var _initial_camera_fov: float
 	
 	func _init(init_player: Player3D) -> void:
 		super("Dash", init_player)

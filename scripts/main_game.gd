@@ -25,7 +25,8 @@ func _ready() -> void:
 						possible_death_plane_child.connect("player_entered", respawn.bind(section))
 				)
 				
-	show_start_menu()
+	#show_start_menu()
+	hide_start_menu()
 	
 ## Ensures that the music is only interrupted when we respawn and not before
 func respawn(section: PlatformingSection):

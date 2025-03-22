@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dqklcpfo8s41n"]
+[gd_scene load_steps=7 format=3 uid="uid://cy5o1s6uhgtft"]
 
 [ext_resource type="Script" uid="uid://b33213kw42su4" path="res://scripts/platforming_section_template.gd" id="1_56cqf"]
 [ext_resource type="Environment" uid="uid://0raosp1j8p3b" path="res://themes/world_environment.tres" id="2_73awg"]

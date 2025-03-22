@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bjec13ap5uow"]
+
+[ext_resource type="Shader" uid="uid://bnkt6isttoddi" path="res://shaders/unshaded.gdshader" id="1_biyyx"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_biyyx")
+shader_parameter/albedo = Color(0.474322, 0.190466, 0.0152473, 1)
