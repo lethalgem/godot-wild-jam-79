@@ -82,7 +82,7 @@ func _process(_delta):
 
 func _on_timer_timeout():
 	tween = create_tween()
-	tween.parallel().tween_property(self,"global_position", Vector3(1, 1, 1) * raycast3D.target_position + position, move_time)
+	tween.parallel().tween_property(self,"position", Vector3(1, 1, 1) * raycast3D.target_position + position, move_time)
 	tween.parallel().tween_property(platform_mesh_instance.mesh, "size", grow_to_size, move_time * done_growing_percentage)
 	tween.parallel().tween_property(platform_mesh_instance.mesh, "size", initial_size, move_time * begin_shrinking_percentage).set_delay(begin_shrinking_percentage)
 	tween.parallel().tween_property(platform_collision_shape.shape, "size", grow_to_size, move_time * done_growing_percentage)
