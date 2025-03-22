@@ -15,8 +15,6 @@ class_name GrowingPlatform3D extends StaticBody3D
 @export_range(0.01, 1.0, 0.01) var done_growing_percentage := 0.3
 ## the percentage of the animation that will have finished when the platform begins to shrink
 @export_range(0.01, 1.0, 0.01) var begin_shrinking_percentage := 0.6
-## how often a branch is placed in meters
-@export var branch_section_length := 0.5
 ## how aggressively the grass scales up with the platform
 @export var grass_mesh_scale_factor := 0.2 / 0.5
 ## how tall the grass is
@@ -27,10 +25,6 @@ class_name GrowingPlatform3D extends StaticBody3D
 @onready var tween: Tween
 
 @onready var start_pos := global_position
-@onready var branch_dimension = min(grow_to_size.x, grow_to_size.y, grow_to_size.z)
-@onready var initial_branch_dimension = branch_dimension
-@onready var last_branch_position := global_position
-@onready var original_branch_position := global_position
 
 var platform_mesh_instance: MeshInstance3D
 var platform_collision_shape: CollisionShape3D
@@ -84,22 +78,7 @@ func _process(_delta):
 	if not raycast3D.target_position == final_relative_pos:
 		raycast3D.target_position = final_relative_pos
 	
-	if not Engine.is_editor_hint():
-		var distance_to_last_branch = global_position.distance_to(last_branch_position)
-		if distance_to_last_branch > 0.1 + branch_section_length / 2 and distance_to_last_branch < 10: # Nasty hack, arbitrarily say it can't be over 10, otherwise it will spawn an extra branch
-			var branch_mesh_instance := MeshInstance3D.new()
-			var branch_mesh := CylinderMesh.new()
-			branch_mesh.top_radius = branch_dimension / 4
-			branch_mesh.bottom_radius = branch_dimension / 4
-			branch_mesh.height = branch_section_length 
-			branch_mesh.surface_set_material(0, preload("res://themes/branch_3d.tres"))
-			branch_mesh_instance.mesh = branch_mesh
-			add_child(branch_mesh_instance)
-			branch_mesh_instance.rotation_degrees = Vector3(90, 0, 90)
-			branch_mesh_instance.global_position = global_position
-			branch_mesh_instance.top_level = true
-			last_branch_position = branch_mesh_instance.global_position
-	else:
+	if Engine.is_editor_hint():
 		if not platform_mesh_instance.mesh.size == initial_size:
 			platform_mesh_instance.mesh.size = initial_size
 			platform_collision_shape.shape.size = initial_size
@@ -112,6 +91,7 @@ func _process(_delta):
 
 
 func _on_timer_timeout():
+	# TODO: throw transition and ease on, it'll make everything feel betteer
 	tween = create_tween()
 	tween.parallel().tween_property(self,"position", Vector3(1, 1, 1) * raycast3D.target_position + position, move_time)
 	tween.parallel().tween_property(platform_mesh_instance.mesh, "size", grow_to_size, move_time * done_growing_percentage)
@@ -136,13 +116,5 @@ func reset_position():
 	timer.stop()
 		
 	global_position = start_pos
-	last_branch_position = start_pos
 	platform_mesh_instance.mesh.size = initial_size
 	platform_collision_shape.shape.size = initial_size
-	remove_branches()
-
-func remove_branches():
-	for node in get_children():
-		if node is MeshInstance3D and node.mesh is CylinderMesh:
-			remove_child(node)
-			node.queue_free()
