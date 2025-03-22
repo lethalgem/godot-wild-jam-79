@@ -12,13 +12,12 @@ class_name Player3D extends CharacterBody3D
 @export_group("State DASHING")
 @export_range(0, 30.0, 0.5) var dash_distance := 10.0
 @export_range(0, 1.0, 0.01) var dash_time := 0.15
-@export_range(1, 179, 1) var camera_fov_dashing:= 60
 @export_range(0.001, 1, 0.01) var camera_zoom_time_dashing := 0.25
 
 @export_group("State JUMPING & DOUBLE_JUMPING")
 @export_range(3.0, 30.0, 0.1) var max_air_control_speed := 6.0
 @export_range(1.0, 30.0, 0.1) var jump_velocity := 20.0
-@export_range(1, 179, 1) var camera_fov_jumping:= 60
+@export_range(1, 179, 1) var camera_fov_increase_jumping := 2.0
 @export_range(0.001, 1, 0.01) var camera_zoom_time_jumping := 0.25
 
 @onready var skin: SophiaSkin3D = %SophiaSkin
@@ -43,14 +42,13 @@ func _ready() -> void:
 	var jump := PlayerStateMachine.StateJump.new(self)
 	jump.max_speed = max_air_control_speed
 	jump.jump_velocity = jump_velocity
-	jump.camera_fov = camera_fov_jumping
+	jump.camera_fov_increase = camera_fov_increase_jumping
 	jump.camera_zoom_time = camera_zoom_time_jumping
 	jump.gravity_strength = gravity_strength
 	
 	var dash := PlayerStateMachine.StateDash.new(self)
 	dash.dash_distance = dash_distance
 	dash.dash_time = dash_time
-	dash.camera_fov = camera_fov_dashing
 	dash.camera_zoom_time = camera_zoom_time_dashing
 	
 	var fall := PlayerStateMachine.StateFall.new(self)
@@ -58,7 +56,6 @@ func _ready() -> void:
 	fall.steering_factor = steering_factor
 	fall.max_speed = max_air_control_speed
 
-	# TODO: Only allow one dash within a set amount of time
 	state_machine.transitions = {
 		idle: {
 			PlayerStateMachine.Events.PLAYER_STARTED_MOVING: walk,

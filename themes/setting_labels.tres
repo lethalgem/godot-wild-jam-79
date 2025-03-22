@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://cjyu4oext3kpl"]
+
+[ext_resource type="FontFile" uid="uid://du2ey54evkplb" path="res://assets/fonts/astron-boy/Astron Boy.otf" id="1_dfhte"]
+
+[resource]
+font = ExtResource("1_dfhte")
+font_size = 40
