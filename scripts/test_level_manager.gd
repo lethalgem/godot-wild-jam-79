@@ -15,8 +15,8 @@ func _on_timer_trigger_3d_player_entered() -> void:
 	growing_platform.start_timer()
 	growing_platform_2.start_timer()
 	growing_platform_3.start_timer()
-	
-	
+
+
 func _input(event):
 	if event.is_action_pressed("respawn"):
 		reset_and_respawn()

@@ -14,7 +14,6 @@ uv2_triplanar = true
 [node name="Movement Test" type="Node3D"]
 
 [node name="Player3D" parent="." instance=ExtResource("1_755td")]
-camera_fov_jumping = 62
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
