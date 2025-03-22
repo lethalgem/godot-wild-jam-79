@@ -58,7 +58,8 @@ func _ready():
 	else:
 		raycast3D.top_level = false
 	
-	assert(done_growing_percentage >= 0.1 and done_growing_percentage <= 1.0, "done_growing_percentage must be a percentage between 0.1 and 1.0")
+	#assert(done_growing_percentage >= 0.1 and done_growing_percentage <= 1.0, "done_growing_percentage must be a percentage between 0.1 and 1.0")
+	assert(done_growing_percentage >= 0.01 and done_growing_percentage <= 1.0, "done_growing_percentage must be a percentage between 0.1 and 1.0")
 	assert(done_growing_percentage <= begin_shrinking_percentage, "done_growing_percentage must be a greather than begin_shrinking_percentage")
 
 	if platform_mesh_instance == null:
@@ -102,6 +103,7 @@ func _on_grow_timer_timeout():
 	tween = create_tween()
 	tween.parallel().tween_property(self,"position", Vector3(1, 1, 1) * raycast3D.target_position + position, move_time)
 	tween.parallel().tween_property(platform_mesh_instance.mesh, "size", grow_to_size, move_time * done_growing_percentage)
+	tween.parallel().tween_property(platform_mesh_instance.mesh, "size", initial_size, move_time * (1 - begin_shrinking_percentage)).set_delay(move_time * begin_shrinking_percentage)
 	tween.parallel().tween_property(platform_mesh_instance.mesh, "size", initial_size, move_time * (1 - begin_shrinking_percentage)).set_delay(move_time * begin_shrinking_percentage)
 	tween.parallel().tween_property(platform_collision_shape.shape, "size", grow_to_size, move_time * done_growing_percentage)
 	tween.parallel().tween_property(platform_collision_shape.shape, "size", initial_size, move_time * (1 - begin_shrinking_percentage)).set_delay(move_time * begin_shrinking_percentage)
