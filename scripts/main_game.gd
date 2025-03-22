@@ -6,6 +6,10 @@ class_name MainGame extends Node3D
 @onready var return_to_camera_anchor_rotation := player.camera_anchor.rotation
 @onready var return_to_camera_3D_fov := player.camera_3D.fov
 
+@export var in_menu_camera_anchor_rotation := Vector3(-0.4,-3.02,0.0)
+@export var in_menu_camera_3D_fov := 35
+@export var menu_animation_time := 0.5
+
 var player_paused_game := false
 
 func _ready() -> void:
@@ -36,19 +40,19 @@ func show_start_menu():
 	
 	if player_paused_game:
 		var tween = create_tween()
-		tween.parallel().tween_property(player.camera_anchor, "rotation", Vector3(-0.4,-3.02,0.0),0.5).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-		tween.parallel().tween_property(player.camera_3D, "fov", 35, 0.5).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		tween.parallel().tween_property(player.camera_anchor, "rotation", in_menu_camera_anchor_rotation, menu_animation_time).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		tween.parallel().tween_property(player.camera_3D, "fov", in_menu_camera_3D_fov, menu_animation_time).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	else:
-		player.camera_anchor.rotation = Vector3(-0.4,-3.02,0.0)
-		player.camera_3D.fov = 35
+		player.camera_anchor.rotation = in_menu_camera_anchor_rotation
+		player.camera_3D.fov = in_menu_camera_3D_fov
 	
 func hide_start_menu(): 
 	start_menu.hide()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	var tween = create_tween()
-	tween.parallel().tween_property(player.camera_anchor, "rotation", return_to_camera_anchor_rotation,0.5).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	tween.parallel().tween_property(player.camera_3D, "fov", return_to_camera_3D_fov, 0.5).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(player.camera_anchor, "rotation", return_to_camera_anchor_rotation, menu_animation_time).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(player.camera_3D, "fov", return_to_camera_3D_fov, menu_animation_time).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 	player.camera_anchor.pause_fov_change = false
 	
