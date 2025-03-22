@@ -5,6 +5,8 @@ signal start_button_pressed
 @export var start_button: Button
 @export var death_count_label: Label
 @export var setting_menu: Control
+@export var select_level_menu: Control
+
 
 @onready var original_start_button_text := start_button.text
 
@@ -27,5 +29,6 @@ func update_death_count(count:int):
 	
 func dismiss_menu():
 	hide()
-	setting_menu._on_back_pressed()
+	setting_menu._on_go_back_pressed()
+	select_level_menu._on_go_back_pressed()
 	

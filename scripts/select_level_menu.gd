@@ -1,10 +1,7 @@
-class_name SettingsMenu extends Control
-	
+class_name SelectLevelMenu extends Control
+
 @onready var dim_rect = $"../PanelContainer"
 @export var start_menu : Control
-	
-func _on_settings_pressed():
-	toggle_menu()
 	
 func toggle_menu():
 	self.visible = true
@@ -15,3 +12,7 @@ func _on_go_back_pressed():
 	dim_rect.visible = false
 	self.visible = false
 	start_menu.show()
+
+
+func _on_select_checkpoint_pressed():
+	toggle_menu()

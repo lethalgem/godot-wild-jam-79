@@ -1,0 +1,198 @@
+[gd_scene load_steps=21 format=3 uid="uid://ck70t0b4wedkk"]
+
+[ext_resource type="Script" uid="uid://dro8e4hpryt1" path="res://scripts/select_level_menu.gd" id="1_cwigf"]
+[ext_resource type="FontFile" uid="uid://du2ey54evkplb" path="res://assets/fonts/astron-boy/Astron Boy.otf" id="2_y3dgh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_labj1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_labj1"]
+font = ExtResource("2_y3dgh")
+font_size = 65
+font_color = Color(1, 1, 1, 0.972549)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2713u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g532r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cwigf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_y3dgh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8c73j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bt7ls"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6ky05"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hy88h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bmcl0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cheir"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lwwgp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bgjg7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_48ojb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n35ux"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fb6cq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ctot"]
+
+[node name="SelectLevelMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_cwigf")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -401.0
+offset_top = -303.0
+offset_right = 401.0
+offset_bottom = 303.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 300
+theme_override_constants/margin_top = 150
+theme_override_constants/margin_right = 300
+theme_override_constants/margin_bottom = 150
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_labj1")
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="CheckpointTitle" type="Label" parent="MarginContainer/GridContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Select Checkpoint"
+label_settings = SubResource("LabelSettings_labj1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/GridContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/GridContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="CheckpointOne" type="Button" parent="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.301961, 0.12549, 0.113725, 1)
+theme_override_fonts/font = ExtResource("2_y3dgh")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2713u")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_g532r")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_cwigf")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_y3dgh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_8c73j")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bt7ls")
+text = "Checkpoint 1"
+
+[node name="CheckpointTwo" type="Button" parent="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.301961, 0.12549, 0.113725, 1)
+theme_override_fonts/font = ExtResource("2_y3dgh")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6ky05")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_g532r")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_cwigf")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_y3dgh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_8c73j")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bt7ls")
+text = "Checkpoint 2
+"
+
+[node name="CheckpointThree" type="Button" parent="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.301961, 0.12549, 0.113725, 1)
+theme_override_fonts/font = ExtResource("2_y3dgh")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hy88h")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_g532r")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_cwigf")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_y3dgh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_8c73j")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bt7ls")
+text = "Checkpoint 3"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/GridContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 50
+
+[node name="CheckpointFour" type="Button" parent="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.301961, 0.12549, 0.113725, 1)
+theme_override_fonts/font = ExtResource("2_y3dgh")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bmcl0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_g532r")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_cwigf")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_y3dgh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_8c73j")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bt7ls")
+text = "Checkpoint 4"
+
+[node name="CheckpointFive" type="Button" parent="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.301961, 0.12549, 0.113725, 1)
+theme_override_fonts/font = ExtResource("2_y3dgh")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cheir")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_g532r")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_cwigf")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_y3dgh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_8c73j")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bt7ls")
+text = "Checkpoint 5"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="GoBack" type="Button" parent="MarginContainer/GridContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 0.972549)
+theme_override_colors/font_pressed_color = Color(0.301961, 0.12549, 0.113725, 1)
+theme_override_fonts/font = ExtResource("2_y3dgh")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lwwgp")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_bgjg7")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_48ojb")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_n35ux")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_fb6cq")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2ctot")
+text = "Go Back"
+
+[connection signal="pressed" from="MarginContainer/GridContainer/HBoxContainer/GoBack" to="." method="_on_go_back_pressed"]

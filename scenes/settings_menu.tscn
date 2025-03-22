@@ -56,7 +56,7 @@ size_flags_vertical = 4
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Label" type="Label" parent="MarginContainer/GridContainer/VBoxContainer"]
+[node name="SelectLevelTitle" type="Label" parent="MarginContainer/GridContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
@@ -110,7 +110,7 @@ bus_name = "sfx"
 layout_mode = 2
 size_flags_vertical = 2
 
-[node name="Back" type="Button" parent="MarginContainer/GridContainer/HBoxContainer"]
+[node name="GoBack" type="Button" parent="MarginContainer/GridContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
@@ -124,9 +124,9 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_48ojb")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_n35ux")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_fb6cq")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_2ctot")
-text = "Back"
+text = "Go Back"
 
 [connection signal="value_changed" from="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/Master" to="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/Master" method="_on_value_changed"]
 [connection signal="value_changed" from="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/Music" to="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/Music" method="_on_value_changed"]
 [connection signal="value_changed" from="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/SFX" to="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/SFX" method="_on_value_changed"]
-[connection signal="pressed" from="MarginContainer/GridContainer/HBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="MarginContainer/GridContainer/HBoxContainer/GoBack" to="." method="_on_go_back_pressed"]

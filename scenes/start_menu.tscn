@@ -1,10 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://t1hltheat6e3"]
+[gd_scene load_steps=28 format=3 uid="uid://t1hltheat6e3"]
 
 [ext_resource type="Script" uid="uid://cjssguwdape4h" path="res://scripts/start_menu.gd" id="3_4v6gu"]
 [ext_resource type="LabelSettings" uid="uid://cjyu4oext3kpl" path="res://themes/setting_labels.tres" id="3_fcv5n"]
 [ext_resource type="FontFile" uid="uid://cqkf3nx3f1g8q" path="res://assets/fonts/astron-boy/Astron Boy Italic.otf" id="3_nxjfj"]
 [ext_resource type="FontFile" uid="uid://du2ey54evkplb" path="res://assets/fonts/astron-boy/Astron Boy.otf" id="4_u4qax"]
 [ext_resource type="PackedScene" uid="uid://dcabj07wxdosg" path="res://scenes/settings_menu.tscn" id="5_5byqq"]
+[ext_resource type="PackedScene" uid="uid://ck70t0b4wedkk" path="res://scenes/select_level_menu.tscn" id="6_4v6gu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fcv5n"]
 bg_color = Color(0, 0, 0, 0.282353)
@@ -54,13 +55,17 @@ _data = {
 }
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4v6gu"]
-bg_color = Color(0, 0, 0, 0.145098)
+bg_color = Color(0, 0, 0, 0.513726)
 
-[node name="StartMenuCanvas" type="CanvasLayer" node_paths=PackedStringArray("start_button", "death_count_label", "setting_menu")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nxjfj"]
+bg_color = Color(0, 0, 0, 0.513726)
+
+[node name="StartMenuCanvas" type="CanvasLayer" node_paths=PackedStringArray("start_button", "death_count_label", "setting_menu", "select_level_menu")]
 script = ExtResource("3_4v6gu")
-start_button = NodePath("StartMenu/MarginContainer/VBoxContainer/Start Game")
+start_button = NodePath("StartMenu/MarginContainer/VBoxContainer/StartGame")
 death_count_label = NodePath("StartMenu/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/DeathCounter")
 setting_menu = NodePath("SettingMenuCanvas/SettingsMenu")
+select_level_menu = NodePath("SelectMenuCanvas/SelectLevelMenu")
 
 [node name="StartMenu" type="Control" parent="."]
 layout_mode = 3
@@ -114,6 +119,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_fcv5n")
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
+theme_override_constants/line_spacing = 0
 text = "Death Count: 100"
 label_settings = ExtResource("3_fcv5n")
 
@@ -137,7 +143,7 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_v86rl")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_13sgg")
 text = "Settings"
 
-[node name="Select Level" type="Button" parent="StartMenu/MarginContainer/VBoxContainer"]
+[node name="SelectCheckpoint" type="Button" parent="StartMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
@@ -151,9 +157,9 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_70i5f")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_mj5lg")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_ufwb2")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6cdou")
-text = "Select Level"
+text = "Select Checkpoint"
 
-[node name="Start Game" type="Button" parent="StartMenu/MarginContainer/VBoxContainer"]
+[node name="StartGame" type="Button" parent="StartMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
@@ -189,7 +195,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_4v6gu")
 
-[node name="SettingsMenu" parent="SettingMenuCanvas" instance=ExtResource("5_5byqq")]
+[node name="SettingsMenu" parent="SettingMenuCanvas" node_paths=PackedStringArray("start_menu") instance=ExtResource("5_5byqq")]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -199,6 +205,34 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
+start_menu = NodePath("../../StartMenu")
+
+[node name="SelectMenuCanvas" type="CanvasLayer" parent="."]
+
+[node name="PanelContainer" type="PanelContainer" parent="SelectMenuCanvas"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_nxjfj")
+
+[node name="SelectLevelMenu" parent="SelectMenuCanvas" node_paths=PackedStringArray("start_menu") instance=ExtResource("6_4v6gu")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+start_menu = NodePath("../../StartMenu")
 
 [connection signal="pressed" from="StartMenu/MarginContainer/VBoxContainer/Settings" to="SettingMenuCanvas/SettingsMenu" method="_on_settings_pressed"]
-[connection signal="pressed" from="StartMenu/MarginContainer/VBoxContainer/Start Game" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="StartMenu/MarginContainer/VBoxContainer/SelectCheckpoint" to="SelectMenuCanvas/SelectLevelMenu" method="_on_select_checkpoint_pressed"]
+[connection signal="pressed" from="StartMenu/MarginContainer/VBoxContainer/StartGame" to="." method="_on_start_game_pressed"]
