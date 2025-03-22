@@ -11,6 +11,7 @@ class_name MainGame extends Node3D
 @export var menu_animation_time := 0.5
 
 var player_paused_game := false
+var death_count := 0
 
 func _ready() -> void:
 	# Listen to all sections to know when the player has entered
@@ -31,6 +32,10 @@ func _ready() -> void:
 func respawn(section: PlatformingSection):
 	section.reset_and_respawn()
 	$AudioStreamPlayer.play(section.song_start)
+	death_count += 1
+	
+	start_menu.update_death_count(death_count)
+
 
 func show_start_menu():
 	player.camera_anchor.pause_fov_change = true
@@ -66,5 +71,3 @@ func _unhandled_input(event):
 			show_start_menu()
 		else:
 			hide_start_menu()
-	
-	
