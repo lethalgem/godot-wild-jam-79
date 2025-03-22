@@ -1,7 +1,6 @@
-extends Control
+class_name StartMenu extends CanvasLayer
 
-func _ready():
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+signal start_button_pressed
 
 func _on_start_game_pressed():
-	get_tree().change_scene_to_file("res://scenes/main_game.tscn")
+	start_button_pressed.emit()

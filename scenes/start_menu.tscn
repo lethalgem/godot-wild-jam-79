@@ -1,13 +1,9 @@
-[gd_scene load_steps=26 format=3 uid="uid://t1hltheat6e3"]
+[gd_scene load_steps=23 format=3 uid="uid://t1hltheat6e3"]
 
-[ext_resource type="PackedScene" uid="uid://dmykngb24yrgg" path="res://scenes/main_game.tscn" id="1_fcv5n"]
-[ext_resource type="Environment" uid="uid://0raosp1j8p3b" path="res://themes/world_environment.tres" id="2_4v6gu"]
 [ext_resource type="Script" uid="uid://cjssguwdape4h" path="res://scripts/start_menu.gd" id="3_4v6gu"]
 [ext_resource type="FontFile" uid="uid://cqkf3nx3f1g8q" path="res://assets/fonts/astron-boy/Astron Boy Italic.otf" id="3_nxjfj"]
 [ext_resource type="FontFile" uid="uid://du2ey54evkplb" path="res://assets/fonts/astron-boy/Astron Boy.otf" id="4_u4qax"]
 [ext_resource type="PackedScene" uid="uid://dcabj07wxdosg" path="res://scenes/settings_menu.tscn" id="5_5byqq"]
-
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_con2f"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mhnvy"]
 
@@ -41,35 +37,11 @@
 
 [sub_resource type="Animation" id="Animation_4ytvr"]
 length = 4.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Background/SubViewportContainer/SubViewport/Camera3D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-0.083537, 0.794608, 1.90631)]
-}
 
 [sub_resource type="Animation" id="Animation_con2f"]
 resource_name = "camera_animation"
 length = 4.0
 loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Background/SubViewportContainer/SubViewport/Camera3D:position")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.01, 2, 3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(-0.083537, 0.794608, 1.90631), Vector3(-0.275178, 0.794608, 1.42629), Vector3(0.103218, 0.939248, 1.58522), Vector3(0.381788, 0.866928, 1.74576)]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mhnvy"]
 _data = {
@@ -78,34 +50,7 @@ _data = {
 }
 
 [node name="StartMenuCanvas" type="CanvasLayer"]
-
-[node name="Background" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.150846, -0.156048, -0.182124)
-
-[node name="MainGame" parent="Background" instance=ExtResource("1_fcv5n")]
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Background"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="SubViewport" type="SubViewport" parent="Background/SubViewportContainer"]
-handle_input_locally = false
-msaa_3d = 3
-use_taa = true
-use_debanding = true
-size = Vector2i(1280, 720)
-render_target_update_mode = 4
-
-[node name="Camera3D" type="Camera3D" parent="Background/SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.083537, 0.794608, 1.90631)
-attributes = SubResource("CameraAttributesPractical_con2f")
-fov = 82.9
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Background"]
-environment = ExtResource("2_4v6gu")
+script = ExtResource("3_4v6gu")
 
 [node name="StartMenu" type="Control" parent="."]
 layout_mode = 3
@@ -114,7 +59,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("3_4v6gu")
 
 [node name="MarginContainer" type="MarginContainer" parent="StartMenu"]
 layout_mode = 1
@@ -132,7 +76,7 @@ theme_override_constants/margin_bottom = 80
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="Title" type="Label" parent="StartMenu/MarginContainer/VBoxContainer"]
+[node name="PolyDashTitle" type="Label" parent="StartMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_color = Color(0.0120981, 0.737281, 0.736178, 0.972549)
@@ -201,9 +145,9 @@ libraries = {
 autoplay = "camera_animation"
 speed_scale = 0.2
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="SettingMenuCanvas" type="CanvasLayer" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="SettingMenuCanvas"]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -212,7 +156,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.698039)
 
-[node name="SettingsMenu" parent="CanvasLayer" instance=ExtResource("5_5byqq")]
+[node name="SettingsMenu" parent="SettingMenuCanvas" instance=ExtResource("5_5byqq")]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -223,5 +167,5 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
 
-[connection signal="pressed" from="StartMenu/MarginContainer/VBoxContainer/Settings" to="CanvasLayer/SettingsMenu" method="_on_settings_pressed"]
-[connection signal="pressed" from="StartMenu/MarginContainer/VBoxContainer/Start Game" to="StartMenu" method="_on_start_game_pressed"]
+[connection signal="pressed" from="StartMenu/MarginContainer/VBoxContainer/Settings" to="SettingMenuCanvas/SettingsMenu" method="_on_settings_pressed"]
+[connection signal="pressed" from="StartMenu/MarginContainer/VBoxContainer/Start Game" to="." method="_on_start_game_pressed"]

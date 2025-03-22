@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dmykngb24yrgg"]
+[gd_scene load_steps=11 format=3 uid="uid://dmykngb24yrgg"]
 
 [ext_resource type="Script" uid="uid://dah127ds70xyx" path="res://scripts/main_game.gd" id="1_s3esy"]
 [ext_resource type="Environment" uid="uid://0raosp1j8p3b" path="res://themes/world_environment.tres" id="2_d2op2"]
@@ -8,13 +8,16 @@
 [ext_resource type="PackedScene" uid="uid://bmbjgq7h67stc" path="res://scenes/platforming_section_tutorial.tscn" id="6_ygxny"]
 [ext_resource type="FontFile" uid="uid://du2ey54evkplb" path="res://assets/fonts/astron-boy/Astron Boy.otf" id="7_70vka"]
 [ext_resource type="Script" uid="uid://bbc0ohnfwk66n" path="res://scripts/fps_counter.gd" id="7_wi4c7"]
+[ext_resource type="PackedScene" uid="uid://t1hltheat6e3" path="res://scenes/start_menu.tscn" id="9_2l77h"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_wi4c7"]
 font_size = 20
 font_color = Color(0, 0, 0, 1)
 
-[node name="MainGame" type="Node3D"]
+[node name="MainGame" type="Node3D" node_paths=PackedStringArray("start_menu", "player")]
 script = ExtResource("1_s3esy")
+start_menu = NodePath("StartMenuCanvas")
+player = NodePath("Player3D")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_ygxny")
@@ -25,6 +28,7 @@ autoplay = true
 environment = ExtResource("2_d2op2")
 
 [node name="Player3D" parent="." instance=ExtResource("3_0rdsr")]
+camera_fov_increase_jumping = 2.0
 
 [node name="DeathPlane3D" parent="." instance=ExtResource("5_ipu61")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -19, 419)
@@ -45,3 +49,7 @@ theme_override_fonts/font = ExtResource("7_70vka")
 text = "FPS"
 label_settings = SubResource("LabelSettings_wi4c7")
 script = ExtResource("7_wi4c7")
+
+[node name="StartMenuCanvas" parent="." instance=ExtResource("9_2l77h")]
+
+[connection signal="start_button_pressed" from="StartMenuCanvas" to="." method="_on_start_menu_canvas_start_button_pressed"]

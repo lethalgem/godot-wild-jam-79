@@ -3,7 +3,7 @@
 [ext_resource type="FontFile" uid="uid://du2ey54evkplb" path="res://assets/fonts/astron-boy/Astron Boy.otf" id="1_cr101"]
 [ext_resource type="Script" uid="uid://dyrva46cpg31v" path="res://scripts/settings_menu.gd" id="1_labj1"]
 [ext_resource type="LabelSettings" uid="uid://cjyu4oext3kpl" path="res://themes/setting_labels.tres" id="2_wswnh"]
-[ext_resource type="Script" path="res://scripts/audio_slider.gd" id="4_lwwgp"]
+[ext_resource type="Script" uid="uid://b6ogndpe316ef" path="res://scripts/audio_slider.gd" id="4_lwwgp"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_labj1"]
 
