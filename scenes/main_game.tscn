@@ -28,7 +28,6 @@ autoplay = true
 environment = ExtResource("2_d2op2")
 
 [node name="Player3D" parent="." instance=ExtResource("3_0rdsr")]
-camera_fov_increase_jumping = 2.0
 
 [node name="DeathPlane3D" parent="." instance=ExtResource("5_ipu61")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -19, 419)

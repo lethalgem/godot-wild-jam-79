@@ -17,8 +17,6 @@ class_name Player3D extends CharacterBody3D
 @export_group("State JUMPING & DOUBLE_JUMPING")
 @export_range(3.0, 30.0, 0.1) var max_air_control_speed := 6.0
 @export_range(1.0, 30.0, 0.1) var jump_velocity := 20.0
-@export_range(1, 179, 1) var camera_fov_increase_jumping := 2.0
-@export_range(0.001, 1, 0.01) var camera_zoom_time_jumping := 0.25
 
 @onready var skin: SophiaSkin3D = %SophiaSkin
 @onready var camera_anchor: Node3D = %CameraAnchor
@@ -42,8 +40,6 @@ func _ready() -> void:
 	var jump := PlayerStateMachine.StateJump.new(self)
 	jump.max_speed = max_air_control_speed
 	jump.jump_velocity = jump_velocity
-	jump.camera_fov_increase = camera_fov_increase_jumping
-	jump.camera_zoom_time = camera_zoom_time_jumping
 	jump.gravity_strength = gravity_strength
 	
 	var dash := PlayerStateMachine.StateDash.new(self)
