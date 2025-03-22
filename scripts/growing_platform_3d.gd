@@ -40,7 +40,6 @@ func _ready():
 	assert(done_growing_percentage >= 0.1 and done_growing_percentage <= 1.0, "done_growing_percentage must be a percentage between 0.1 and 1.0")
 	assert(done_growing_percentage <= begin_shrinking_percentage, "done_growing_percentage must be a greather than begin_shrinking_percentage")
 
-func _process(_delta):
 	if platform_mesh_instance == null:
 		platform_mesh_instance = MeshInstance3D.new()
 		add_child(platform_mesh_instance)
@@ -53,7 +52,8 @@ func _process(_delta):
 		add_child(platform_collision_shape)
 		platform_collision_shape.shape = BoxShape3D.new()
 		platform_collision_shape.shape.size = initial_size
-	
+
+func _process(_delta):
 	if not raycast3D.target_position == final_relative_pos:
 		raycast3D.target_position = final_relative_pos
 	
@@ -64,7 +64,7 @@ func _process(_delta):
 			var sphere_mesh := SphereMesh.new()
 			sphere_mesh.radius = branch_dimension / 2
 			sphere_mesh.height = branch_dimension
-			sphere_mesh.surface_set_material(0, Material.new())
+			sphere_mesh.surface_set_material(0, preload("res://themes/growing_platform_3d.tres"))
 			branch_sphere.mesh = sphere_mesh
 			add_child(branch_sphere)
 			branch_sphere.global_position = global_position
@@ -106,6 +106,6 @@ func reset_position():
 
 func remove_branches():
 	for node in get_children():
-		if node is MeshInstance3D:
+		if node is MeshInstance3D and node.mesh is SphereMesh:
 			remove_child(node)
 			node.queue_free()
