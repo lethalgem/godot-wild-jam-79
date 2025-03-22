@@ -16,7 +16,7 @@ fog_density = 0.0
 fog_height = -5.0
 fog_height_density = 0.2125
 
-[node name="Platforming_Section_Template_MB" type="Node3D"]
+[node name="Platforming_Section_Template_MB2" type="Node3D"]
 script = ExtResource("1_id2pp")
 song_start = 7.169
 
