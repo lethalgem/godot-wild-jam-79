@@ -7,7 +7,7 @@ func _ready():
 	bus_index = AudioServer.get_bus_index(bus_name)
 	
 	if bus_index == -1:
-		push_error("Audio bus with name '%s' doe snot exist." % bus_name)
+		push_error("Audio bus with name '%s' does not exist." % bus_name)
 		return
 		
 	value = db_to_linear(

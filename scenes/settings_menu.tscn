@@ -126,4 +126,7 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_fb6cq")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_2ctot")
 text = "Back"
 
+[connection signal="value_changed" from="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/Master" to="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/Master" method="_on_value_changed"]
+[connection signal="value_changed" from="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/Music" to="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/Music" method="_on_value_changed"]
+[connection signal="value_changed" from="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/SFX" to="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/SFX" method="_on_value_changed"]
 [connection signal="pressed" from="MarginContainer/GridContainer/HBoxContainer/Back" to="." method="_on_back_pressed"]
