@@ -226,10 +226,10 @@ class StateWalk extends State:
 		if not (look_at_direction - player.global_position).is_zero_approx():
 			player.skin.look_at(look_at_direction)
 
-		if direction.is_zero_approx():
-			return Events.PLAYER_STOPPED_MOVING
-		elif Input.is_action_just_pressed("jump"):
+		if Input.is_action_just_pressed("jump"):
 			return Events.PLAYER_JUMPED
+		elif direction.is_zero_approx():
+			return Events.PLAYER_STOPPED_MOVING
 		elif Input.is_action_just_pressed("dash"):
 			return Events.PLAYER_DASHED
 		elif player.velocity.y < 0:
@@ -285,10 +285,10 @@ class StateJump extends State:
 		if not (look_at_direction - player.global_position).is_zero_approx():
 			player.skin.look_at(look_at_direction)
 			
-		if player.is_on_floor():
-			return Events.PLAYER_LANDED
-		elif Input.is_action_just_pressed("jump"):
+		if Input.is_action_just_pressed("jump"):
 			return Events.PLAYER_JUMPED
+		elif player.is_on_floor():
+			return Events.PLAYER_LANDED
 		elif Input.is_action_just_pressed("dash"):
 			return Events.PLAYER_DASHED
 		elif player.velocity.y < 0:
@@ -378,10 +378,10 @@ class StateFall extends State:
 		if not (look_at_direction - player.global_position).is_zero_approx():
 			player.skin.look_at(look_at_direction)
 		
-		if player.velocity.y >= 0:
-			return Events.PLAYER_LANDED
-		elif Input.is_action_just_pressed("jump"):
+		if Input.is_action_just_pressed("jump"):
 			return Events.PLAYER_JUMPED
+		elif player.velocity.y >= 0:
+			return Events.PLAYER_LANDED
 		elif Input.is_action_just_pressed("dash"):
 			return Events.PLAYER_DASHED
 		return Events.NONE

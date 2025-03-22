@@ -1,0 +1,103 @@
+[gd_scene load_steps=7 format=3 uid="uid://ui07hx3jt6md"]
+
+[ext_resource type="Script" uid="uid://b33213kw42su4" path="res://scripts/platforming_section_template.gd" id="1_id2pp"]
+[ext_resource type="PackedScene" uid="uid://vtkc3myfd1i6" path="res://scenes/checkpoint_respawn_3d.tscn" id="3_c6tqm"]
+[ext_resource type="Material" uid="uid://woy3v4cv6ld" path="res://themes/static_test_platform.tres" id="4_bbmmj"]
+[ext_resource type="PackedScene" uid="uid://d2rnwb6em08gc" path="res://scenes/death_plane_3d.tscn" id="5_sx0ip"]
+[ext_resource type="PackedScene" uid="uid://cfcdfh2hxyn7a" path="res://scenes/growing_platform_3d.tscn" id="6_c5odm"]
+
+[sub_resource type="Environment" id="Environment_wwrq5"]
+background_mode = 1
+background_color = Color(0.890374, 0.927404, 1, 1)
+ambient_light_color = Color(1, 1, 1, 1)
+tonemap_mode = 2
+fog_light_color = Color(1, 1, 1, 1)
+fog_density = 0.0
+fog_height = -5.0
+fog_height_density = 0.2125
+
+[node name="Platforming_Section_Template_MB" type="Node3D"]
+script = ExtResource("1_id2pp")
+song_start = 7.169
+
+[node name="SectionWorldEnvironment" type="WorldEnvironment" parent="."]
+unique_name_in_owner = true
+environment = SubResource("Environment_wwrq5")
+
+[node name="CheckpointRespawn3D" parent="." instance=ExtResource("3_c6tqm")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+size = Vector3(10, 10, 10)
+
+[node name="Checkpoint_Platform" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
+use_collision = true
+size = Vector3(15, 20, 15)
+material = ExtResource("4_bbmmj")
+
+[node name="Checkpoint_Platform2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 102.923, 0.735308, 115.3)
+use_collision = true
+size = Vector3(15, 20, 15)
+material = ExtResource("4_bbmmj")
+
+[node name="DeathPlane3D" parent="." instance=ExtResource("5_sx0ip")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -1000, 0)
+size = Vector3(3000, 1, 3000)
+
+[node name="Landing1" parent="." instance=ExtResource("6_c5odm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 35)
+size = Vector3(0.5, 0, 0.5)
+move_time = 1.5
+movement_delay = 0.375
+final_relative_pos = Vector3(0, 0, 0)
+initial_size = Vector3(0.5, 0, 0.5)
+grow_to_size = Vector3(50, 0.5, 50)
+done_growing_percentage = 0.15
+begin_shrinking_percentage = 0.85
+
+[node name="Landing2" parent="." instance=ExtResource("6_c5odm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -200, 84.116)
+size = Vector3(0.5, 0, 0.5)
+move_time = 3.0
+movement_delay = 3.0
+final_relative_pos = Vector3(0, 0, 0)
+initial_size = Vector3(0.5, 0, 0.5)
+grow_to_size = Vector3(50, 0.5, 50)
+done_growing_percentage = 0.15
+begin_shrinking_percentage = 0.85
+
+[node name="Landing3" parent="." instance=ExtResource("6_c5odm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.432, -400, 84.116)
+size = Vector3(0.5, 0, 0.5)
+move_time = 3.0
+movement_delay = 5.5
+final_relative_pos = Vector3(0, 0, 0)
+initial_size = Vector3(0.5, 0, 0.5)
+grow_to_size = Vector3(50, 0.5, 50)
+done_growing_percentage = 0.15
+begin_shrinking_percentage = 0.85
+
+[node name="Landing4" parent="." instance=ExtResource("6_c5odm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 110.252, -600, 84.116)
+size = Vector3(0.5, 0, 0.5)
+move_time = 3.0
+movement_delay = 8.0
+final_relative_pos = Vector3(0, 0, 0)
+initial_size = Vector3(0.5, 0, 0.5)
+grow_to_size = Vector3(50, 0.5, 50)
+done_growing_percentage = 0.15
+begin_shrinking_percentage = 0.85
+
+[node name="Landing5" parent="." instance=ExtResource("6_c5odm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 166.396, -800, 142.71)
+size = Vector3(0.5, 0, 0.5)
+move_time = 3.0
+movement_delay = 10.5
+final_relative_pos = Vector3(0, 0, 0)
+initial_size = Vector3(0.5, 0, 0.5)
+grow_to_size = Vector3(50, 0.5, 50)
+done_growing_percentage = 0.15
+begin_shrinking_percentage = 0.85
+
+[connection signal="player_entered" from="CheckpointRespawn3D" to="." method="_on_checkpoint_respawn_3d_player_entered"]
