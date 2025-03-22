@@ -56,10 +56,11 @@ _data = {
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4v6gu"]
 bg_color = Color(0, 0, 0, 0.145098)
 
-[node name="StartMenuCanvas" type="CanvasLayer" node_paths=PackedStringArray("start_button", "death_count_label")]
+[node name="StartMenuCanvas" type="CanvasLayer" node_paths=PackedStringArray("start_button", "death_count_label", "setting_menu")]
 script = ExtResource("3_4v6gu")
 start_button = NodePath("StartMenu/MarginContainer/VBoxContainer/Start Game")
 death_count_label = NodePath("StartMenu/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/DeathCounter")
+setting_menu = NodePath("SettingMenuCanvas/SettingsMenu")
 
 [node name="StartMenu" type="Control" parent="."]
 layout_mode = 3

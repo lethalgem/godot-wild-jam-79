@@ -53,7 +53,7 @@ func show_start_menu():
 		player.camera_3D.fov = in_menu_camera_3D_fov
 	
 func hide_start_menu(): 
-	start_menu.hide()
+	start_menu.dismiss_menu()
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	var tween = create_tween()

@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://cugd3pcbgvnmq"]
+[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://pgqm10cueh0c"]
 
 [ext_resource type="Shader" uid="uid://bxabqnkr63q4f" path="res://shaders/wind_grass.gdshader" id="1"]
 

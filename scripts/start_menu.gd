@@ -4,6 +4,7 @@ signal start_button_pressed
 
 @export var start_button: Button
 @export var death_count_label: Label
+@export var setting_menu: Control
 
 @onready var original_start_button_text := start_button.text
 
@@ -23,4 +24,8 @@ func _ready():
 
 func update_death_count(count:int):
 	death_count_label.text = "Death Counter: "  + str(count)
+	
+func dismiss_menu():
+	hide()
+	setting_menu._on_back_pressed()
 	
