@@ -32,7 +32,6 @@ size = Vector3(100, 1, 100)
 
 [node name="Step1" parent="." instance=ExtResource("5_r513f")]
 transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0, 3.75, 14)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 0.75
 final_relative_pos = Vector3(0, 0, 0)
@@ -43,7 +42,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Step2" parent="." instance=ExtResource("5_r513f")]
 transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0, 7.5, 22.5)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 1.125
 final_relative_pos = Vector3(0, 0, 0)
@@ -54,7 +52,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Step3" parent="." instance=ExtResource("5_r513f")]
 transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0, 11.25, 31)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 1.5
 final_relative_pos = Vector3(0, 0, 0)
@@ -65,7 +62,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Step4" parent="." instance=ExtResource("5_r513f")]
 transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0, 15, 39.5)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 1.875
 final_relative_pos = Vector3(0, 0, 0)
@@ -76,7 +72,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Step5" parent="." instance=ExtResource("5_r513f")]
 transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0, 18.75, 48)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 2.25
 final_relative_pos = Vector3(0, 0, 0)
@@ -87,7 +82,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Step6" parent="." instance=ExtResource("5_r513f")]
 transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0, 22.5, 56.5)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 2.625
 final_relative_pos = Vector3(0, 0, 0)
@@ -98,7 +92,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Step7" parent="." instance=ExtResource("5_r513f")]
 transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0, 26.25, 65)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 3.0
 final_relative_pos = Vector3(0, 0, 0)
@@ -109,7 +102,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Step8" parent="." instance=ExtResource("5_r513f")]
 transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0, 30, 73.5)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 3.375
 final_relative_pos = Vector3(0, 0, 0)
@@ -120,7 +112,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Step9" parent="." instance=ExtResource("5_r513f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 33, 80.5)
-size = Vector3(5, 0.5, 5)
 move_time = 3.0
 movement_delay = 3.625
 final_relative_pos = Vector3(0, 0, 0)
@@ -131,7 +122,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Step10" parent="." instance=ExtResource("5_r513f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 36, 87.5)
-size = Vector3(5, 0.5, 5)
 move_time = 3.0
 movement_delay = 4.375
 final_relative_pos = Vector3(0, 0, 0)
@@ -142,7 +132,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Step11" parent="." instance=ExtResource("5_r513f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 39, 87.5)
-size = Vector3(5, 0.5, 5)
 move_time = 3.0
 movement_delay = 5.125
 final_relative_pos = Vector3(0, 0, 0)
@@ -153,7 +142,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Step12" parent="." instance=ExtResource("5_r513f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 42, 80.5)
-size = Vector3(5, 0.5, 5)
 move_time = 3.0
 movement_delay = 5.875
 final_relative_pos = Vector3(0, 0, 0)
@@ -164,7 +152,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Step13" parent="." instance=ExtResource("5_r513f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35, 45, 73.5)
-size = Vector3(5, 0.5, 5)
 move_time = 3.0
 movement_delay = 6.625
 final_relative_pos = Vector3(0, 0, 0)
@@ -175,7 +162,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Step14" parent="." instance=ExtResource("5_r513f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35, 48, 66.5)
-size = Vector3(5, 0.5, 5)
 move_time = 3.0
 movement_delay = 7.375
 final_relative_pos = Vector3(0, 0, 0)
@@ -186,7 +172,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Step15" parent="." instance=ExtResource("5_r513f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 51, 59.5)
-size = Vector3(5, 0.5, 5)
 move_time = 3.0
 movement_delay = 8.125
 final_relative_pos = Vector3(0, 0, 0)
@@ -197,7 +182,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Step16" parent="." instance=ExtResource("5_r513f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21, 54, 52.5)
-size = Vector3(5, 0.5, 5)
 move_time = 3.0
 movement_delay = 8.875
 final_relative_pos = Vector3(0, 0, 0)
@@ -208,7 +192,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Step17" parent="." instance=ExtResource("5_r513f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 57, 52.5)
-size = Vector3(5, 0.5, 5)
 move_time = 3.0
 movement_delay = 9.625
 final_relative_pos = Vector3(0, 0, 0)
@@ -219,7 +202,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Step18" parent="." instance=ExtResource("5_r513f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 60, 59.5)
-size = Vector3(5, 0.5, 5)
 move_time = 3.0
 movement_delay = 10.375
 final_relative_pos = Vector3(0, 0, 0)
@@ -230,7 +212,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Step19" parent="." instance=ExtResource("5_r513f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 63, 66.5)
-size = Vector3(5, 0.5, 5)
 move_time = 3.0
 movement_delay = 11.125
 final_relative_pos = Vector3(0, 0, 0)
@@ -241,7 +222,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Step20" parent="." instance=ExtResource("5_r513f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 66, 73.5)
-size = Vector3(5, 0.5, 5)
 move_time = 3.0
 movement_delay = 11.875
 final_relative_pos = Vector3(0, 0, 0)
@@ -252,7 +232,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Step21" parent="." instance=ExtResource("5_r513f")]
 transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0.184727, 68.6421, 80.5771)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 12.625
 final_relative_pos = Vector3(0, 0, 0)
@@ -263,7 +242,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Step22" parent="." instance=ExtResource("5_r513f")]
 transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0.184727, 72.3921, 89.0771)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 13.0
 final_relative_pos = Vector3(0, 0, 0)
@@ -274,7 +252,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Step23" parent="." instance=ExtResource("5_r513f")]
 transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0.184727, 76.1421, 97.5771)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 13.375
 final_relative_pos = Vector3(0, 0, 0)
@@ -285,7 +262,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Step24" parent="." instance=ExtResource("5_r513f")]
 transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0.184727, 79.8921, 106.077)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 13.75
 final_relative_pos = Vector3(0, 0, 0)
@@ -296,7 +272,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Step25" parent="." instance=ExtResource("5_r513f")]
 transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0.184727, 83.6421, 114.577)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 14.125
 final_relative_pos = Vector3(0, 0, 0)
@@ -307,7 +282,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Step26" parent="." instance=ExtResource("5_r513f")]
 transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0.184727, 87.3921, 123.077)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 14.5
 final_relative_pos = Vector3(0, 0, 0)
@@ -318,7 +292,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Step27" parent="." instance=ExtResource("5_r513f")]
 transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0.184727, 91.1421, 131.577)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 14.875
 final_relative_pos = Vector3(0, 0, 0)
@@ -329,7 +302,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Step28" parent="." instance=ExtResource("5_r513f")]
 transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0.184727, 94.8921, 140.077)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 15.25
 final_relative_pos = Vector3(0, 0, 0)

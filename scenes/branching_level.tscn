@@ -38,176 +38,160 @@ size = Vector3(100, 1, 100)
 
 [node name="Step1" parent="." instance=ExtResource("6_vc1f6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 21.5)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 0.75
 final_relative_pos = Vector3(0, 0, 0)
-initial_size = Vector3(5, 0.5, 5)
+initial_size = Vector3(5, 0, 5)
 grow_to_size = Vector3(5, 0.5, 5)
 done_growing_percentage = 0.15
 begin_shrinking_percentage = 0.85
 
 [node name="Step2" parent="." instance=ExtResource("6_vc1f6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 36)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 1.5
 final_relative_pos = Vector3(0, 0, 0)
-initial_size = Vector3(5, 0.5, 5)
+initial_size = Vector3(5, 0, 5)
 grow_to_size = Vector3(5, 0.5, 5)
 done_growing_percentage = 0.15
 begin_shrinking_percentage = 0.85
 
 [node name="Step3_1" parent="." instance=ExtResource("6_vc1f6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 49.5)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 2.25
 final_relative_pos = Vector3(0, 0, 0)
-initial_size = Vector3(5, 0.5, 5)
+initial_size = Vector3(5, 0, 5)
 grow_to_size = Vector3(5, 0.5, 5)
 done_growing_percentage = 0.15
 begin_shrinking_percentage = 0.85
 
 [node name="Step3_2" parent="." instance=ExtResource("6_vc1f6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 49.5)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 2.25
 final_relative_pos = Vector3(0, 0, 0)
-initial_size = Vector3(5, 0.5, 5)
+initial_size = Vector3(5, 0, 5)
 grow_to_size = Vector3(5, 0.5, 5)
 done_growing_percentage = 0.15
 begin_shrinking_percentage = 0.85
 
 [node name="Step4_1" parent="." instance=ExtResource("6_vc1f6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 64)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 3.0
 final_relative_pos = Vector3(0, 0, 0)
-initial_size = Vector3(5, 0.5, 5)
+initial_size = Vector3(5, 0, 5)
 grow_to_size = Vector3(5, 0.5, 5)
 done_growing_percentage = 0.15
 begin_shrinking_percentage = 0.85
 
 [node name="Step4_2" parent="." instance=ExtResource("6_vc1f6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 64)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 3.0
 final_relative_pos = Vector3(0, 0, 0)
-initial_size = Vector3(5, 0.5, 5)
+initial_size = Vector3(5, 0, 5)
 grow_to_size = Vector3(5, 0.5, 5)
 done_growing_percentage = 0.15
 begin_shrinking_percentage = 0.85
 
 [node name="Step5" parent="." instance=ExtResource("6_vc1f6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 78.5)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 3.75
 final_relative_pos = Vector3(0, 0, 0)
-initial_size = Vector3(5, 0.5, 5)
+initial_size = Vector3(5, 0, 5)
 grow_to_size = Vector3(5, 0.5, 5)
 done_growing_percentage = 0.15
 begin_shrinking_percentage = 0.85
 
 [node name="Step6_1" parent="." instance=ExtResource("6_vc1f6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 92)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 4.5
 final_relative_pos = Vector3(0, 0, 0)
-initial_size = Vector3(5, 0.5, 5)
+initial_size = Vector3(5, 0, 5)
 grow_to_size = Vector3(5, 0.5, 5)
 done_growing_percentage = 0.15
 begin_shrinking_percentage = 0.85
 
 [node name="Step6_2" parent="." instance=ExtResource("6_vc1f6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 92)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 4.5
 final_relative_pos = Vector3(0, 0, 0)
-initial_size = Vector3(5, 0.5, 5)
+initial_size = Vector3(5, 0, 5)
 grow_to_size = Vector3(5, 0.5, 5)
 done_growing_percentage = 0.15
 begin_shrinking_percentage = 0.85
 
 [node name="Step7" parent="." instance=ExtResource("6_vc1f6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 106.5)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 5.25
 final_relative_pos = Vector3(0, 0, 0)
-initial_size = Vector3(5, 0.5, 5)
+initial_size = Vector3(5, 0, 5)
 grow_to_size = Vector3(5, 0.5, 5)
 done_growing_percentage = 0.15
 begin_shrinking_percentage = 0.85
 
 [node name="Step8" parent="." instance=ExtResource("6_vc1f6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 121)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 6.0
 final_relative_pos = Vector3(0, 0, 0)
-initial_size = Vector3(5, 0.5, 5)
+initial_size = Vector3(5, 0, 5)
 grow_to_size = Vector3(5, 0.5, 5)
 done_growing_percentage = 0.15
 begin_shrinking_percentage = 0.85
 
 [node name="Step9_1" parent="." instance=ExtResource("6_vc1f6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 135.5)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 6.75
 final_relative_pos = Vector3(0, 0, 0)
-initial_size = Vector3(5, 0.5, 5)
+initial_size = Vector3(5, 0, 5)
 grow_to_size = Vector3(5, 0.5, 5)
 done_growing_percentage = 0.15
 begin_shrinking_percentage = 0.85
 
 [node name="Step9_2" parent="." instance=ExtResource("6_vc1f6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 134.5)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 6.75
 final_relative_pos = Vector3(0, 0, 0)
-initial_size = Vector3(5, 0.5, 5)
+initial_size = Vector3(5, 0, 5)
 grow_to_size = Vector3(5, 0.5, 5)
 done_growing_percentage = 0.15
 begin_shrinking_percentage = 0.85
 
 [node name="Step9_3" parent="." instance=ExtResource("6_vc1f6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 134.5)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 6.75
 final_relative_pos = Vector3(0, 0, 0)
-initial_size = Vector3(5, 0.5, 5)
+initial_size = Vector3(5, 0, 5)
 grow_to_size = Vector3(5, 0.5, 5)
 done_growing_percentage = 0.15
 begin_shrinking_percentage = 0.85
 
 [node name="Step10" parent="." instance=ExtResource("6_vc1f6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 148)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 7.5
 final_relative_pos = Vector3(0, 0, 0)
-initial_size = Vector3(5, 0.5, 5)
+initial_size = Vector3(5, 0, 5)
 grow_to_size = Vector3(5, 0.5, 5)
 done_growing_percentage = 0.15
 begin_shrinking_percentage = 0.85
 
 [node name="Step11" parent="." instance=ExtResource("6_vc1f6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, 162.5)
-size = Vector3(5, 0.5, 5)
 move_time = 1.5
 movement_delay = 8.75
 final_relative_pos = Vector3(0, 0, 0)
-initial_size = Vector3(5, 0.5, 5)
+initial_size = Vector3(5, 0, 5)
 grow_to_size = Vector3(5, 0.5, 5)
 done_growing_percentage = 0.15
 begin_shrinking_percentage = 0.85

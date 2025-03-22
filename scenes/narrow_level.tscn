@@ -38,7 +38,6 @@ material = ExtResource("4_dlimx")
 
 [node name="Narrow1" parent="." instance=ExtResource("6_cglfm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 75)
-size = Vector3(1.5, 0.5, 0)
 move_time = 2.0
 movement_delay = 0.375
 final_relative_pos = Vector3(0, 0, 0)
@@ -49,7 +48,6 @@ begin_shrinking_percentage = 0.9
 
 [node name="Narrow2" parent="." instance=ExtResource("6_cglfm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 145)
-size = Vector3(1.5, 0.5, 0)
 move_time = 2.0
 movement_delay = 2.75
 final_relative_pos = Vector3(0, 0, 0)
@@ -60,7 +58,6 @@ begin_shrinking_percentage = 0.9
 
 [node name="Narrow3" parent="." instance=ExtResource("6_cglfm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 215)
-size = Vector3(1.5, 0.5, 0)
 move_time = 2.0
 movement_delay = 5.125
 final_relative_pos = Vector3(0, 0, 0)
@@ -71,7 +68,6 @@ begin_shrinking_percentage = 0.9
 
 [node name="Narrow4" parent="." instance=ExtResource("6_cglfm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 285)
-size = Vector3(1.5, 0.5, 0)
 move_time = 2.0
 movement_delay = 7.5
 final_relative_pos = Vector3(0, 0, 0)

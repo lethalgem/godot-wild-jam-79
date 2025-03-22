@@ -47,7 +47,6 @@ size = Vector3(3000, 1, 3000)
 
 [node name="Landing1" parent="." instance=ExtResource("6_c5odm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 35)
-size = Vector3(0.5, 0, 0.5)
 move_time = 1.5
 movement_delay = 0.375
 final_relative_pos = Vector3(0, 0, 0)
@@ -58,7 +57,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Landing2" parent="." instance=ExtResource("6_c5odm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -200, 84.116)
-size = Vector3(0.5, 0, 0.5)
 move_time = 3.0
 movement_delay = 3.0
 final_relative_pos = Vector3(0, 0, 0)
@@ -69,7 +67,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Landing3" parent="." instance=ExtResource("6_c5odm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.432, -400, 84.116)
-size = Vector3(0.5, 0, 0.5)
 move_time = 3.0
 movement_delay = 5.5
 final_relative_pos = Vector3(0, 0, 0)
@@ -80,7 +77,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Landing4" parent="." instance=ExtResource("6_c5odm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 110.252, -600, 84.116)
-size = Vector3(0.5, 0, 0.5)
 move_time = 3.0
 movement_delay = 8.0
 final_relative_pos = Vector3(0, 0, 0)
@@ -91,7 +87,6 @@ begin_shrinking_percentage = 0.85
 
 [node name="Landing5" parent="." instance=ExtResource("6_c5odm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 166.396, -800, 142.71)
-size = Vector3(0.5, 0, 0.5)
 move_time = 3.0
 movement_delay = 10.5
 final_relative_pos = Vector3(0, 0, 0)
