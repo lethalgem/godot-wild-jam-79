@@ -31,6 +31,12 @@ use_collision = true
 size = Vector3(9, 17, 7)
 material = ExtResource("4_m8n62")
 
+[node name="Static_Platform3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, -4.5, 12)
+use_collision = true
+size = Vector3(9, 17, 7)
+material = ExtResource("4_m8n62")
+
 [node name="Static_Platform2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7, 63)
 use_collision = true
@@ -43,6 +49,7 @@ move_time = 1.0
 movement_delay = 1.7
 final_relative_pos = Vector3(50, 0, 0)
 grow_to_size = Vector3(10, 1, 10)
+branch_section_length = 0.5
 
 [node name="GrowingPlatform3D2" parent="." instance=ExtResource("5_okkvj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 1, 53)
@@ -50,6 +57,7 @@ move_time = 1.0
 movement_delay = 3.5
 final_relative_pos = Vector3(-50, 0, 0)
 grow_to_size = Vector3(10, 1, 10)
+branch_section_length = 0.5
 
 [node name="GrowingPlatform3D3" parent="." instance=ExtResource("5_okkvj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 88)
@@ -57,6 +65,7 @@ move_time = 4.0
 final_relative_pos = Vector3(0, 5, 50)
 grow_to_size = Vector3(10, 1, 10)
 done_growing_percentage = 0.1
+branch_section_length = 0.5
 
 [node name="DeathPlane3D" parent="." instance=ExtResource("6_0aodp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -24, 42)

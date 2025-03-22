@@ -242,7 +242,7 @@ class StateJump extends State:
 	var jump_velocity := 15.0
 	var max_speed := 10.0
 	var steering_factor := 20.0
-	var camera_fov_increase := 2 # degrees
+	var camera_fov_increase := 2.0 # degrees
 	var camera_zoom_time = 0.25 # seconds
 	var gravity_strength := 40.0
 
@@ -303,7 +303,6 @@ class StateDash extends State:
 	var camera_zoom_time = 0.15 # seconds
 	
 	var _elapsed_time := 0.0
-	var _initial_camera_fov: float
 	
 	func _init(init_player: Player3D) -> void:
 		super("Dash", init_player)

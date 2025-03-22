@@ -1,6 +1,6 @@
-[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://b4lr8jmejpa8t"]
+[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://cugd3pcbgvnmq"]
 
-[ext_resource type="Shader" uid="uid://bxabqnkr63q4f" path="res://Shaders/wind_grass.gdshader" id="1"]
+[ext_resource type="Shader" uid="uid://bxabqnkr63q4f" path="res://shaders/wind_grass.gdshader" id="1"]
 
 [sub_resource type="Curve" id="1"]
 _data = [Vector2(0, 0), 0.0, 2.71765, 0, 0, Vector2(1, 1), -0.129412, 0.0, 0, 0]
@@ -26,7 +26,7 @@ noise = SubResource("5")
 [resource]
 render_priority = 0
 shader = ExtResource("1")
-shader_parameter/wind_speed = 0.05
+shader_parameter/wind_speed = 0.0
 shader_parameter/wind_strength = 2.0
 shader_parameter/wind_texture_tile_size = 20.0
 shader_parameter/wind_vertical_strength = 0.3

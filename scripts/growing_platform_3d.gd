@@ -15,8 +15,12 @@ class_name GrowingPlatform3D extends StaticBody3D
 @export_range(0.01, 1.0, 0.01) var done_growing_percentage := 0.3
 ## the percentage of the animation that will have finished when the platform begins to shrink
 @export_range(0.01, 1.0, 0.01) var begin_shrinking_percentage := 0.6
-## gap between each sphere in the branch in meters
-@export var branch_gap := -0.5
+## how often a branch is placed in meters
+@export var branch_section_length := 0.5
+## how aggressively the grass scales up with the platform
+@export var grass_mesh_scale_factor := 0.2 / 0.5
+## how tall the grass is
+@export var grass_mesh_height := 0.5
 
 @onready var timer := $Timer
 @onready var raycast3D := $RayCast3D
@@ -30,6 +34,22 @@ class_name GrowingPlatform3D extends StaticBody3D
 
 var platform_mesh_instance: MeshInstance3D
 var platform_collision_shape: CollisionShape3D
+var platform_grass_mesh: MultiMeshInstance3D
+
+func _enter_tree() -> void:
+	visibility_changed.connect(_on_visibility_changed)
+
+func _on_visibility_changed() -> void:
+	if visible:
+		_ready()
+	else:
+		platform_mesh_instance.queue_free()
+		platform_collision_shape.queue_free()
+		platform_grass_mesh.queue_free()
+		
+		platform_mesh_instance = null
+		platform_collision_shape = null
+		platform_grass_mesh = null
 
 func _ready():
 	if not Engine.is_editor_hint():
@@ -52,6 +72,13 @@ func _ready():
 		add_child(platform_collision_shape)
 		platform_collision_shape.shape = BoxShape3D.new()
 		platform_collision_shape.shape.size = initial_size
+	
+	if platform_grass_mesh == null:
+		platform_grass_mesh = MultiMeshInstance3D.new()
+		add_child(platform_grass_mesh)
+		platform_grass_mesh.multimesh = preload("res://themes/growing_platform_3d_multi_mesh.tres")
+		platform_grass_mesh.material_override = preload("res://themes/wind_grass.tres")
+		platform_grass_mesh.scale = Vector3(initial_size.x * grass_mesh_scale_factor, grass_mesh_height, initial_size.x * grass_mesh_scale_factor)
 
 func _process(_delta):
 	if not raycast3D.target_position == final_relative_pos:
@@ -59,34 +86,44 @@ func _process(_delta):
 	
 	if not Engine.is_editor_hint():
 		var distance_to_last_branch = global_position.distance_to(last_branch_position)
-		if distance_to_last_branch > branch_dimension + branch_gap and distance_to_last_branch < 10: # Nasty hack, arbitrarily say it can't be over 10, otherwise it will spawn an extra branch
-			var branch_sphere := MeshInstance3D.new()
-			var sphere_mesh := SphereMesh.new()
-			sphere_mesh.radius = branch_dimension / 2
-			sphere_mesh.height = branch_dimension
-			sphere_mesh.surface_set_material(0, preload("res://themes/growing_platform_3d.tres"))
-			branch_sphere.mesh = sphere_mesh
-			add_child(branch_sphere)
-			branch_sphere.global_position = global_position
-			branch_sphere.top_level = true
-			last_branch_position = branch_sphere.global_position
+		if distance_to_last_branch > 0.1 + branch_section_length / 2 and distance_to_last_branch < 10: # Nasty hack, arbitrarily say it can't be over 10, otherwise it will spawn an extra branch
+			var branch_mesh_instance := MeshInstance3D.new()
+			var branch_mesh := CylinderMesh.new()
+			branch_mesh.top_radius = branch_dimension / 4
+			branch_mesh.bottom_radius = branch_dimension / 4
+			branch_mesh.height = branch_section_length 
+			branch_mesh.surface_set_material(0, preload("res://themes/branch_3d.tres"))
+			branch_mesh_instance.mesh = branch_mesh
+			add_child(branch_mesh_instance)
+			branch_mesh_instance.rotation_degrees = Vector3(90, 0, 90)
+			branch_mesh_instance.global_position = global_position
+			branch_mesh_instance.top_level = true
+			last_branch_position = branch_mesh_instance.global_position
 	else:
 		if not platform_mesh_instance.mesh.size == initial_size:
 			platform_mesh_instance.mesh.size = initial_size
-		
-		if not platform_collision_shape.shape.size == initial_size:
 			platform_collision_shape.shape.size = initial_size
-			
-		remove_branches()
+			platform_grass_mesh.scale.x = initial_size.x * grass_mesh_scale_factor
+			platform_grass_mesh.scale.z = initial_size.z * grass_mesh_scale_factor
+			platform_grass_mesh.position.y = initial_size.y / 2
+		
+		if not platform_grass_mesh.scale.y == grass_mesh_height:
+			platform_grass_mesh.scale = Vector3(initial_size.x * grass_mesh_scale_factor, grass_mesh_height, initial_size.x * grass_mesh_scale_factor)
 
 
 func _on_timer_timeout():
 	tween = create_tween()
 	tween.parallel().tween_property(self,"position", Vector3(1, 1, 1) * raycast3D.target_position + position, move_time)
 	tween.parallel().tween_property(platform_mesh_instance.mesh, "size", grow_to_size, move_time * done_growing_percentage)
-	tween.parallel().tween_property(platform_mesh_instance.mesh, "size", initial_size, move_time * begin_shrinking_percentage).set_delay(begin_shrinking_percentage)
+	tween.parallel().tween_property(platform_mesh_instance.mesh, "size", initial_size, move_time * (1 - begin_shrinking_percentage)).set_delay(move_time * begin_shrinking_percentage)
 	tween.parallel().tween_property(platform_collision_shape.shape, "size", grow_to_size, move_time * done_growing_percentage)
-	tween.parallel().tween_property(platform_collision_shape.shape, "size", initial_size, move_time * begin_shrinking_percentage).set_delay(begin_shrinking_percentage)
+	tween.parallel().tween_property(platform_collision_shape.shape, "size", initial_size, move_time * (1 - begin_shrinking_percentage)).set_delay(move_time * begin_shrinking_percentage)
+	tween.parallel().tween_property(platform_grass_mesh, "scale:x", grow_to_size.x * grass_mesh_scale_factor, move_time * done_growing_percentage)
+	tween.parallel().tween_property(platform_grass_mesh, "scale:x", initial_size.x * grass_mesh_scale_factor, move_time * (1 - begin_shrinking_percentage)).set_delay(move_time * begin_shrinking_percentage)
+	tween.parallel().tween_property(platform_grass_mesh, "scale:z", grow_to_size.z * grass_mesh_scale_factor, move_time * done_growing_percentage)
+	tween.parallel().tween_property(platform_grass_mesh, "scale:z", initial_size.z * grass_mesh_scale_factor, move_time * (1 - begin_shrinking_percentage)).set_delay(move_time * begin_shrinking_percentage)
+	tween.parallel().tween_property(platform_grass_mesh, "position:y", grow_to_size.y / 2, move_time * done_growing_percentage)
+	tween.parallel().tween_property(platform_grass_mesh, "position:y", initial_size.y / 2, move_time * (1 - begin_shrinking_percentage)).set_delay(move_time * begin_shrinking_percentage)
 
 func start_timer():
 	if movement_delay > 0:
@@ -106,6 +143,6 @@ func reset_position():
 
 func remove_branches():
 	for node in get_children():
-		if node is MeshInstance3D and node.mesh is SphereMesh:
+		if node is MeshInstance3D and node.mesh is CylinderMesh:
 			remove_child(node)
 			node.queue_free()

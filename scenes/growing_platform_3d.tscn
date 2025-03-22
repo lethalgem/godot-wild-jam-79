@@ -1,15 +1,38 @@
-[gd_scene load_steps=2 format=3 uid="uid://cfcdfh2hxyn7a"]
+[gd_scene load_steps=7 format=3 uid="uid://cfcdfh2hxyn7a"]
 
 [ext_resource type="Script" uid="uid://dunna5oxxhxu" path="res://scripts/growing_platform_3d.gd" id="1_f4yqo"]
+[ext_resource type="Material" uid="uid://cugd3pcbgvnmq" path="res://themes/wind_grass.tres" id="2_2vydv"]
+[ext_resource type="MultiMesh" uid="uid://bwy4tvk2plixx" path="res://themes/growing_platform_3d_multi_mesh.tres" id="3_3ugco"]
+[ext_resource type="Script" uid="uid://brvw3nml006qv" path="res://scripts/grass_multi_mesh_instance_3d.gd" id="4_3ugco"]
+[ext_resource type="Material" uid="uid://bjec13ap5uow" path="res://themes/branch_3d.tres" id="5_4adp0"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hseml"]
+material = ExtResource("5_4adp0")
+top_radius = 0.25
+bottom_radius = 0.25
 
 [node name="GrowingPlatform3D" type="StaticBody3D"]
 script = ExtResource("1_f4yqo")
+final_relative_pos = Vector3(-13.525, 8.575, -4.94)
+grass_mesh_height = 0.4
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
-target_position = Vector3(0, 5, 3)
+target_position = Vector3(-13.525, 8.575, -4.94)
 debug_shape_thickness = 5
+
+[node name="GrassMultiMeshInstance3D" type="MultiMeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 1, 0, 0, 0, 0.2, 0, 0.254437, 0)
+visible = false
+material_override = ExtResource("2_2vydv")
+multimesh = ExtResource("3_3ugco")
+script = ExtResource("4_3ugco")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.994829, -0.0521368, 0.0871557, 0.052336, 0.99863, 0, -0.0870363, 0.00456138, 0.996195, 0, 0, 0)
+visible = false
+mesh = SubResource("CylinderMesh_hseml")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
