@@ -37,7 +37,8 @@ func _ready():
 	else:
 		raycast3D.top_level = false
 	
-	assert(done_growing_percentage >= 0.1 and done_growing_percentage <= 1.0, "done_growing_percentage must be a percentage between 0.1 and 1.0")
+	#assert(done_growing_percentage >= 0.1 and done_growing_percentage <= 1.0, "done_growing_percentage must be a percentage between 0.1 and 1.0")
+	assert(done_growing_percentage >= 0.01 and done_growing_percentage <= 1.0, "done_growing_percentage must be a percentage between 0.1 and 1.0")
 	assert(done_growing_percentage <= begin_shrinking_percentage, "done_growing_percentage must be a greather than begin_shrinking_percentage")
 
 	if platform_mesh_instance == null:
