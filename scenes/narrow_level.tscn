@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://d2rnwb6em08gc" path="res://scenes/death_plane_3d.tscn" id="5_17idp"]
 [ext_resource type="PackedScene" uid="uid://cfcdfh2hxyn7a" path="res://scenes/growing_platform_3d.tscn" id="6_cglfm"]
 
-[node name="Platforming_Section_Template_MB2" type="Node3D"]
+[node name="Platforming_Section_Template_MB3" type="Node3D"]
 script = ExtResource("1_qem1h")
 song_start = 7.169
 

@@ -8,15 +8,14 @@
 [ext_resource type="PackedScene" uid="uid://bmbjgq7h67stc" path="res://scenes/platforming_section_tutorial.tscn" id="6_ygxny"]
 [ext_resource type="FontFile" uid="uid://du2ey54evkplb" path="res://assets/fonts/astron-boy/Astron Boy.otf" id="7_70vka"]
 [ext_resource type="Script" uid="uid://bbc0ohnfwk66n" path="res://scripts/fps_counter.gd" id="7_wi4c7"]
-[ext_resource type="PackedScene" uid="uid://t1hltheat6e3" path="res://scenes/start_menu.tscn" id="9_2l77h"]
+[ext_resource type="PackedScene" uid="uid://gi2f77phhs7w" path="res://scenes/branching_level.tscn" id="9_2l77h"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_wi4c7"]
 font_size = 20
 font_color = Color(0, 0, 0, 1)
 
-[node name="MainGame" type="Node3D" node_paths=PackedStringArray("start_menu", "player")]
+[node name="MainGame" type="Node3D" node_paths=PackedStringArray("player")]
 script = ExtResource("1_s3esy")
-start_menu = NodePath("StartMenuCanvas")
 player = NodePath("Player3D")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
@@ -49,6 +48,6 @@ text = "FPS"
 label_settings = SubResource("LabelSettings_wi4c7")
 script = ExtResource("7_wi4c7")
 
-[node name="StartMenuCanvas" parent="." instance=ExtResource("9_2l77h")]
-
-[connection signal="start_button_pressed" from="StartMenuCanvas" to="." method="_on_start_menu_canvas_start_button_pressed"]
+[node name="Platforming_Section_Template_MB2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_2l77h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80.829, 0, 130.22)
+player = NodePath("../Player3D")
