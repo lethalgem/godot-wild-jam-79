@@ -13,14 +13,16 @@ bottom_radius = 0.25
 
 [node name="GrowingPlatform3D" type="StaticBody3D"]
 script = ExtResource("1_f4yqo")
-final_relative_pos = Vector3(-13.525, 8.575, -4.94)
 grass_mesh_height = 0.4
 
-[node name="Timer" type="Timer" parent="."]
+[node name="GrowTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="StartMoveTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
-target_position = Vector3(-13.525, 8.575, -4.94)
+target_position = Vector3(0, 5, 3)
 debug_shape_thickness = 5
 
 [node name="GrassMultiMeshInstance3D" type="MultiMeshInstance3D" parent="."]
@@ -35,4 +37,5 @@ transform = Transform3D(0.994829, -0.0521368, 0.0871557, 0.052336, 0.99863, 0, -
 visible = false
 mesh = SubResource("CylinderMesh_hseml")
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="GrowTimer" to="." method="_on_grow_timer_timeout"]
+[connection signal="timeout" from="StartMoveTimer" to="." method="_on_start_move_timer_timeout"]

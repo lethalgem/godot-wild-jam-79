@@ -54,7 +54,7 @@ func reset_and_respawn():
 func trigger_platforms():
 	for child in get_children():
 		if child is GrowingPlatform3D:
-			child.start_timer()
+			child.start_timers()
 
 func _on_checkpoint_respawn_3d_player_entered():
 	player_entered_section.emit(self)

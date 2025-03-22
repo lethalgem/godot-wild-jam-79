@@ -1,12 +1,18 @@
 @tool
 class_name GrowingPlatform3D extends StaticBody3D
 
-## seconds
+## how long the platform should animate growing in seconds
 @export var move_time := 10.0
-## seconds
+## seconds after the checkpoint is touched that the platform should start growing
 @export var movement_delay := 5.0
+## seconds before the platform starts growing that it should hover in place
+@export var hover_buffer := 0.1
+## seconds before the platform starts growing that it should begin moving into view
+@export var move_buffer := 0.2
+## how far down the platform should be before appearing in meters
+@export var appear_from_height_offset := 50
 ## relative position the platform will move to in meters
-@export var final_relative_pos := Vector3(0,5,3)
+@export var final_relative_pos := Vector3(0, 5, 3)
 ## size the platform starts at and finishes at in meters
 @export var initial_size := Vector3(0.5, 0.5, 0.5)
 ## largest size the platform will grow to in meters
@@ -20,7 +26,8 @@ class_name GrowingPlatform3D extends StaticBody3D
 ## how tall the grass is
 @export var grass_mesh_height := 0.5
 
-@onready var timer := $Timer
+@onready var grow_timer := $GrowTimer
+@onready var start_move_timer := $StartMoveTimer
 @onready var raycast3D := $RayCast3D
 @onready var tween: Tween
 
@@ -90,7 +97,7 @@ func _process(_delta):
 			platform_grass_mesh.scale = Vector3(initial_size.x * grass_mesh_scale_factor, grass_mesh_height, initial_size.x * grass_mesh_scale_factor)
 
 
-func _on_timer_timeout():
+func _on_grow_timer_timeout():
 	# TODO: throw transition and ease on, it'll make everything feel betteer
 	tween = create_tween()
 	tween.parallel().tween_property(self,"position", Vector3(1, 1, 1) * raycast3D.target_position + position, move_time)
@@ -104,17 +111,35 @@ func _on_timer_timeout():
 	tween.parallel().tween_property(platform_grass_mesh, "scale:z", initial_size.z * grass_mesh_scale_factor, move_time * (1 - begin_shrinking_percentage)).set_delay(move_time * begin_shrinking_percentage)
 	tween.parallel().tween_property(platform_grass_mesh, "position:y", grow_to_size.y / 2, move_time * done_growing_percentage)
 	tween.parallel().tween_property(platform_grass_mesh, "position:y", initial_size.y / 2, move_time * (1 - begin_shrinking_percentage)).set_delay(move_time * begin_shrinking_percentage)
+	tween.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tween.connect("finished", func(): 
+		if movement_delay - hover_buffer > 0.05:
+			tween = create_tween()
+			tween.tween_property(self, "global_position:y", global_position.y - appear_from_height_offset, move_buffer).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN_OUT)
+		)
 
-func start_timer():
+func start_timers():
 	if movement_delay > 0:
-		timer.wait_time = movement_delay
-		timer.start()
+		grow_timer.wait_time = movement_delay
+		grow_timer.start()
+		
+		if movement_delay - hover_buffer > 0.05:
+			start_move_timer.wait_time = movement_delay - hover_buffer - move_buffer
+			start_move_timer.start()
+			global_position.y -= appear_from_height_offset
+		else:
+			print_debug("hover_buffer and move_buffer would have the platform appear before 0 seconds from the checkpoint so it is not being used, ignore if this is intended")
 
 func reset_position():
 	if tween != null:
 		tween.kill()
-	timer.stop()
-		
+	grow_timer.stop()
+	start_move_timer.stop()
+	
 	global_position = start_pos
 	platform_mesh_instance.mesh.size = initial_size
 	platform_collision_shape.shape.size = initial_size
+
+func _on_start_move_timer_timeout() -> void:
+	tween = create_tween()
+	tween.tween_property(self, "global_position:y", global_position.y + appear_from_height_offset, move_buffer).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
