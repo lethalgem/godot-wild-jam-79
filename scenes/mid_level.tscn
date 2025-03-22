@@ -77,9 +77,19 @@ done_growing_percentage = 0.15
 begin_shrinking_percentage = 0.85
 
 [node name="Step3_1" parent="." instance=ExtResource("6_ggof8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 9, 125)
-move_time = 1.5
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4544, 9, 125)
+move_time = 1.875
 movement_delay = 6.75
+final_relative_pos = Vector3(-2, 0, 0)
+initial_size = Vector3(7, 0.5, 7)
+grow_to_size = Vector3(7, 0.5, 7)
+done_growing_percentage = 0.15
+begin_shrinking_percentage = 0.85
+
+[node name="Step3_2" parent="." instance=ExtResource("6_ggof8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.7812, -4, 136.419)
+move_time = 1.875
+movement_delay = 7.5
 final_relative_pos = Vector3(-2, 0, 0)
 initial_size = Vector3(7, 0.5, 7)
 grow_to_size = Vector3(7, 0.5, 7)
@@ -87,19 +97,9 @@ done_growing_percentage = 0.15
 begin_shrinking_percentage = 0.85
 
 [node name="Checkpoint_Platform3" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.4974, -26.9406, 124.416)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64.5609, -26.9406, 144.749)
 use_collision = true
 size = Vector3(15, 20, 15)
 material = ExtResource("4_l1hwm")
-
-[node name="Step3_2" parent="." instance=ExtResource("6_ggof8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 9, 125)
-move_time = 1.5
-movement_delay = 6.75
-final_relative_pos = Vector3(-2, 0, 0)
-initial_size = Vector3(7, 0.5, 7)
-grow_to_size = Vector3(7, 0.5, 7)
-done_growing_percentage = 0.15
-begin_shrinking_percentage = 0.85
 
 [connection signal="player_entered" from="CheckpointRespawn3D" to="." method="_on_checkpoint_respawn_3d_player_entered"]
