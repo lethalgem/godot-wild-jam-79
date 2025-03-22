@@ -22,6 +22,8 @@ class_name Player3D extends CharacterBody3D
 @onready var camera_anchor: Node3D = %CameraAnchor
 @onready var camera_3D: Camera3D = %Camera3D
 @onready var debug_state_label = %DebugStateLabel3D
+@onready var jumping_audio_player = %JumpAudio
+@onready var dash_audio_player = %DashAudio
 
 var _jump_count := 0
 var _dash_count := 0

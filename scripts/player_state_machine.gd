@@ -253,6 +253,7 @@ class StateJump extends State:
 		player._jump_count += 1
 		player.skin.jump()
 		player.velocity.y = jump_velocity
+		player.jumping_audio_player.play()
 
 	func update(delta: float) -> Events:
 		var input_vector := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
@@ -299,6 +300,7 @@ class StateDash extends State:
 	func enter():
 		player._dash_count += 1
 		player.skin.fall()
+		player.dash_audio_player.play()
 		
 		# Ignore y velocity so the skin stays up right
 		# Add position to make everything relative to where the player is

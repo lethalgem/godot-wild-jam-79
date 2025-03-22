@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dah127ds70xyx" path="res://scripts/main_game.gd" id="1_s3esy"]
 [ext_resource type="Environment" uid="uid://0raosp1j8p3b" path="res://themes/world_environment.tres" id="2_d2op2"]
 [ext_resource type="PackedScene" uid="uid://c8t036440xf3" path="res://scenes/player_3d.tscn" id="3_0rdsr"]
-[ext_resource type="AudioStream" uid="uid://b4wijc4hg1dvt" path="res://assets/music/fighter-269805.mp3" id="4_ygxny"]
+[ext_resource type="AudioStream" uid="uid://b4wijc4hg1dvt" path="res://assets/audio/music/fighter-269805.mp3" id="4_ygxny"]
 [ext_resource type="PackedScene" uid="uid://d2rnwb6em08gc" path="res://scenes/death_plane_3d.tscn" id="5_ipu61"]
 [ext_resource type="PackedScene" uid="uid://bmbjgq7h67stc" path="res://scenes/platforming_section_tutorial.tscn" id="6_ygxny"]
 [ext_resource type="FontFile" uid="uid://du2ey54evkplb" path="res://assets/fonts/astron-boy/Astron Boy.otf" id="7_70vka"]

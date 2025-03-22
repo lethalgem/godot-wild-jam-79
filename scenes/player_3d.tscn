@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://c8t036440xf3"]
+[gd_scene load_steps=8 format=3 uid="uid://c8t036440xf3"]
 
 [ext_resource type="Script" uid="uid://brn3k1ki4wtq1" path="res://scripts/player_3d.gd" id="1_2djwe"]
 [ext_resource type="PackedScene" uid="uid://prh35jb6tjtd" path="res://assets/models/sophia/sophia_skin.tscn" id="1_52vux"]
 [ext_resource type="Script" uid="uid://jj4ic7xob8qc" path="res://scripts/camera_anchor.gd" id="2_reoop"]
 [ext_resource type="Script" uid="uid://rhfih0pkbaki" path="res://scripts/mouse_mode_controller.gd" id="4_4jfb6"]
+[ext_resource type="AudioStream" uid="uid://df0kkrripwfqb" path="res://assets/audio/sfx/jump_sound.mp3" id="5_yevqy"]
+[ext_resource type="AudioStream" uid="uid://b0yys6vprf3b3" path="res://assets/audio/sfx/dash_sound.mp3" id="6_sxlqi"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_52vux"]
 height = 1.8
@@ -55,3 +57,14 @@ shadow_enabled = true
 shadow_caster_mask = 4293918976
 directional_shadow_mode = 0
 sky_mode = 1
+
+[node name="JumpAudio" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_yevqy")
+volume_db = -20.0
+bus = &"sfx"
+
+[node name="DashAudio" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_sxlqi")
+bus = &"sfx"

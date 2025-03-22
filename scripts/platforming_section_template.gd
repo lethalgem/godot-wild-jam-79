@@ -41,7 +41,7 @@ func _ready() -> void:
 		
 		debug_audio_player = AudioStreamPlayer.new()
 		add_child(debug_audio_player)
-		debug_audio_player.stream = preload("res://assets/music/fighter-269805.mp3")
+		debug_audio_player.stream = preload("res://assets/audio/music/fighter-269805.mp3")
 		debug_audio_player.volume_db -= 20
 		debug_audio_player.play(song_start)
 
