@@ -22,6 +22,8 @@ player = NodePath("Player3D")
 stream = ExtResource("4_ygxny")
 volume_db = -10.0
 autoplay = true
+bus = &"music"
+parameters/looping = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("2_d2op2")

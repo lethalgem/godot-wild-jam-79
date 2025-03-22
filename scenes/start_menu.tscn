@@ -1,9 +1,13 @@
-[gd_scene load_steps=23 format=3 uid="uid://t1hltheat6e3"]
+[gd_scene load_steps=26 format=3 uid="uid://t1hltheat6e3"]
 
 [ext_resource type="Script" uid="uid://cjssguwdape4h" path="res://scripts/start_menu.gd" id="3_4v6gu"]
+[ext_resource type="LabelSettings" uid="uid://cjyu4oext3kpl" path="res://themes/setting_labels.tres" id="3_fcv5n"]
 [ext_resource type="FontFile" uid="uid://cqkf3nx3f1g8q" path="res://assets/fonts/astron-boy/Astron Boy Italic.otf" id="3_nxjfj"]
 [ext_resource type="FontFile" uid="uid://du2ey54evkplb" path="res://assets/fonts/astron-boy/Astron Boy.otf" id="4_u4qax"]
 [ext_resource type="PackedScene" uid="uid://dcabj07wxdosg" path="res://scenes/settings_menu.tscn" id="5_5byqq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fcv5n"]
+bg_color = Color(0, 0, 0, 0.282353)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mhnvy"]
 
@@ -49,9 +53,14 @@ _data = {
 &"camera_animation": SubResource("Animation_con2f")
 }
 
-[node name="StartMenuCanvas" type="CanvasLayer" node_paths=PackedStringArray("start_button")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4v6gu"]
+bg_color = Color(0, 0, 0, 0.145098)
+
+[node name="StartMenuCanvas" type="CanvasLayer" node_paths=PackedStringArray("start_button", "death_count_label", "setting_menu")]
 script = ExtResource("3_4v6gu")
 start_button = NodePath("StartMenu/MarginContainer/VBoxContainer/Start Game")
+death_count_label = NodePath("StartMenu/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/DeathCounter")
+setting_menu = NodePath("SettingMenuCanvas/SettingsMenu")
 
 [node name="StartMenu" type="Control" parent="."]
 layout_mode = 3
@@ -75,7 +84,6 @@ theme_override_constants/margin_bottom = 80
 
 [node name="VBoxContainer" type="VBoxContainer" parent="StartMenu/MarginContainer"]
 layout_mode = 2
-size_flags_vertical = 0
 
 [node name="PolyDashTitle" type="Label" parent="StartMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -88,7 +96,29 @@ theme_override_font_sizes/font_size = 100
 text = "PolyDash"
 
 [node name="MarginContainer" type="MarginContainer" parent="StartMenu/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 350)
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="StartMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="StartMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_fcv5n")
+
+[node name="DeathCounter" type="Label" parent="StartMenu/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "Death Count: 100"
+label_settings = ExtResource("3_fcv5n")
+
+[node name="MarginContainer2" type="MarginContainer" parent="StartMenu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 
 [node name="Settings" type="Button" parent="StartMenu/MarginContainer/VBoxContainer"]
@@ -148,14 +178,16 @@ speed_scale = 0.2
 
 [node name="SettingMenuCanvas" type="CanvasLayer" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="SettingMenuCanvas"]
+[node name="PanelContainer" type="PanelContainer" parent="SettingMenuCanvas"]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.698039)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_4v6gu")
 
 [node name="SettingsMenu" parent="SettingMenuCanvas" instance=ExtResource("5_5byqq")]
 visible = false

@@ -1,6 +1,6 @@
 class_name SettingsMenu extends Control
 	
-@onready var dim_rect = $"../ColorRect"
+@onready var dim_rect = $"../PanelContainer"
 	
 func _on_settings_pressed():
 	toggle_menu()
