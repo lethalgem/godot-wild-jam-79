@@ -49,8 +49,9 @@ _data = {
 &"camera_animation": SubResource("Animation_con2f")
 }
 
-[node name="StartMenuCanvas" type="CanvasLayer"]
+[node name="StartMenuCanvas" type="CanvasLayer" node_paths=PackedStringArray("start_button")]
 script = ExtResource("3_4v6gu")
+start_button = NodePath("StartMenu/MarginContainer/VBoxContainer/Start Game")
 
 [node name="StartMenu" type="Control" parent="."]
 layout_mode = 3

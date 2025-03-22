@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://d2rnwb6em08gc" path="res://scenes/death_plane_3d.tscn" id="5_ipu61"]
 [ext_resource type="PackedScene" uid="uid://bmbjgq7h67stc" path="res://scenes/platforming_section_tutorial.tscn" id="6_ygxny"]
 [ext_resource type="FontFile" uid="uid://du2ey54evkplb" path="res://assets/fonts/astron-boy/Astron Boy.otf" id="7_70vka"]
-[ext_resource type="Script" uid="uid://bbc0ohnfwk66n" path="res://scripts/fps_counter.gd" id="7_wi4c7"]
+[ext_resource type="Script" path="res://scripts/fps_counter.gd" id="7_wi4c7"]
 [ext_resource type="PackedScene" uid="uid://t1hltheat6e3" path="res://scenes/start_menu.tscn" id="9_2l77h"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_wi4c7"]
