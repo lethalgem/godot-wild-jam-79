@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cy5o1s6uhgtft"]
+[gd_scene load_steps=7 format=3 uid="uid://dqklcpfo8s41n"]
 
 [ext_resource type="Script" uid="uid://b33213kw42su4" path="res://scripts/platforming_section_template.gd" id="1_56cqf"]
 [ext_resource type="Environment" uid="uid://0raosp1j8p3b" path="res://themes/world_environment.tres" id="2_73awg"]
@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cfcdfh2hxyn7a" path="res://scenes/growing_platform_3d.tscn" id="5_r513f"]
 [ext_resource type="PackedScene" uid="uid://d2rnwb6em08gc" path="res://scenes/death_plane_3d.tscn" id="6_k0omt"]
 
-[node name="Platforming_Section_Template_MB" type="Node3D"]
+[node name="Platforming_Section_Template_MB3" type="Node3D"]
 script = ExtResource("1_56cqf")
 song_start = 7.169
 
