@@ -60,6 +60,7 @@ func jump_to_section(num: int):
 	assert(len(all_sections) >= num - 1, "num exceeds the length of section collection")
 	assert(num >= 1, "num starts from 1 not 0, please make any correction needed")
 	respawn(all_sections[num - 1])
+	death_count -= 1
 
 ## Ensures that the music is only interrupted when we respawn and not before
 func respawn(section: PlatformingSection):
@@ -73,10 +74,10 @@ func respawn(section: PlatformingSection):
 		if color_tween != null and color_tween.is_running():
 			color_tween.kill()
 			get_tree().create_timer(time_to_first_beat).connect("timeout", tween_to_color_2)
-	
-	if starting_fresh_game and start_at_section == 1:
-		starting_fresh_game = !starting_fresh_game
 		section.trigger_platforms()
+	else:
+		starting_fresh_game = false
+
 
 func show_start_menu():
 	player.camera_anchor.pause_fov_change = true
@@ -103,7 +104,7 @@ func hide_start_menu():
 	player.camera_anchor.pause_fov_change = false
 	
 	if starting_fresh_game:
-		death_count -= 1
+		starting_fresh_game = !starting_fresh_game
 		jump_to_section(start_at_section)
 	
 func _on_start_menu_canvas_start_button_pressed():
