@@ -83,7 +83,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 270, -
 player = NodePath("../Player3D")
 
 [node name="Stair_Level" parent="." node_paths=PackedStringArray("player") instance=ExtResource("16_ihbck")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -681.264, -2889.35, 1713.45)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -506.147, -2889.35, 1744.06)
 player = NodePath("../Player3D")
 
 [node name="DeathPlane_Initial_Slide_Level" parent="." instance=ExtResource("5_ipu61")]
