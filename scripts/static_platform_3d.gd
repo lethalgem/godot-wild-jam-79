@@ -8,6 +8,7 @@ class_name StaticPlatform3D extends StaticBody3D
 
 var mesh_instance: MeshInstance3D
 var collision_shape: CollisionShape3D
+var bottom_mesh_instance: MeshInstance3D
 
 func _ready() -> void:
 	for child in get_children():
@@ -26,6 +27,11 @@ func _ready() -> void:
 	collision_shape.shape = CylinderShape3D.new()
 	collision_shape.shape.height = height
 	collision_shape.shape.radius = radius
+	
+	bottom_mesh_instance = MeshInstance3D.new()
+	add_child(bottom_mesh_instance)
+	bottom_mesh_instance.mesh = TorusMesh.new()
+	bottom_mesh_instance.mesh
 
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint():

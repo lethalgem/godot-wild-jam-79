@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bmbjgq7h67stc"]
+[gd_scene load_steps=12 format=3 uid="uid://bmbjgq7h67stc"]
 
 [ext_resource type="Script" uid="uid://b33213kw42su4" path="res://scripts/platforming_section_template.gd" id="1_dfone"]
 [ext_resource type="Environment" uid="uid://0raosp1j8p3b" path="res://themes/world_environment.tres" id="2_p8iqt"]
@@ -7,10 +7,20 @@
 [ext_resource type="PackedScene" uid="uid://blvohvgieachh" path="res://scenes/static_platform_3d.tscn" id="5_dfone"]
 [ext_resource type="PackedScene" uid="uid://cfcdfh2hxyn7a" path="res://scenes/growing_platform_3d.tscn" id="5_okkvj"]
 [ext_resource type="PackedScene" uid="uid://d2rnwb6em08gc" path="res://scenes/death_plane_3d.tscn" id="6_0aodp"]
+[ext_resource type="FontFile" uid="uid://y50qtlgmhk1q" path="res://assets/fonts/astron-boy/Astron Boy Video.otf" id="8_p8iqt"]
+[ext_resource type="Material" uid="uid://dy70yny530eh1" path="res://themes/test_instruction_material.tres" id="9_k0bh0"]
 
-[sub_resource type="TorusMesh" id="TorusMesh_dfone"]
-inner_radius = 3.015
-outer_radius = 4.455
+[sub_resource type="TextMesh" id="TextMesh_dfone"]
+material = ExtResource("9_k0bh0")
+text = "JUMP"
+font = ExtResource("8_p8iqt")
+font_size = 127
+
+[sub_resource type="TextMesh" id="TextMesh_k0bh0"]
+material = ExtResource("9_k0bh0")
+text = "DOUBLE JUMP"
+font = ExtResource("8_p8iqt")
+font_size = 127
 
 [node name="Platforming_Section_Tutorial" type="Node3D"]
 script = ExtResource("1_dfone")
@@ -29,7 +39,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
 
 [node name="StaticPlatform3D" parent="." instance=ExtResource("5_dfone")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 27)
-height = 2.0
 
 [node name="StaticPlatform3D2" parent="." instance=ExtResource("5_dfone")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11, 63)
@@ -60,8 +69,12 @@ done_growing_percentage = 0.1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -24, 42)
 size = Vector3(100, 1, 200)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 27)
-mesh = SubResource("TorusMesh_dfone")
+[node name="Jump_Instruction" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.92333, 0, 1.92333, 0, 2.72, 0, -1.92333, 0, -1.92333, -9, 2.5, 12)
+mesh = SubResource("TextMesh_dfone")
+
+[node name="Double_Jump_Instruction" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.92333, 0, 1.92333, 0, 2.72, 0, -1.92333, 0, -1.92333, -9, 7.5, 47)
+mesh = SubResource("TextMesh_k0bh0")
 
 [connection signal="player_entered" from="CheckpointRespawn3D" to="." method="_on_checkpoint_respawn_3d_player_entered"]

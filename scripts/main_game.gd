@@ -20,6 +20,7 @@ var death_count := 0
 var blend_to_color_1 = false
 var time_between_beats = 0.375 # seconds
 var time_to_first_beat = 1.25 # seconds
+var starting_fresh_game = true
 
 func _ready() -> void:
 	# Listen to all sections to know when the player has entered
@@ -35,10 +36,8 @@ func _ready() -> void:
 						possible_death_plane_child.connect("player_entered", respawn.bind(section))
 				)
 
-	#show_start_menu()
-	hide_start_menu()
-	
-	jump_to_section(start_at_section)
+	show_start_menu()
+	#hide_start_menu()
 	
 	get_tree().create_timer(time_to_first_beat).connect("timeout", tween_to_color_2)
 
@@ -64,10 +63,15 @@ func jump_to_section(num: int):
 
 ## Ensures that the music is only interrupted when we respawn and not before
 func respawn(section: PlatformingSection):
+	print(section)
 	section.reset_and_respawn()
 	$AudioStreamPlayer.play(section.song_start)
 	death_count += 1
 	start_menu.update_death_count(death_count)
+	
+	if starting_fresh_game and start_at_section == 1:
+		starting_fresh_game = !starting_fresh_game
+		section.trigger_platforms()
 
 func show_start_menu():
 	player.camera_anchor.pause_fov_change = true
@@ -92,6 +96,10 @@ func hide_start_menu():
 	tween.parallel().tween_property(player.camera_3D, "fov", return_to_camera_3D_fov, menu_animation_time).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 	player.camera_anchor.pause_fov_change = false
+	
+	if starting_fresh_game:
+		death_count -= 1
+		jump_to_section(start_at_section)
 	
 func _on_start_menu_canvas_start_button_pressed():
 	hide_start_menu()
