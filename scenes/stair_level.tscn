@@ -9,7 +9,7 @@
 
 [node name="Platforming_Section_Template_MB3" type="Node3D"]
 script = ExtResource("1_56cqf")
-song_start = 7.169
+song_start = 97.169
 
 [node name="SectionWorldEnvironment" type="WorldEnvironment" parent="."]
 unique_name_in_owner = true
@@ -203,7 +203,7 @@ done_growing_percentage = 0.15
 begin_shrinking_percentage = 0.85
 
 [node name="Step22" parent="." instance=ExtResource("5_r513f")]
-transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0.185, 92.75, 99)
+transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0.185, 92.75, 90)
 move_time = 1.125
 movement_delay = 18.0
 move_buffer = 3.0
@@ -214,7 +214,7 @@ done_growing_percentage = 0.15
 begin_shrinking_percentage = 0.85
 
 [node name="Step23" parent="." instance=ExtResource("5_r513f")]
-transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0.185, 96.5, 106.5)
+transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0.185, 96.5, 97.5)
 move_time = 1.125
 movement_delay = 18.375
 move_buffer = 3.0
@@ -225,7 +225,7 @@ done_growing_percentage = 0.15
 begin_shrinking_percentage = 0.85
 
 [node name="Step24" parent="." instance=ExtResource("5_r513f")]
-transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0.185, 100.25, 114)
+transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0.185, 100.25, 105)
 move_time = 1.125
 movement_delay = 18.75
 move_buffer = 3.0
@@ -236,7 +236,7 @@ done_growing_percentage = 0.15
 begin_shrinking_percentage = 0.85
 
 [node name="Step25" parent="." instance=ExtResource("5_r513f")]
-transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0.185, 104, 121.5)
+transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0.185, 104, 112.5)
 move_time = 1.125
 movement_delay = 19.125
 move_buffer = 3.0
@@ -247,7 +247,7 @@ done_growing_percentage = 0.15
 begin_shrinking_percentage = 0.85
 
 [node name="Step26" parent="." instance=ExtResource("5_r513f")]
-transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0.185, 107.75, 138)
+transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0.185, 107.75, 120)
 move_time = 1.125
 movement_delay = 19.5
 move_buffer = 3.0
@@ -257,8 +257,30 @@ grow_to_size = Vector3(5, 0.5, 5)
 done_growing_percentage = 0.15
 begin_shrinking_percentage = 0.85
 
+[node name="Step27" parent="." instance=ExtResource("5_r513f")]
+transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0.185, 111.5, 127.5)
+move_time = 1.125
+movement_delay = 19.875
+move_buffer = 3.0
+appear_from_height_offset = 500
+final_relative_pos = Vector3(0, 0, 0)
+grow_to_size = Vector3(5, 0.5, 5)
+done_growing_percentage = 0.15
+begin_shrinking_percentage = 0.85
+
+[node name="Step28" parent="." instance=ExtResource("5_r513f")]
+transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0.185, 115.25, 135)
+move_time = 1.125
+movement_delay = 20.25
+move_buffer = 3.0
+appear_from_height_offset = 500
+final_relative_pos = Vector3(0, 0, 0)
+grow_to_size = Vector3(5, 0.5, 5)
+done_growing_percentage = 0.15
+begin_shrinking_percentage = 0.85
+
 [node name="Checkpoint_Platform2" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 95, 153)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 112.8, 153)
 use_collision = true
 size = Vector3(15, 20, 15)
 material = ExtResource("4_gebt5")
