@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkrm1pdlm0j4o"]
+
+[ext_resource type="Script" uid="uid://dtdnr21ec5bhc" path="res://scripts/static_platform_rect_3d.gd" id="1_ldblf"]
+
+[node name="StaticPlatformRect3D" type="StaticBody3D"]
+script = ExtResource("1_ldblf")
