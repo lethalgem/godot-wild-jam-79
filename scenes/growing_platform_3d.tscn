@@ -1,13 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfcdfh2hxyn7a"]
+[gd_scene load_steps=6 format=3 uid="uid://cfcdfh2hxyn7a"]
 
 [ext_resource type="Script" uid="uid://dunna5oxxhxu" path="res://scripts/growing_platform_3d.gd" id="1_f4yqo"]
-[ext_resource type="Material" uid="uid://cugd3pcbgvnmq" path="res://themes/wind_grass.tres" id="2_2vydv"]
+[ext_resource type="Material" uid="uid://pgqm10cueh0c" path="res://themes/wind_grass.tres" id="2_2vydv"]
 [ext_resource type="MultiMesh" uid="uid://bwy4tvk2plixx" path="res://themes/growing_platform_3d_multi_mesh.tres" id="3_3ugco"]
 [ext_resource type="Script" uid="uid://brvw3nml006qv" path="res://scripts/grass_multi_mesh_instance_3d.gd" id="4_3ugco"]
-[ext_resource type="Material" uid="uid://bjec13ap5uow" path="res://themes/branch_3d.tres" id="5_4adp0"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_hseml"]
-material = ExtResource("5_4adp0")
 top_radius = 0.25
 bottom_radius = 0.25
 

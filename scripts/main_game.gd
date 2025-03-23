@@ -9,6 +9,8 @@ class_name MainGame extends Node3D
 @export var in_menu_camera_anchor_rotation := Vector3(-0.4,-3.02,0.0)
 @export var in_menu_camera_3D_fov := 35
 @export var menu_animation_time := 0.5
+@export var start_at_section := 1
+@onready var all_sections : Array[PlatformingSection] = []
 
 var player_paused_game := false
 var death_count := 0
@@ -17,7 +19,8 @@ func _ready() -> void:
 	# Listen to all sections to know when the player has entered
 	for possible_child_section in get_children():
 		if possible_child_section is PlatformingSection:
-			possible_child_section.connect("player_entered_section", func(section):
+			all_sections.append(possible_child_section)
+			possible_child_section.connect("player_entered_section", func(section):				
 				# Reset all death planes to go to this checkpoint
 				for possible_death_plane_child in get_children():
 					if possible_death_plane_child is DeathPlane3D:
@@ -29,14 +32,22 @@ func _ready() -> void:
 	#show_start_menu()
 	hide_start_menu()
 	
+	print(all_sections)
+	
+	jump_to_section(start_at_section)
+
+## sections start from 1, not 0
+func jump_to_section(num: int):
+	assert(len(all_sections) >= num - 1, "num exceeds the length of section collection")
+	assert(num >= 1, "num starts from 1 not 0, please make any correction needed")
+	respawn(all_sections[num - 1])
+
 ## Ensures that the music is only interrupted when we respawn and not before
 func respawn(section: PlatformingSection):
 	section.reset_and_respawn()
 	$AudioStreamPlayer.play(section.song_start)
 	death_count += 1
-	
 	start_menu.update_death_count(death_count)
-
 
 func show_start_menu():
 	player.camera_anchor.pause_fov_change = true
