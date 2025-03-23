@@ -94,4 +94,8 @@ size = Vector3(200, 1, 200)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 270, -2992.99, 930)
 size = Vector3(3000, 10, 3000)
 
+[node name="DeathPlane_Stair_Level" parent="." instance=ExtResource("5_ipu61")]
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, -679.292, -2918.32, 1709.65)
+size = Vector3(500, 2, 500)
+
 [connection signal="start_button_pressed" from="StartMenuCanvas" to="." method="_on_start_menu_canvas_start_button_pressed"]
