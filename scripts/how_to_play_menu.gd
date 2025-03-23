@@ -2,7 +2,7 @@ class_name HowToPlayMenu extends Control
 
 @export var start_menu : Control
 @export var button_sound_player : AudioStreamPlayer
-	
+
 func toggle_menu():
 	self.visible = true
 	start_menu.hide()

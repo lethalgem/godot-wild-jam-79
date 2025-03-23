@@ -11,7 +11,7 @@ var is_fullscreen := false
 func _on_settings_pressed():
 	toggle_menu()
 	button_sound_player.play()
-	
+
 func toggle_menu():
 	self.visible = true
 	dim_rect.visible = true

@@ -1,10 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://ck70t0b4wedkk"]
+[gd_scene load_steps=21 format=3 uid="uid://ck70t0b4wedkk"]
 
 [ext_resource type="Script" uid="uid://dro8e4hpryt1" path="res://scripts/select_level_menu.gd" id="1_cwigf"]
 [ext_resource type="FontFile" uid="uid://du2ey54evkplb" path="res://assets/fonts/astron-boy/Astron Boy.otf" id="2_y3dgh"]
 [ext_resource type="AudioStream" uid="uid://us6xjeo42kvy" path="res://assets/audio/sfx/button_sound.wav" id="3_g532r"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_labj1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_labj1"]
 font = ExtResource("2_y3dgh")
@@ -69,13 +67,10 @@ theme_override_constants/margin_top = 150
 theme_override_constants/margin_right = 300
 theme_override_constants/margin_bottom = 150
 
-[node name="Panel" type="Panel" parent="MarginContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_labj1")
-
 [node name="GridContainer" type="GridContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 4
+theme_override_constants/v_separation = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/GridContainer"]
 layout_mode = 2
@@ -90,6 +85,7 @@ label_settings = SubResource("LabelSettings_labj1")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/GridContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 10
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/GridContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2

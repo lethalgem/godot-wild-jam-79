@@ -25,10 +25,10 @@ func _on_start_game_pressed():
 	start_button_pressed.emit()
 
 func _ready():
-	death_count_label.text = "Death Count: 0"
+	death_count_label.text = "Fall Count: 0"
 
 func update_death_count(count:int):
-	death_count_label.text = "Death Count: "  + str(count)
+	death_count_label.text = "Fall Count: "  + str(count)
 	
 func dismiss_menu():
 	hide()

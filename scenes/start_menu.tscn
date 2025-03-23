@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://t1hltheat6e3"]
+[gd_scene load_steps=31 format=3 uid="uid://t1hltheat6e3"]
 
 [ext_resource type="Script" uid="uid://cjssguwdape4h" path="res://scripts/start_menu.gd" id="3_4v6gu"]
 [ext_resource type="FontFile" uid="uid://cqkf3nx3f1g8q" path="res://assets/fonts/astron-boy/Astron Boy Italic.otf" id="3_nxjfj"]
@@ -50,23 +50,6 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3dmrc"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fcv5n"]
-bg_color = Color(0, 0, 0, 0)
-
-[sub_resource type="Animation" id="Animation_4ytvr"]
-length = 4.0
-
-[sub_resource type="Animation" id="Animation_con2f"]
-resource_name = "camera_animation"
-length = 4.0
-loop_mode = 1
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_mhnvy"]
-_data = {
-&"RESET": SubResource("Animation_4ytvr"),
-&"camera_animation": SubResource("Animation_con2f")
-}
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4v6gu"]
 bg_color = Color(0, 0, 0, 0.509804)
 
@@ -75,8 +58,8 @@ bg_color = Color(0, 0, 0, 0.513726)
 
 [node name="StartMenuCanvas" type="CanvasLayer" node_paths=PackedStringArray("start_button", "death_count_label", "setting_menu", "select_level_menu", "how_to_play_menu", "button_sound_player")]
 script = ExtResource("3_4v6gu")
-start_button = NodePath("StartMenu/MarginContainer/ButtonHBoxContainer/VBoxContainer/StartGame")
-death_count_label = NodePath("StartMenu/MarginContainer/DeathCounterVBoxContainer/PanelContainer/DeathCounter")
+start_button = NodePath("StartMenu/MarginContainer/ButtonVBoxContainer/StartGame")
+death_count_label = NodePath("StartMenu/MarginContainer/DeathCounter")
 setting_menu = NodePath("SettingMenuCanvas/SettingsMenu")
 select_level_menu = NodePath("SelectMenuCanvas/SelectLevelMenu")
 how_to_play_menu = NodePath("HowToPlayCanvas/HowToPlayMenu")
@@ -114,26 +97,22 @@ theme_override_colors/font_color = Color(0.0120981, 0.737281, 0.736178, 0.972549
 theme_override_colors/font_shadow_color = Color(0.727453, 4.0141e-05, 0.554777, 1)
 theme_override_colors/font_outline_color = Color(0.494118, 0.960784, 0.00392157, 1)
 theme_override_fonts/font = ExtResource("3_nxjfj")
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 265
 text = "PolyDash"
 
-[node name="ButtonHBoxContainer" type="HBoxContainer" parent="StartMenu/MarginContainer"]
+[node name="ButtonVBoxContainer" type="VBoxContainer" parent="StartMenu/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
-theme_override_constants/separation = 150
 
-[node name="VBoxContainer" type="VBoxContainer" parent="StartMenu/MarginContainer/ButtonHBoxContainer"]
-layout_mode = 2
-
-[node name="HowToPlay" type="Button" parent="StartMenu/MarginContainer/ButtonHBoxContainer/VBoxContainer"]
+[node name="HowToPlay" type="Button" parent="StartMenu/MarginContainer/ButtonVBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0.301961, 0.12549, 0.113725, 1)
 theme_override_fonts/font = ExtResource("4_u4qax")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 55
 theme_override_styles/focus = SubResource("StyleBoxEmpty_nxjfj")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_u4qax")
 theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_5byqq")
@@ -142,7 +121,7 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_apowk")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_vnuwp")
 text = "How to Play"
 
-[node name="Settings" type="Button" parent="StartMenu/MarginContainer/ButtonHBoxContainer/VBoxContainer"]
+[node name="Settings" type="Button" parent="StartMenu/MarginContainer/ButtonVBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
@@ -150,7 +129,7 @@ theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0.301961, 0.12549, 0.113725, 1)
 theme_override_fonts/font = ExtResource("4_u4qax")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 55
 theme_override_styles/focus = SubResource("StyleBoxEmpty_mhnvy")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_4ytvr")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_g3eks")
@@ -158,7 +137,7 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_v86rl")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_13sgg")
 text = "Settings"
 
-[node name="SelectCheckpoint" type="Button" parent="StartMenu/MarginContainer/ButtonHBoxContainer/VBoxContainer"]
+[node name="SelectCheckpoint" type="Button" parent="StartMenu/MarginContainer/ButtonVBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
@@ -166,7 +145,7 @@ theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0.301961, 0.12549, 0.113725, 1)
 theme_override_fonts/font = ExtResource("4_u4qax")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 55
 theme_override_styles/focus = SubResource("StyleBoxEmpty_i6lef")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_70i5f")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_mj5lg")
@@ -174,7 +153,7 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_ufwb2")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6cdou")
 text = "Select Checkpoint"
 
-[node name="StartGame" type="Button" parent="StartMenu/MarginContainer/ButtonHBoxContainer/VBoxContainer"]
+[node name="StartGame" type="Button" parent="StartMenu/MarginContainer/ButtonVBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
@@ -182,7 +161,7 @@ theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_pressed_color = Color(0.301911, 0.126776, 0.114581, 1)
 theme_override_fonts/font = ExtResource("4_u4qax")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 55
 theme_override_styles/focus = SubResource("StyleBoxEmpty_i42df")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_7jp70")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_mxgkd")
@@ -190,33 +169,16 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_g6gyw")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_3dmrc")
 text = "Start Game"
 
-[node name="DeathCounterVBoxContainer" type="VBoxContainer" parent="StartMenu/MarginContainer"]
+[node name="DeathCounter" type="Label" parent="StartMenu/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 8
-
-[node name="PanelContainer" type="PanelContainer" parent="StartMenu/MarginContainer/DeathCounterVBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_styles/panel = SubResource("StyleBoxFlat_fcv5n")
-
-[node name="DeathCounter" type="Label" parent="StartMenu/MarginContainer/DeathCounterVBoxContainer/PanelContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_colors/font_color = Color(0.0117647, 0.737255, 0.737255, 0.972549)
 theme_override_colors/font_shadow_color = Color(0.729412, 0, 0.552941, 1)
 theme_override_colors/font_outline_color = Color(0.494118, 0.960784, 0.00392157, 1)
 theme_override_fonts/font = ExtResource("4_u4qax")
 theme_override_font_sizes/font_size = 65
-text = "Death Count: 100"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_mhnvy")
-}
-autoplay = "camera_animation"
-speed_scale = 0.2
+text = "Falls Count: 100"
 
 [node name="HowToPlayCanvas" type="CanvasLayer" parent="."]
 
@@ -275,8 +237,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 start_menu = NodePath("../../StartMenu")
 
-[connection signal="pressed" from="StartMenu/MarginContainer/ButtonHBoxContainer/VBoxContainer/HowToPlay" to="HowToPlayCanvas/HowToPlayMenu" method="_on_how_to_play_pressed"]
-[connection signal="pressed" from="StartMenu/MarginContainer/ButtonHBoxContainer/VBoxContainer/Settings" to="SettingMenuCanvas/SettingsMenu" method="_on_settings_pressed"]
-[connection signal="pressed" from="StartMenu/MarginContainer/ButtonHBoxContainer/VBoxContainer/SelectCheckpoint" to="SelectMenuCanvas/SelectLevelMenu" method="_on_select_checkpoint_pressed"]
-[connection signal="pressed" from="StartMenu/MarginContainer/ButtonHBoxContainer/VBoxContainer/StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="StartMenu/MarginContainer/ButtonVBoxContainer/HowToPlay" to="HowToPlayCanvas/HowToPlayMenu" method="_on_how_to_play_pressed"]
+[connection signal="pressed" from="StartMenu/MarginContainer/ButtonVBoxContainer/Settings" to="SettingMenuCanvas/SettingsMenu" method="_on_settings_pressed"]
+[connection signal="pressed" from="StartMenu/MarginContainer/ButtonVBoxContainer/SelectCheckpoint" to="SelectMenuCanvas/SelectLevelMenu" method="_on_select_checkpoint_pressed"]
+[connection signal="pressed" from="StartMenu/MarginContainer/ButtonVBoxContainer/StartGame" to="." method="_on_start_game_pressed"]
 [connection signal="checkpoint_selected" from="SelectMenuCanvas/SelectLevelMenu" to="." method="_on_select_level_menu_checkpoint_selected"]
