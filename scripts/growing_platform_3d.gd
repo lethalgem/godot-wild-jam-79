@@ -110,8 +110,9 @@ func _on_grow_timer_timeout():
 					tween = create_tween()
 					tween.tween_property(self, "global_position:y", global_position.y - appear_from_height_offset, move_buffer).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN_OUT)
 					tween.finished.connect(func():
-						platform_grass_mesh.queue_free()
-						platform_grass_mesh = null
+						if platform_grass_mesh != null:
+							platform_grass_mesh.queue_free()
+							platform_grass_mesh = null
 						)
 				)
 		)
