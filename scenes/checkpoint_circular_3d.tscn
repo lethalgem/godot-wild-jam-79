@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://chgx1g555xara"]
+
+[ext_resource type="Script" uid="uid://m3l114aja0w4" path="res://scripts/checkpoint_circular_3d.gd" id="1_l52xj"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_l52xj"]
+height = 0.255
+radius = 7.17
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_478ea"]
+transparency = 1
+albedo_color = Color(0.1368, 0.57, 0.4617, 0.396078)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_478ea"]
+material = SubResource("StandardMaterial3D_478ea")
+top_radius = 7.17
+bottom_radius = 7.17
+height = 0.255
+
+[node name="CheckpointCircular3D" type="Area3D"]
+script = ExtResource("1_l52xj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_l52xj")
+debug_color = Color(0.676788, 0, 0.194063, 0.42)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0146511, 0.0116098, 0.000776291)
+mesh = SubResource("CylinderMesh_478ea")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

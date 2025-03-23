@@ -121,3 +121,14 @@ func _unhandled_input(event):
 
 func _on_start_menu_canvas_checkpoint_selected(num: int) -> void:
 	jump_to_section(num)
+
+
+func _on_stair_level_end_game_reached():
+	$AudioStreamPlayer.stream = preload("res://assets/audio/music/rocket-phonk-music-141359.mp3")
+	$AudioStreamPlayer.play()
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	
+	var tween = create_tween()
+	tween.parallel().tween_property(player.camera_anchor, "rotation", in_menu_camera_anchor_rotation, menu_animation_time).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(player.camera_3D, "fov", in_menu_camera_3D_fov, menu_animation_time).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	
