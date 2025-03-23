@@ -73,6 +73,7 @@ func respawn(section: PlatformingSection):
 	if section == all_sections[0]:
 		if color_tween != null and color_tween.is_running():
 			color_tween.kill()
+			world_environment.environment.ambient_light_color = color_1
 			get_tree().create_timer(time_to_first_beat).connect("timeout", tween_to_color_2)
 		section.trigger_platforms()
 	else:
