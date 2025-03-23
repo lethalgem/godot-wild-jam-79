@@ -1,14 +1,15 @@
-[gd_scene load_steps=28 format=3 uid="uid://t1hltheat6e3"]
+[gd_scene load_steps=29 format=3 uid="uid://t1hltheat6e3"]
 
 [ext_resource type="Script" uid="uid://cjssguwdape4h" path="res://scripts/start_menu.gd" id="3_4v6gu"]
 [ext_resource type="LabelSettings" uid="uid://cjyu4oext3kpl" path="res://themes/setting_labels.tres" id="3_fcv5n"]
 [ext_resource type="FontFile" uid="uid://cqkf3nx3f1g8q" path="res://assets/fonts/astron-boy/Astron Boy Italic.otf" id="3_nxjfj"]
 [ext_resource type="FontFile" uid="uid://du2ey54evkplb" path="res://assets/fonts/astron-boy/Astron Boy.otf" id="4_u4qax"]
 [ext_resource type="PackedScene" uid="uid://dcabj07wxdosg" path="res://scenes/settings_menu.tscn" id="5_5byqq"]
+[ext_resource type="AudioStream" uid="uid://us6xjeo42kvy" path="res://assets/audio/sfx/button_sound.wav" id="5_nxjfj"]
 [ext_resource type="PackedScene" uid="uid://ck70t0b4wedkk" path="res://scenes/select_level_menu.tscn" id="6_4v6gu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fcv5n"]
-bg_color = Color(0, 0, 0, 0.282353)
+bg_color = Color(0, 0, 0, 0.113725)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mhnvy"]
 
@@ -55,17 +56,18 @@ _data = {
 }
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4v6gu"]
-bg_color = Color(0, 0, 0, 0.513726)
+bg_color = Color(0, 0, 0, 0.509804)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nxjfj"]
 bg_color = Color(0, 0, 0, 0.513726)
 
-[node name="StartMenuCanvas" type="CanvasLayer" node_paths=PackedStringArray("start_button", "death_count_label", "setting_menu", "select_level_menu")]
+[node name="StartMenuCanvas" type="CanvasLayer" node_paths=PackedStringArray("start_button", "death_count_label", "setting_menu", "select_level_menu", "button_sound")]
 script = ExtResource("3_4v6gu")
 start_button = NodePath("StartMenu/MarginContainer/VBoxContainer/StartGame")
 death_count_label = NodePath("StartMenu/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/DeathCounter")
 setting_menu = NodePath("SettingMenuCanvas/SettingsMenu")
 select_level_menu = NodePath("SelectMenuCanvas/SelectLevelMenu")
+button_sound = NodePath("StartMenu/MarginContainer/ButtonSound")
 
 [node name="StartMenu" type="Control" parent="."]
 layout_mode = 3
@@ -174,6 +176,9 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_mxgkd")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_g6gyw")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_3dmrc")
 text = "Start Game"
+
+[node name="ButtonSound" type="AudioStreamPlayer" parent="StartMenu/MarginContainer"]
+stream = ExtResource("5_nxjfj")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

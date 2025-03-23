@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://ck70t0b4wedkk"]
+[gd_scene load_steps=22 format=3 uid="uid://ck70t0b4wedkk"]
 
 [ext_resource type="Script" uid="uid://dro8e4hpryt1" path="res://scripts/select_level_menu.gd" id="1_cwigf"]
 [ext_resource type="FontFile" uid="uid://du2ey54evkplb" path="res://assets/fonts/astron-boy/Astron Boy.otf" id="2_y3dgh"]
+[ext_resource type="AudioStream" uid="uid://us6xjeo42kvy" path="res://assets/audio/sfx/button_sound.wav" id="3_g532r"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_labj1"]
 
@@ -194,6 +195,9 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_n35ux")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_fb6cq")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_2ctot")
 text = "Go Back"
+
+[node name="ButtonSound" type="AudioStreamPlayer" parent="MarginContainer"]
+stream = ExtResource("3_g532r")
 
 [connection signal="button_up" from="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/HBoxContainer/CheckpointOne" to="." method="_on_checkpoint_one_button_up"]
 [connection signal="button_up" from="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/HBoxContainer/CheckpointTwo" to="." method="_on_checkpoint_two_button_up"]
