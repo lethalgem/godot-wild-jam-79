@@ -99,7 +99,6 @@ func _process(_delta):
 
 
 func _on_grow_timer_timeout():
-	# TODO: throw transition and ease on, it'll make everything feel betteer
 	tween = create_tween()
 	tween.parallel().tween_property(self,"position", Vector3(1, 1, 1) * raycast3D.target_position + position, move_time)
 	tween.parallel().tween_property(platform_mesh_instance.mesh, "size", grow_to_size, move_time * done_growing_percentage)
@@ -141,6 +140,9 @@ func reset_position():
 	global_position = start_pos
 	platform_mesh_instance.mesh.size = initial_size
 	platform_collision_shape.shape.size = initial_size
+	platform_grass_mesh.scale.x = initial_size.x * grass_mesh_scale_factor
+	platform_grass_mesh.scale.z = initial_size.z * grass_mesh_scale_factor
+	platform_grass_mesh.position.y = initial_size.y / 2
 
 func _on_start_move_timer_timeout() -> void:
 	tween = create_tween()
