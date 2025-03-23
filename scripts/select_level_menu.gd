@@ -14,10 +14,17 @@ func _on_go_back_pressed():
 	dim_rect.visible = false
 	self.visible = false
 	start_menu.show()
+	$"../../StartMenu/MarginContainer/ButtonSound".play()
 
 
 func _on_select_checkpoint_pressed():
 	toggle_menu()
+	$"../../StartMenu/MarginContainer/ButtonSound".play()
+	
+func dismiss_menu():
+	dim_rect.visible = false
+	self.visible = false
+	start_menu.show()
 
 
 func _on_checkpoint_one_button_up() -> void:

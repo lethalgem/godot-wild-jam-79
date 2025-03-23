@@ -67,4 +67,5 @@ bus = &"sfx"
 [node name="DashAudio" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("6_sxlqi")
+volume_db = 1.0
 bus = &"sfx"

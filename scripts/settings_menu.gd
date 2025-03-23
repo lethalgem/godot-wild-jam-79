@@ -5,6 +5,7 @@ class_name SettingsMenu extends Control
 	
 func _on_settings_pressed():
 	toggle_menu()
+	$MarginContainer/GridContainer/HBoxContainer/ButtonSound.play()
 	
 func toggle_menu():
 	self.visible = true
@@ -12,6 +13,12 @@ func toggle_menu():
 	start_menu.hide()
 
 func _on_go_back_pressed():
+	dim_rect.visible = false
+	self.visible = false
+	start_menu.show()
+	$MarginContainer/GridContainer/HBoxContainer/ButtonSound.play()
+
+func dismiss_menu():
 	dim_rect.visible = false
 	self.visible = false
 	start_menu.show()
