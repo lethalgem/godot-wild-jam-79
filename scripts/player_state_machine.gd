@@ -128,6 +128,8 @@ class StateMachine extends Node:
 			Blackboard.player._jump_count = 0
 			Blackboard.player._dash_count = 0
 			
+			Blackboard.player.land_audio_player.play()
+			
 		if event == Events.PLAYER_STARTED_MOVING and Blackboard.player.velocity.y >= 0 :
 			Blackboard.player._dash_count = 0
 			

@@ -24,6 +24,7 @@ class_name Player3D extends CharacterBody3D
 @onready var debug_state_label = %DebugStateLabel3D
 @onready var jumping_audio_player = %JumpAudio
 @onready var dash_audio_player = %DashAudio
+@onready var land_audio_player = %LandingAudio
 
 var _jump_count := 0
 var _dash_count := 0
