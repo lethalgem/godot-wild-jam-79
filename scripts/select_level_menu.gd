@@ -45,3 +45,11 @@ func _on_checkpoint_four_button_up() -> void:
 
 func _on_checkpoint_five_button_up() -> void:
 	checkpoint_selected.emit(5)
+	
+	
+func _on_checkpoint_six_button_up() -> void:
+	checkpoint_selected.emit(6)
+	
+	
+func _on_checkpoint_seven_button_up() -> void:
+	checkpoint_selected.emit(7)
