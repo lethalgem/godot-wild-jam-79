@@ -7,6 +7,7 @@ signal checkpoint_selected
 @export var death_count_label: Label
 @export var setting_menu: Control
 @export var select_level_menu: Control
+@export var how_to_play_menu: Control
 @export var button_sound: AudioStreamPlayer
 
 
@@ -25,17 +26,17 @@ func _on_start_game_pressed():
 	
 
 func _ready():
-	death_count_label.text = "Death Counter: 0"
+	death_count_label.text = "Death Count: 0"
 
 func update_death_count(count:int):
-	death_count_label.text = "Death Counter: "  + str(count)
+	death_count_label.text = "Death Count: "  + str(count)
 	
 func dismiss_menu():
 	hide()
 	setting_menu.dismiss_menu()
 	select_level_menu.dismiss_menu()
+	how_to_play_menu.dismiss_menu()
 	
-
 
 func _on_select_level_menu_checkpoint_selected(num: int) -> void:
 	checkpoint_selected.emit(num)

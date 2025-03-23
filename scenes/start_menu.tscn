@@ -1,15 +1,24 @@
-[gd_scene load_steps=29 format=3 uid="uid://t1hltheat6e3"]
+[gd_scene load_steps=35 format=3 uid="uid://t1hltheat6e3"]
 
 [ext_resource type="Script" uid="uid://cjssguwdape4h" path="res://scripts/start_menu.gd" id="3_4v6gu"]
-[ext_resource type="LabelSettings" uid="uid://cjyu4oext3kpl" path="res://themes/setting_labels.tres" id="3_fcv5n"]
 [ext_resource type="FontFile" uid="uid://cqkf3nx3f1g8q" path="res://assets/fonts/astron-boy/Astron Boy Italic.otf" id="3_nxjfj"]
 [ext_resource type="FontFile" uid="uid://du2ey54evkplb" path="res://assets/fonts/astron-boy/Astron Boy.otf" id="4_u4qax"]
 [ext_resource type="PackedScene" uid="uid://dcabj07wxdosg" path="res://scenes/settings_menu.tscn" id="5_5byqq"]
 [ext_resource type="AudioStream" uid="uid://us6xjeo42kvy" path="res://assets/audio/sfx/button_sound.wav" id="5_nxjfj"]
 [ext_resource type="PackedScene" uid="uid://ck70t0b4wedkk" path="res://scenes/select_level_menu.tscn" id="6_4v6gu"]
+[ext_resource type="PackedScene" uid="uid://c0g6nollxudht" path="res://scenes/how_to_play_menu.tscn" id="7_nxjfj"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fcv5n"]
-bg_color = Color(0, 0, 0, 0.113725)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nxjfj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u4qax"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5byqq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e58y3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_apowk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vnuwp"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mhnvy"]
 
@@ -41,6 +50,9 @@ bg_color = Color(0, 0, 0, 0.113725)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3dmrc"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fcv5n"]
+bg_color = Color(0, 0, 0, 0)
+
 [sub_resource type="Animation" id="Animation_4ytvr"]
 length = 4.0
 
@@ -61,12 +73,13 @@ bg_color = Color(0, 0, 0, 0.509804)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nxjfj"]
 bg_color = Color(0, 0, 0, 0.513726)
 
-[node name="StartMenuCanvas" type="CanvasLayer" node_paths=PackedStringArray("start_button", "death_count_label", "setting_menu", "select_level_menu", "button_sound")]
+[node name="StartMenuCanvas" type="CanvasLayer" node_paths=PackedStringArray("start_button", "death_count_label", "setting_menu", "select_level_menu", "how_to_play_menu", "button_sound")]
 script = ExtResource("3_4v6gu")
-start_button = NodePath("StartMenu/MarginContainer/VBoxContainer/StartGame")
-death_count_label = NodePath("StartMenu/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/DeathCounter")
+start_button = NodePath("StartMenu/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StartGame")
+death_count_label = NodePath("StartMenu/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer/DeathCounter")
 setting_menu = NodePath("SettingMenuCanvas/SettingsMenu")
 select_level_menu = NodePath("SelectMenuCanvas/SelectLevelMenu")
+how_to_play_menu = NodePath("HowToPlayCanvas/HowToPlayMenu")
 button_sound = NodePath("StartMenu/MarginContainer/ButtonSound")
 
 [node name="StartMenu" type="Control" parent="."]
@@ -91,6 +104,7 @@ theme_override_constants/margin_bottom = 80
 
 [node name="VBoxContainer" type="VBoxContainer" parent="StartMenu/MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 145
 
 [node name="PolyDashTitle" type="Label" parent="StartMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -103,33 +117,32 @@ theme_override_font_sizes/font_size = 100
 text = "PolyDash"
 
 [node name="MarginContainer" type="MarginContainer" parent="StartMenu/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="StartMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
+theme_override_constants/separation = 150
 
-[node name="PanelContainer" type="PanelContainer" parent="StartMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="StartMenu/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 8
-theme_override_styles/panel = SubResource("StyleBoxFlat_fcv5n")
 
-[node name="DeathCounter" type="Label" parent="StartMenu/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer"]
+[node name="HowToPlay" type="Button" parent="StartMenu/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 8
-theme_override_constants/line_spacing = 0
-text = "Death Count: 100"
-label_settings = ExtResource("3_fcv5n")
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.301961, 0.12549, 0.113725, 1)
+theme_override_fonts/font = ExtResource("4_u4qax")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nxjfj")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_u4qax")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_5byqq")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_e58y3")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_apowk")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_vnuwp")
+text = "How to Play"
 
-[node name="MarginContainer2" type="MarginContainer" parent="StartMenu/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-
-[node name="Settings" type="Button" parent="StartMenu/MarginContainer/VBoxContainer"]
+[node name="Settings" type="Button" parent="StartMenu/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
@@ -145,7 +158,7 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_v86rl")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_13sgg")
 text = "Settings"
 
-[node name="SelectCheckpoint" type="Button" parent="StartMenu/MarginContainer/VBoxContainer"]
+[node name="SelectCheckpoint" type="Button" parent="StartMenu/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
@@ -161,7 +174,7 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_ufwb2")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6cdou")
 text = "Select Checkpoint"
 
-[node name="StartGame" type="Button" parent="StartMenu/MarginContainer/VBoxContainer"]
+[node name="StartGame" type="Button" parent="StartMenu/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
@@ -176,6 +189,29 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_mxgkd")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_g6gyw")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_3dmrc")
 text = "Start Game"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="StartMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="StartMenu/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="StartMenu/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_fcv5n")
+
+[node name="DeathCounter" type="Label" parent="StartMenu/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.0117647, 0.737255, 0.737255, 0.972549)
+theme_override_colors/font_shadow_color = Color(0.729412, 0, 0.552941, 1)
+theme_override_colors/font_outline_color = Color(0.494118, 0.960784, 0.00392157, 1)
+theme_override_fonts/font = ExtResource("4_u4qax")
+theme_override_font_sizes/font_size = 65
+text = "Death Count: 100"
 
 [node name="ButtonSound" type="AudioStreamPlayer" parent="StartMenu/MarginContainer"]
 stream = ExtResource("5_nxjfj")
@@ -238,7 +274,14 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 start_menu = NodePath("../../StartMenu")
 
-[connection signal="pressed" from="StartMenu/MarginContainer/VBoxContainer/Settings" to="SettingMenuCanvas/SettingsMenu" method="_on_settings_pressed"]
-[connection signal="pressed" from="StartMenu/MarginContainer/VBoxContainer/SelectCheckpoint" to="SelectMenuCanvas/SelectLevelMenu" method="_on_select_checkpoint_pressed"]
-[connection signal="pressed" from="StartMenu/MarginContainer/VBoxContainer/StartGame" to="." method="_on_start_game_pressed"]
+[node name="HowToPlayCanvas" type="CanvasLayer" parent="."]
+
+[node name="HowToPlayMenu" parent="HowToPlayCanvas" node_paths=PackedStringArray("start_menu") instance=ExtResource("7_nxjfj")]
+visible = false
+start_menu = NodePath("../../StartMenu")
+
+[connection signal="pressed" from="StartMenu/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HowToPlay" to="HowToPlayCanvas/HowToPlayMenu" method="_on_how_to_play_pressed"]
+[connection signal="pressed" from="StartMenu/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Settings" to="SettingMenuCanvas/SettingsMenu" method="_on_settings_pressed"]
+[connection signal="pressed" from="StartMenu/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/SelectCheckpoint" to="SelectMenuCanvas/SelectLevelMenu" method="_on_select_checkpoint_pressed"]
+[connection signal="pressed" from="StartMenu/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/StartGame" to="." method="_on_start_game_pressed"]
 [connection signal="checkpoint_selected" from="SelectMenuCanvas/SelectLevelMenu" to="." method="_on_select_level_menu_checkpoint_selected"]
