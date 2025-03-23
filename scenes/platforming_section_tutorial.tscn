@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bmbjgq7h67stc"]
+[gd_scene load_steps=9 format=3 uid="uid://bmbjgq7h67stc"]
 
 [ext_resource type="Script" uid="uid://b33213kw42su4" path="res://scripts/platforming_section_template.gd" id="1_dfone"]
 [ext_resource type="Environment" uid="uid://0raosp1j8p3b" path="res://themes/world_environment.tres" id="2_p8iqt"]
@@ -7,6 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://blvohvgieachh" path="res://scenes/static_platform_3d.tscn" id="5_dfone"]
 [ext_resource type="PackedScene" uid="uid://cfcdfh2hxyn7a" path="res://scenes/growing_platform_3d.tscn" id="5_okkvj"]
 [ext_resource type="PackedScene" uid="uid://d2rnwb6em08gc" path="res://scenes/death_plane_3d.tscn" id="6_0aodp"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_dfone"]
+inner_radius = 3.015
+outer_radius = 4.455
 
 [node name="Platforming_Section_Tutorial" type="Node3D"]
 script = ExtResource("1_dfone")
@@ -24,8 +28,8 @@ size = Vector3(9, 10, 7)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
 
 [node name="StaticPlatform3D" parent="." instance=ExtResource("5_dfone")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 27)
-height = 17.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 27)
+height = 2.0
 
 [node name="StaticPlatform3D2" parent="." instance=ExtResource("5_dfone")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11, 63)
@@ -55,5 +59,9 @@ done_growing_percentage = 0.1
 [node name="DeathPlane3D" parent="." instance=ExtResource("6_0aodp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -24, 42)
 size = Vector3(100, 1, 200)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 27)
+mesh = SubResource("TorusMesh_dfone")
 
 [connection signal="player_entered" from="CheckpointRespawn3D" to="." method="_on_checkpoint_respawn_3d_player_entered"]

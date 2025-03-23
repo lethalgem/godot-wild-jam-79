@@ -20,19 +20,13 @@
 font_size = 20
 font_color = Color(0, 0, 0, 1)
 
-[node name="MainGame" type="Node3D" node_paths=PackedStringArray("start_menu", "player", "world_environment", "color_shift_timer")]
+[node name="MainGame" type="Node3D" node_paths=PackedStringArray("start_menu", "player", "world_environment")]
 script = ExtResource("1_s3esy")
 start_menu = NodePath("StartMenuCanvas")
 player = NodePath("Player3D")
 world_environment = NodePath("WorldEnvironment")
-color_shift_timer = NodePath("ColorShiftTimer")
-color_1 = Color(0.844062, 0.273012, 1, 1)
-color_2 = Color(0.795782, 0.00204363, 0.966353, 1)
-
-[node name="ColorShiftTimer" type="Timer" parent="."]
-wait_time = 0.375
-autostart = true
-ignore_time_scale = true
+color_1 = Color(1, 1, 1, 1)
+color_2 = Color(0.999999, 0.52807, 0.671058, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_ygxny")
@@ -100,6 +94,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 270, -2992.99, 930)
 visible = false
 size = Vector3(3000, 1, 3000)
 
-[connection signal="timeout" from="ColorShiftTimer" to="." method="_on_color_shift_timer_timeout"]
 [connection signal="checkpoint_selected" from="StartMenuCanvas" to="." method="_on_start_menu_canvas_checkpoint_selected"]
 [connection signal="start_button_pressed" from="StartMenuCanvas" to="." method="_on_start_menu_canvas_start_button_pressed"]

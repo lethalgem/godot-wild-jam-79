@@ -3,7 +3,6 @@ class_name MainGame extends Node3D
 @export var start_menu: StartMenu
 @export var player: Player3D
 @export var world_environment: WorldEnvironment
-@export var color_shift_timer: Timer
 
 @onready var return_to_camera_anchor_rotation := player.camera_anchor.rotation
 @onready var return_to_camera_3D_fov := player.camera_3D.fov
@@ -20,7 +19,7 @@ var player_paused_game := false
 var death_count := 0
 var blend_to_color_1 = false
 var time_between_beats = 0.375 # seconds
-var time_blending = 0.0
+var time_to_first_beat = 1.25 # seconds
 
 func _ready() -> void:
 	# Listen to all sections to know when the player has entered
@@ -41,16 +40,21 @@ func _ready() -> void:
 	
 	jump_to_section(start_at_section)
 	
-	color_shift_timer.wait_time = time_between_beats
+	get_tree().create_timer(time_to_first_beat).connect("timeout", tween_to_color_2)
 
-func _physics_process(delta: float) -> void:
-	time_blending += delta
-	if blend_to_color_1:
-		var blended_color = color_2.lerp(color_1, time_blending / time_between_beats)
-		world_environment.environment.ambient_light_color = blended_color
-	else:
-		var blended_color = color_1.lerp(color_2, time_blending / time_between_beats)
-		world_environment.environment.ambient_light_color = blended_color
+func tween_to_color_1():
+	var tween = create_tween()
+	tween.tween_property(world_environment, "environment:ambient_light_color", color_2, time_between_beats)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.set_ease(Tween.EASE_IN)
+	tween.finished.connect(tween_to_color_2)
+
+func tween_to_color_2():
+	var tween = create_tween()
+	tween.tween_property(world_environment, "environment:ambient_light_color", color_1, time_between_beats)
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.set_ease(Tween.EASE_OUT)
+	tween.finished.connect(tween_to_color_1)
 
 ## sections start from 1, not 0
 func jump_to_section(num: int):
@@ -102,7 +106,3 @@ func _unhandled_input(event):
 
 func _on_start_menu_canvas_checkpoint_selected(num: int) -> void:
 	jump_to_section(num)
-
-func _on_color_shift_timer_timeout() -> void:
-	blend_to_color_1 = !blend_to_color_1
-	time_blending = 0.0
