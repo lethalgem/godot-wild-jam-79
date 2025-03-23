@@ -2,7 +2,7 @@
 class_name StaticPlatform3D extends StaticBody3D
 
 ## meters
-@export var height := 27.0
+@export var height := 2.0
 ## meters
 @export var radius := 5.0
 
@@ -30,16 +30,22 @@ func _ready() -> void:
 	
 	bottom_mesh_instance = MeshInstance3D.new()
 	add_child(bottom_mesh_instance)
+	bottom_mesh_instance.position.y = -height / 2
 	bottom_mesh_instance.mesh = TorusMesh.new()
-	bottom_mesh_instance.mesh
+	bottom_mesh_instance.mesh.outer_radius = radius
+	bottom_mesh_instance.mesh.inner_radius = bottom_mesh_instance.mesh.outer_radius - 1.0
+	bottom_mesh_instance.mesh.surface_set_material(0, preload("res://themes/static_platform_3D.tres"))
 
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		if mesh_instance.mesh.height != height:
 			mesh_instance.mesh.height = height
 			collision_shape.shape.height = height
+			bottom_mesh_instance.position.y = -height / 2
 		
 		if mesh_instance.mesh.top_radius != radius:
 			mesh_instance.mesh.top_radius = radius
 			mesh_instance.mesh.bottom_radius = radius
 			collision_shape.shape.radius = radius
+			bottom_mesh_instance.mesh.outer_radius = radius
+			bottom_mesh_instance.mesh.inner_radius = bottom_mesh_instance.mesh.outer_radius - 1.0
