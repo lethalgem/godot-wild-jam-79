@@ -26,8 +26,8 @@ script = ExtResource("1_s3esy")
 start_menu = NodePath("StartMenuCanvas")
 player = NodePath("Player3D")
 world_environment = NodePath("WorldEnvironment")
-color_1 = Color(1, 1, 1, 1)
-color_2 = Color(0.999999, 0.52807, 0.671058, 1)
+color_1 = Color(0.728822, 0.728822, 0.728822, 1)
+color_2 = Color(1, 0.19, 0.433, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_ygxny")
@@ -74,10 +74,6 @@ player = NodePath("../Player3D")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 233.439, -988.579, 353.98)
 player = NodePath("../Player3D")
 
-[node name="DeathPlane_Mid_Level" parent="." instance=ExtResource("5_ipu61")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 237.553, -1014.21, 419)
-size = Vector3(1000, 1, 1000)
-
 [node name="Narrow_Level" parent="." node_paths=PackedStringArray("player") instance=ExtResource("14_8xp80")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 297.83, -1002.9, 527.004)
 player = NodePath("../Player3D")
@@ -89,6 +85,10 @@ player = NodePath("../Player3D")
 [node name="Stair_Level" parent="." node_paths=PackedStringArray("player") instance=ExtResource("16_ihbck")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -506.147, -2889.35, 1744.06)
 player = NodePath("../Player3D")
+
+[node name="DeathPlane_Mid_Level" parent="." instance=ExtResource("5_ipu61")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 237.553, -1014.21, 419)
+size = Vector3(1000, 1, 1000)
 
 [node name="DeathPlane_Initial_Slide_Level" parent="." instance=ExtResource("5_ipu61")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 270, -1050.86, 930)

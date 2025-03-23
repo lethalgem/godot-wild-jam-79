@@ -21,6 +21,7 @@ var blend_to_color_1 = false
 var time_between_beats = 0.375 # seconds
 var time_to_first_beat = 1.25 # seconds
 var starting_fresh_game = true
+var color_tween: Tween
 
 func _ready() -> void:
 	# Listen to all sections to know when the player has entered
@@ -37,23 +38,22 @@ func _ready() -> void:
 				)
 
 	show_start_menu()
-	#hide_start_menu()
 	
 	get_tree().create_timer(time_to_first_beat).connect("timeout", tween_to_color_2)
 
 func tween_to_color_1():
-	var tween = create_tween()
-	tween.tween_property(world_environment, "environment:ambient_light_color", color_2, time_between_beats)
-	tween.set_trans(Tween.TRANS_CUBIC)
-	tween.set_ease(Tween.EASE_IN)
-	tween.finished.connect(tween_to_color_2)
+	color_tween = create_tween()
+	color_tween.tween_property(world_environment, "environment:ambient_light_color", color_2, time_between_beats)
+	color_tween.set_trans(Tween.TRANS_CUBIC)
+	color_tween.set_ease(Tween.EASE_IN)
+	color_tween.finished.connect(tween_to_color_2)
 
 func tween_to_color_2():
-	var tween = create_tween()
-	tween.tween_property(world_environment, "environment:ambient_light_color", color_1, time_between_beats)
-	tween.set_trans(Tween.TRANS_CUBIC)
-	tween.set_ease(Tween.EASE_OUT)
-	tween.finished.connect(tween_to_color_1)
+	color_tween = create_tween()
+	color_tween.tween_property(world_environment, "environment:ambient_light_color", color_1, time_between_beats)
+	color_tween.set_trans(Tween.TRANS_CUBIC)
+	color_tween.set_ease(Tween.EASE_OUT)
+	color_tween.finished.connect(tween_to_color_1)
 
 ## sections start from 1, not 0
 func jump_to_section(num: int):
@@ -67,6 +67,12 @@ func respawn(section: PlatformingSection):
 	$AudioStreamPlayer.play(section.song_start)
 	death_count += 1
 	start_menu.update_death_count(death_count)
+	
+	# restart the light show if it's the tutorial
+	if section == all_sections[0]:
+		if color_tween != null:
+			color_tween.kill()
+			get_tree().create_timer(time_to_first_beat).connect("timeout", tween_to_color_2)
 	
 	if starting_fresh_game and start_at_section == 1:
 		starting_fresh_game = !starting_fresh_game

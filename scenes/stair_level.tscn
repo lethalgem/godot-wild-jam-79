@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b33213kw42su4" path="res://scripts/platforming_section_template.gd" id="1_56cqf"]
 [ext_resource type="Environment" uid="uid://0raosp1j8p3b" path="res://themes/world_environment.tres" id="2_73awg"]
 [ext_resource type="PackedScene" uid="uid://vtkc3myfd1i6" path="res://scenes/checkpoint_respawn_3d.tscn" id="3_y5dac"]
-[ext_resource type="Material" uid="uid://woy3v4cv6ld" path="res://themes/static_test_platform.tres" id="4_gebt5"]
+[ext_resource type="PackedScene" uid="uid://dlbk0kkfvj46e" path="res://scenes/static_platform_3d.tscn" id="4_pwee3"]
 [ext_resource type="PackedScene" uid="uid://cfcdfh2hxyn7a" path="res://scenes/growing_platform_3d.tscn" id="5_r513f"]
 [ext_resource type="PackedScene" uid="uid://d2rnwb6em08gc" path="res://scenes/death_plane_3d.tscn" id="6_k0omt"]
 
@@ -20,11 +20,13 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 size = Vector3(10, 10, 10)
 
-[node name="Checkpoint_Platform" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
-use_collision = true
-size = Vector3(15, 20, 15)
-material = ExtResource("4_gebt5")
+[node name="StaticPlatform3D" parent="." instance=ExtResource("4_pwee3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
+radius = 7.555
+
+[node name="StaticPlatform3D2" parent="." instance=ExtResource("4_pwee3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 121.8, 153)
+radius = 7.555
 
 [node name="DeathPlane3D" parent="." instance=ExtResource("6_k0omt")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -24, 42)
@@ -278,11 +280,5 @@ final_relative_pos = Vector3(0, 0, 0)
 grow_to_size = Vector3(5, 0.5, 5)
 done_growing_percentage = 0.15
 begin_shrinking_percentage = 0.85
-
-[node name="Checkpoint_Platform2" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 112.8, 153)
-use_collision = true
-size = Vector3(15, 20, 15)
-material = ExtResource("4_gebt5")
 
 [connection signal="player_entered" from="CheckpointRespawn3D" to="." method="_on_checkpoint_respawn_3d_player_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bmbjgq7h67stc"]
+[gd_scene load_steps=12 format=3 uid="uid://bmbjgq7h67stc"]
 
 [ext_resource type="Script" uid="uid://b33213kw42su4" path="res://scripts/platforming_section_template.gd" id="1_dfone"]
 [ext_resource type="Environment" uid="uid://0raosp1j8p3b" path="res://themes/world_environment.tres" id="2_p8iqt"]
@@ -17,7 +17,14 @@ font_size = 127
 
 [sub_resource type="TextMesh" id="TextMesh_k0bh0"]
 material = ExtResource("9_k0bh0")
-text = "DOUBLE JUMP"
+text = "DOUBLE 
+JUMP"
+font = ExtResource("8_p8iqt")
+font_size = 127
+
+[sub_resource type="TextMesh" id="TextMesh_p8iqt"]
+material = ExtResource("9_k0bh0")
+text = "DASH"
 font = ExtResource("8_p8iqt")
 font_size = 127
 
@@ -69,11 +76,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -24, 42)
 size = Vector3(100, 1, 200)
 
 [node name="Jump_Instruction" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1.92333, 0, 1.92333, 0, 2.72, 0, -1.92333, 0, -1.92333, -9, 2.5, 12)
+transform = Transform3D(-4.0097, 0, -14.2825, 0, 4.63, 0, 2.315, 0, -24.738, 14, 2.5, 13)
 mesh = SubResource("TextMesh_dfone")
 
 [node name="Double_Jump_Instruction" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1.92333, 0, 1.92333, 0, 2.72, 0, -1.92333, 0, -1.92333, -15, 7.5, 47)
+transform = Transform3D(-4.0097, 0, 14.2825, 0, 4.63, 0, -2.315, 0, -24.738, -17, 7.5, 46)
 mesh = SubResource("TextMesh_k0bh0")
+
+[node name="Double_Jump_Instruction2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.0097, 0, -14.2825, 0, 4.63, 0, 2.315, 0, -24.738, 19, 7.5, 92)
+mesh = SubResource("TextMesh_k0bh0")
+
+[node name="Dash_Instruction" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.47224, 0, 7.39316, 0, 4.63, 0, -1.19833, 0, -27.5917, -15, 9.5, 102)
+mesh = SubResource("TextMesh_p8iqt")
 
 [connection signal="player_entered" from="CheckpointRespawn3D" to="." method="_on_checkpoint_respawn_3d_player_entered"]

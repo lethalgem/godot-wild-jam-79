@@ -85,4 +85,4 @@ func _ready() -> void:
 	}
 
 	state_machine.activate(idle)
-	state_machine.is_debugging = true
+	state_machine.is_debugging = false
