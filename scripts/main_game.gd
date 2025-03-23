@@ -70,7 +70,7 @@ func respawn(section: PlatformingSection):
 	
 	# restart the light show if it's the tutorial
 	if section == all_sections[0]:
-		if color_tween != null:
+		if color_tween != null and color_tween.is_running():
 			color_tween.kill()
 			get_tree().create_timer(time_to_first_beat).connect("timeout", tween_to_color_2)
 	
