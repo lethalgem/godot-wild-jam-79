@@ -15,7 +15,7 @@ func _on_back_button_pressed():
 	self.visible = false
 	start_menu.show()
 	button_sound_player.play()
-	
+
 func dismiss_menu():
 	self.visible = false
 	start_menu.show()

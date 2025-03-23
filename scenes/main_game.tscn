@@ -91,16 +91,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 231.199, -19, 139)
 size = Vector3(500, 1, 500)
 
 [node name="DeathPlane_Mid_Level" parent="." instance=ExtResource("5_ipu61")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 237.553, -1014.21, 419)
-size = Vector3(1000, 1, 1000)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 237.553, -1292.21, 419)
+size = Vector3(1000, 500, 1000)
 
 [node name="DeathPlane_Initial_Slide_Level" parent="." instance=ExtResource("5_ipu61")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 270, -1050.86, 930)
 size = Vector3(200, 1, 200)
 
 [node name="DeathPlane_Slide_Level" parent="." instance=ExtResource("5_ipu61")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 270, -2992.99, 930)
-size = Vector3(3000, 10, 3000)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 271, -3250.99, 933)
+size = Vector3(3000, 500, 3000)
 
 [node name="DeathPlane_Stair_Level" parent="." instance=ExtResource("5_ipu61")]
 transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, -679.292, -2918.32, 1709.65)
