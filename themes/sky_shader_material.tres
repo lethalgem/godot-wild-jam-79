@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cym6kkehk663h"]
+
+[ext_resource type="Shader" uid="uid://blld1yjfl6j7i" path="res://shaders/sky_shader.gdshader" id="1_6p8l0"]
+[ext_resource type="Texture2D" uid="uid://13d8vvt27015" path="res://assets/textures/Epic_GloriousPink_EquiRect.png" id="2_5uw4h"]
+
+[resource]
+shader = ExtResource("1_6p8l0")
+shader_parameter/skyColor = Color(0.797819, 0.299755, 1, 1)
+shader_parameter/horizionColor = Color(0.46, 0.496, 1, 1)
+shader_parameter/skyTexture = ExtResource("2_5uw4h")

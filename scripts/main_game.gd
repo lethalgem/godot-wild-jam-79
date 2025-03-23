@@ -32,8 +32,6 @@ func _ready() -> void:
 	#show_start_menu()
 	hide_start_menu()
 	
-	print(all_sections)
-	
 	jump_to_section(start_at_section)
 
 ## sections start from 1, not 0

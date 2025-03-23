@@ -25,13 +25,16 @@ func _process(_delta):
 		debug_mesh = MeshInstance3D.new()
 		add_child(debug_mesh)
 		
-		debug_mesh.mesh = BoxMesh.new()
-		debug_mesh.mesh.size = size
-		debug_mesh.mesh.surface_set_material(0, preload("res://themes/death_plane_3d.tres"))
+		if Engine.is_editor_hint():
+			debug_mesh.mesh = BoxMesh.new()
+			debug_mesh.mesh.size = size
+			debug_mesh.mesh.surface_set_material(0, preload("res://themes/death_plane_3d.tres"))
 	else:
 		if collision_shape.shape.size != size:
 			collision_shape.shape.size = size
-			debug_mesh.mesh.size = size
+			
+			if Engine.is_editor_hint():
+				debug_mesh.mesh.size = size
 
 func _on_body_entered(body):
 	if body is Player3D:

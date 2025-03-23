@@ -1,11 +1,17 @@
-[gd_resource type="Environment" format=3 uid="uid://0raosp1j8p3b"]
+[gd_resource type="Environment" load_steps=2 format=3 uid="uid://0raosp1j8p3b"]
+
+[ext_resource type="Sky" uid="uid://1raif3g7x63t" path="res://themes/sky.tres" id="1_j1457"]
 
 [resource]
-background_mode = 1
+background_mode = 2
 background_color = Color(0.890374, 0.927404, 1, 1)
-ambient_light_color = Color(1, 1, 1, 1)
+sky = ExtResource("1_j1457")
+ambient_light_source = 2
+ambient_light_color = Color(0.933261, 0.000750647, 0.94065, 1)
+reflected_light_source = 2
 tonemap_mode = 2
-fog_light_color = Color(1, 1, 1, 1)
+fog_light_color = Color(7.5084e-06, 0.871668, 0.780181, 1)
 fog_density = 0.0
-fog_height = -5.0
-fog_height_density = 0.2125
+fog_sky_affect = 0.0
+fog_height = -2937.45
+fog_height_density = 7.0
