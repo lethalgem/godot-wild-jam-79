@@ -28,6 +28,7 @@ material = ExtResource("4_gebt5")
 
 [node name="DeathPlane3D" parent="." instance=ExtResource("6_k0omt")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -24, 42)
+visible = false
 size = Vector3(100, 1, 100)
 
 [node name="Step1" parent="." instance=ExtResource("5_r513f")]

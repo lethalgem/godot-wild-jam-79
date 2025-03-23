@@ -28,10 +28,11 @@ material = ExtResource("4_dlimx")
 
 [node name="DeathPlane3D" parent="." instance=ExtResource("5_17idp")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -24, 42)
+visible = false
 size = Vector3(100, 1, 100)
 
 [node name="Checkpoint_Platform2" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.6885, 0.714106, 63.6916)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.94285, -13.054, 402.455)
 use_collision = true
 size = Vector3(15, 20, 15)
 material = ExtResource("4_dlimx")
@@ -42,7 +43,7 @@ move_time = 3.375
 movement_delay = 0.375
 final_relative_pos = Vector3(0, 0, 0)
 initial_size = Vector3(0, 0, 0)
-grow_to_size = Vector3(1.5, 0.5, 85)
+grow_to_size = Vector3(2, 0.5, 85)
 done_growing_percentage = 0.1
 begin_shrinking_percentage = 0.9
 
@@ -52,7 +53,7 @@ move_time = 3.375
 movement_delay = 3.375
 final_relative_pos = Vector3(0, 0, 0)
 initial_size = Vector3(0, 0, 0)
-grow_to_size = Vector3(1.5, 0.5, 85)
+grow_to_size = Vector3(2, 0.5, 85)
 done_growing_percentage = 0.1
 begin_shrinking_percentage = 0.9
 
@@ -62,7 +63,7 @@ move_time = 3.375
 movement_delay = 6.375
 final_relative_pos = Vector3(0, 0, 0)
 initial_size = Vector3(0, 0, 0)
-grow_to_size = Vector3(1.5, 0.5, 85)
+grow_to_size = Vector3(2, 0.5, 85)
 done_growing_percentage = 0.1
 begin_shrinking_percentage = 0.9
 
@@ -71,8 +72,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 341)
 move_time = 3.375
 movement_delay = 9.375
 final_relative_pos = Vector3(0, 0, 0)
-initial_size = Vector3(0, 0, 0)
-grow_to_size = Vector3(1.5, 0.5, 85)
+grow_to_size = Vector3(2, 0.5, 85)
 done_growing_percentage = 0.1
 begin_shrinking_percentage = 0.9
 
