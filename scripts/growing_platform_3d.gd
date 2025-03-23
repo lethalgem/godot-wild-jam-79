@@ -90,24 +90,29 @@ func _on_grow_timer_timeout():
 	tween = create_tween()
 	tween.parallel().tween_property(self,"position", Vector3(1, 1, 1) * raycast3D.target_position + position, move_time)
 	tween.parallel().tween_property(platform_mesh_instance.mesh, "size", grow_to_size, move_time * done_growing_percentage)
-	tween.parallel().tween_property(platform_mesh_instance.mesh, "size", initial_size, move_time * (1 - begin_shrinking_percentage)).set_delay(move_time * begin_shrinking_percentage)
-	tween.parallel().tween_property(platform_mesh_instance.mesh, "size", initial_size, move_time * (1 - begin_shrinking_percentage)).set_delay(move_time * begin_shrinking_percentage)
 	tween.parallel().tween_property(platform_collision_shape.shape, "size", grow_to_size, move_time * done_growing_percentage)
-	tween.parallel().tween_property(platform_collision_shape.shape, "size", initial_size, move_time * (1 - begin_shrinking_percentage)).set_delay(move_time * begin_shrinking_percentage)
 	tween.parallel().tween_property(platform_grass_mesh, "extents:x", grow_to_size.x * grass_mesh_scale_factor, move_time * done_growing_percentage)
-	tween.parallel().tween_property(platform_grass_mesh, "extents:x", initial_size.x * grass_mesh_scale_factor, move_time * (1 - begin_shrinking_percentage)).set_delay(move_time * begin_shrinking_percentage)
 	tween.parallel().tween_property(platform_grass_mesh, "extents:y", grow_to_size.z * grass_mesh_scale_factor, move_time * done_growing_percentage)
-	tween.parallel().tween_property(platform_grass_mesh, "extents:y", initial_size.z * grass_mesh_scale_factor, move_time * (1 - begin_shrinking_percentage)).set_delay(move_time * begin_shrinking_percentage)
 	tween.parallel().tween_property(platform_grass_mesh, "position:y", grow_to_size.y / 2, move_time * done_growing_percentage)
-	tween.parallel().tween_property(platform_grass_mesh, "position:y", initial_size.y / 2, move_time * (1 - begin_shrinking_percentage)).set_delay(move_time * begin_shrinking_percentage)
 	tween.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	tween.connect("finished", func(): 
-		if movement_delay - hover_buffer > 0.05:
+	tween.connect("finished", func():
+		# check if we canceled the tween because the checkpoint is restarting
+		if tween != null:
 			tween = create_tween()
-			tween.tween_property(self, "global_position:y", global_position.y - appear_from_height_offset, move_buffer).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN_OUT)
-			tween.finished.connect(func():
-				platform_grass_mesh.queue_free()
-				platform_grass_mesh = null
+			tween.parallel().tween_property(platform_mesh_instance.mesh, "size", initial_size, move_time * (1 - begin_shrinking_percentage))
+			tween.parallel().tween_property(platform_mesh_instance.mesh, "size", initial_size, move_time * (1 - begin_shrinking_percentage))
+			tween.parallel().tween_property(platform_collision_shape.shape, "size", initial_size, move_time * (1 - begin_shrinking_percentage))
+			tween.parallel().tween_property(platform_grass_mesh, "extents:x", initial_size.x * grass_mesh_scale_factor, move_time * (1 - begin_shrinking_percentage))
+			tween.parallel().tween_property(platform_grass_mesh, "extents:y", initial_size.z * grass_mesh_scale_factor, move_time * (1 - begin_shrinking_percentage))
+			tween.parallel().tween_property(platform_grass_mesh, "position:y", initial_size.y / 2, move_time * (1 - begin_shrinking_percentage))
+			tween.connect("finished", func(): 
+				if movement_delay - hover_buffer > 0.05 and tween != null:
+					tween = create_tween()
+					tween.tween_property(self, "global_position:y", global_position.y - appear_from_height_offset, move_buffer).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN_OUT)
+					tween.finished.connect(func():
+						platform_grass_mesh.queue_free()
+						platform_grass_mesh = null
+						)
 				)
 		)
 
@@ -124,7 +129,7 @@ func start_timers():
 			print_debug("hover_buffer and move_buffer would have the platform appear before 0 seconds from the checkpoint so it is not being used, ignore if this is intended")
 
 func reset_position():
-	if tween != null:
+	if tween != null and tween.is_running():
 		tween.kill()
 	grow_timer.stop()
 	start_move_timer.stop()
