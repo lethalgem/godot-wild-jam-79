@@ -18,7 +18,7 @@ fog_height_density = 0.2125
 
 [node name="Platforming_Section_Template_MB2" type="Node3D"]
 script = ExtResource("1_id2pp")
-song_start = 7.169
+song_start = 34.169
 
 [node name="SectionWorldEnvironment" type="WorldEnvironment" parent="."]
 unique_name_in_owner = true

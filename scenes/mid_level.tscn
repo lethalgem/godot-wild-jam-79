@@ -9,7 +9,7 @@
 
 [node name="Platforming_Section_Template_MB2" type="Node3D"]
 script = ExtResource("1_5u73y")
-song_start = 7.169
+song_start = 55.169
 
 [node name="SectionWorldEnvironment" type="WorldEnvironment" parent="."]
 unique_name_in_owner = true

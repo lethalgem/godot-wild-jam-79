@@ -18,7 +18,7 @@ fog_height_density = 0.2125
 
 [node name="Platforming_Section_Template_MB" type="Node3D"]
 script = ExtResource("1_7lf2x")
-song_start = 7.169
+song_start = 79.169
 
 [node name="SectionWorldEnvironment" type="WorldEnvironment" parent="."]
 unique_name_in_owner = true
@@ -96,7 +96,7 @@ done_growing_percentage = 0.1
 begin_shrinking_percentage = 0.99
 
 [node name="Landing" parent="." instance=ExtResource("6_6kj16")]
-transform = Transform3D(0.965016, 0, -0.262189, 0, 1, 0, 0.262189, 0, 0.965016, 750.424, -1889.74, 944.436)
+transform = Transform3D(0.965016, 0, -0.262189, 0, 1, 0, 0.262189, 0, 0.965016, 782.237, -1889.74, 769.248)
 move_time = 3.0
 movement_delay = 18.0
 appear_from_height_offset = 0

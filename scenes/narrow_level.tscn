@@ -8,8 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://cfcdfh2hxyn7a" path="res://scenes/growing_platform_3d.tscn" id="6_cglfm"]
 
 [node name="Platforming_Section_Template_MB3" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0352936, 1.1618, -0.330231)
 script = ExtResource("1_qem1h")
-song_start = 7.169
+song_start = 65.669
 
 [node name="SectionWorldEnvironment" type="WorldEnvironment" parent="."]
 unique_name_in_owner = true
