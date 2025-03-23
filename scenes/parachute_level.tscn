@@ -43,6 +43,7 @@ material = ExtResource("4_bbmmj")
 
 [node name="DeathPlane3D" parent="." instance=ExtResource("5_sx0ip")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -1000, 0)
+visible = false
 size = Vector3(3000, 1, 3000)
 
 [node name="Landing1" parent="." instance=ExtResource("6_c5odm")]
@@ -50,7 +51,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 35)
 move_time = 4.0
 movement_delay = 0.375
 final_relative_pos = Vector3(0, 0, 0)
-initial_size = Vector3(50, 0.5, 50)
 grow_to_size = Vector3(50, 0.5, 50)
 done_growing_percentage = 0.25
 begin_shrinking_percentage = 0.75
@@ -60,7 +60,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -200, 85)
 move_time = 4.0
 movement_delay = 4.5
 final_relative_pos = Vector3(0, 0, 0)
-initial_size = Vector3(50, 0.5, 50)
 grow_to_size = Vector3(50, 0.5, 50)
 done_growing_percentage = 0.15
 begin_shrinking_percentage = 0.85
@@ -70,7 +69,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, -400, 85)
 move_time = 4.0
 movement_delay = 8.0
 final_relative_pos = Vector3(0, 0, 0)
-initial_size = Vector3(50, 0.5, 50)
 grow_to_size = Vector3(50, 0.5, 50)
 done_growing_percentage = 0.15
 begin_shrinking_percentage = 0.85
@@ -80,7 +78,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, -600, 85)
 move_time = 4.0
 movement_delay = 11.5
 final_relative_pos = Vector3(0, 0, 0)
-initial_size = Vector3(50, 0.5, 50)
 grow_to_size = Vector3(50, 0.5, 50)
 done_growing_percentage = 0.15
 begin_shrinking_percentage = 0.85
@@ -90,7 +87,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 135, -800, 120)
 move_time = 4.0
 movement_delay = 15.0
 final_relative_pos = Vector3(0, 0, 0)
-initial_size = Vector3(50, 0.5, 50)
 grow_to_size = Vector3(50, 0.5, 50)
 done_growing_percentage = 0.15
 begin_shrinking_percentage = 0.85
