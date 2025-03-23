@@ -90,21 +90,5 @@ size = Vector3(200, 1, 200)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 270, -2992.99, 930)
 size = Vector3(3000, 1, 3000)
 
-[node name="Narrow_Level" parent="." node_paths=PackedStringArray("player") instance=ExtResource("14_8xp80")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 297.83, -1002.9, 527.004)
-player = NodePath("../Player3D")
-
-[node name="Slide_Level" parent="." node_paths=PackedStringArray("player") instance=ExtResource("15_sp04v")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 270, -1005, 930)
-player = NodePath("../Player3D")
-
-[node name="DeathPlane_Initial_Slide_Level" parent="." instance=ExtResource("5_ipu61")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 270, -1050.86, 930)
-size = Vector3(200, 1, 200)
-
-[node name="DeathPlane_Slide_Level" parent="." instance=ExtResource("5_ipu61")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 270, -2992.99, 930)
-size = Vector3(3000, 1, 3000)
-
 [connection signal="checkpoint_selected" from="StartMenuCanvas" to="." method="_on_start_menu_canvas_checkpoint_selected"]
 [connection signal="start_button_pressed" from="StartMenuCanvas" to="." method="_on_start_menu_canvas_start_button_pressed"]
