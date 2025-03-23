@@ -22,7 +22,7 @@ class_name GrowingPlatform3D extends StaticBody3D
 ## the percentage of the animation that will have finished when the platform begins to shrink
 @export_range(0.01, 1.0, 0.01) var begin_shrinking_percentage := 0.6
 ## how aggressively the grass scales up with the platform
-@export var grass_mesh_scale_factor := 0.2 / 0.5
+@export var grass_mesh_scale_factor := 0.1 / 0.5
 ## how tall the grass is
 @export var grass_mesh_height := 0.5
 
@@ -35,7 +35,7 @@ class_name GrowingPlatform3D extends StaticBody3D
 
 var platform_mesh_instance: MeshInstance3D
 var platform_collision_shape: CollisionShape3D
-var platform_grass_mesh: MultiMeshInstance3D
+var platform_grass_mesh: GrassMultiMeshInstance3D
 
 func _enter_tree() -> void:
 	visibility_changed.connect(_on_visibility_changed)
@@ -58,7 +58,6 @@ func _ready():
 	else:
 		raycast3D.top_level = false
 	
-	#assert(done_growing_percentage >= 0.1 and done_growing_percentage <= 1.0, "done_growing_percentage must be a percentage between 0.1 and 1.0")
 	assert(done_growing_percentage >= 0.01 and done_growing_percentage <= 1.0, "done_growing_percentage must be a percentage between 0.1 and 1.0")
 	assert(done_growing_percentage <= begin_shrinking_percentage, "done_growing_percentage must be a greather than begin_shrinking_percentage")
 
@@ -74,13 +73,6 @@ func _ready():
 		add_child(platform_collision_shape)
 		platform_collision_shape.shape = BoxShape3D.new()
 		platform_collision_shape.shape.size = initial_size
-	
-	if platform_grass_mesh == null:
-		platform_grass_mesh = MultiMeshInstance3D.new()
-		add_child(platform_grass_mesh)
-		platform_grass_mesh.multimesh = preload("res://themes/growing_platform_3d_multi_mesh.tres")
-		platform_grass_mesh.material_override = preload("res://themes/wind_grass.tres")
-		platform_grass_mesh.scale = Vector3(initial_size.x * grass_mesh_scale_factor, grass_mesh_height, initial_size.x * grass_mesh_scale_factor)
 
 func _process(_delta):
 	if not raycast3D.target_position == final_relative_pos:
@@ -90,12 +82,8 @@ func _process(_delta):
 		if not platform_mesh_instance.mesh.size == initial_size:
 			platform_mesh_instance.mesh.size = initial_size
 			platform_collision_shape.shape.size = initial_size
-			platform_grass_mesh.scale.x = initial_size.x * grass_mesh_scale_factor
-			platform_grass_mesh.scale.z = initial_size.z * grass_mesh_scale_factor
+			platform_grass_mesh.extents = Vector2(initial_size.x * grass_mesh_scale_factor, initial_size.z * grass_mesh_scale_factor)
 			platform_grass_mesh.position.y = initial_size.y / 2
-		
-		if not platform_grass_mesh.scale.y == grass_mesh_height:
-			platform_grass_mesh.scale = Vector3(initial_size.x * grass_mesh_scale_factor, grass_mesh_height, initial_size.x * grass_mesh_scale_factor)
 
 
 func _on_grow_timer_timeout():
@@ -106,10 +94,10 @@ func _on_grow_timer_timeout():
 	tween.parallel().tween_property(platform_mesh_instance.mesh, "size", initial_size, move_time * (1 - begin_shrinking_percentage)).set_delay(move_time * begin_shrinking_percentage)
 	tween.parallel().tween_property(platform_collision_shape.shape, "size", grow_to_size, move_time * done_growing_percentage)
 	tween.parallel().tween_property(platform_collision_shape.shape, "size", initial_size, move_time * (1 - begin_shrinking_percentage)).set_delay(move_time * begin_shrinking_percentage)
-	tween.parallel().tween_property(platform_grass_mesh, "scale:x", grow_to_size.x * grass_mesh_scale_factor, move_time * done_growing_percentage)
-	tween.parallel().tween_property(platform_grass_mesh, "scale:x", initial_size.x * grass_mesh_scale_factor, move_time * (1 - begin_shrinking_percentage)).set_delay(move_time * begin_shrinking_percentage)
-	tween.parallel().tween_property(platform_grass_mesh, "scale:z", grow_to_size.z * grass_mesh_scale_factor, move_time * done_growing_percentage)
-	tween.parallel().tween_property(platform_grass_mesh, "scale:z", initial_size.z * grass_mesh_scale_factor, move_time * (1 - begin_shrinking_percentage)).set_delay(move_time * begin_shrinking_percentage)
+	tween.parallel().tween_property(platform_grass_mesh, "extents:x", grow_to_size.x * grass_mesh_scale_factor, move_time * done_growing_percentage)
+	tween.parallel().tween_property(platform_grass_mesh, "extents:x", initial_size.x * grass_mesh_scale_factor, move_time * (1 - begin_shrinking_percentage)).set_delay(move_time * begin_shrinking_percentage)
+	tween.parallel().tween_property(platform_grass_mesh, "extents:y", grow_to_size.z * grass_mesh_scale_factor, move_time * done_growing_percentage)
+	tween.parallel().tween_property(platform_grass_mesh, "extents:y", initial_size.z * grass_mesh_scale_factor, move_time * (1 - begin_shrinking_percentage)).set_delay(move_time * begin_shrinking_percentage)
 	tween.parallel().tween_property(platform_grass_mesh, "position:y", grow_to_size.y / 2, move_time * done_growing_percentage)
 	tween.parallel().tween_property(platform_grass_mesh, "position:y", initial_size.y / 2, move_time * (1 - begin_shrinking_percentage)).set_delay(move_time * begin_shrinking_percentage)
 	tween.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
@@ -117,6 +105,10 @@ func _on_grow_timer_timeout():
 		if movement_delay - hover_buffer > 0.05:
 			tween = create_tween()
 			tween.tween_property(self, "global_position:y", global_position.y - appear_from_height_offset, move_buffer).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN_OUT)
+			tween.finished.connect(func():
+				platform_grass_mesh.queue_free()
+				platform_grass_mesh = null
+				)
 		)
 
 func start_timers():
@@ -140,10 +132,19 @@ func reset_position():
 	global_position = start_pos
 	platform_mesh_instance.mesh.size = initial_size
 	platform_collision_shape.shape.size = initial_size
-	platform_grass_mesh.scale.x = initial_size.x * grass_mesh_scale_factor
-	platform_grass_mesh.scale.z = initial_size.z * grass_mesh_scale_factor
-	platform_grass_mesh.position.y = initial_size.y / 2
+	if platform_grass_mesh != null:
+		platform_grass_mesh.extents = Vector2(initial_size.x * grass_mesh_scale_factor, initial_size.z * grass_mesh_scale_factor)
+		platform_grass_mesh.position.y = initial_size.y / 2
 
 func _on_start_move_timer_timeout() -> void:
 	tween = create_tween()
 	tween.tween_property(self, "global_position:y", global_position.y + appear_from_height_offset, move_buffer).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	tween.finished.connect(func():
+		if platform_grass_mesh == null:
+			platform_grass_mesh = GrassMultiMeshInstance3D.new()
+			platform_grass_mesh.multimesh = preload("res://themes/growing_platform_3d_multi_mesh.tres").duplicate(true)
+			platform_grass_mesh.material_override = preload("res://themes/wind_grass.tres").duplicate(true)
+			platform_grass_mesh.extents = Vector2(initial_size.x * grass_mesh_scale_factor, initial_size.z * grass_mesh_scale_factor)
+			platform_grass_mesh.scale.y = 0.5
+			add_child(platform_grass_mesh)
+		)

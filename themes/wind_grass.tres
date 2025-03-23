@@ -24,9 +24,10 @@ seamless = true
 noise = SubResource("5")
 
 [resource]
+resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("1")
-shader_parameter/wind_speed = 0.0
+shader_parameter/wind_speed = 0.05
 shader_parameter/wind_strength = 2.0
 shader_parameter/wind_texture_tile_size = 20.0
 shader_parameter/wind_vertical_strength = 0.3

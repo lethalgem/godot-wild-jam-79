@@ -1,9 +1,12 @@
 @tool
-extends MultiMeshInstance3D
+class_name GrassMultiMeshInstance3D extends MultiMeshInstance3D
 
 @export var extents := Vector2.ONE
 @export var spawn_outside_circle := false
 @export var radius := 12.0
+
+@onready var current_extents := extents
+
 #@export var character_path := NodePath()
 #
 #@onready var _character: Node3D = get_node(character_path)
@@ -41,7 +44,10 @@ func _on_grass_visibility_changed() -> void:
 	if visible:
 		_ready()
 
-#func _process(_delta: float) -> void:
+func _process(_delta: float) -> void:
+	
+	if current_extents != extents:
+		_ready()
 	
 	#material_override.set_shader_parameter(
 		#"character_position", _character.global_transform.origin
