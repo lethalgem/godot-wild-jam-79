@@ -75,3 +75,4 @@ bus = &"sfx"
 unique_name_in_owner = true
 stream = ExtResource("7_460ac")
 volume_db = -15.0
+bus = &"sfx"

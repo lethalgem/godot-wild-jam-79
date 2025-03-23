@@ -43,10 +43,15 @@ font_color = Color(1, 1, 1, 0.972549)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ctot"]
 
-[node name="SelectLevelMenu" type="Control"]
+[node name="SelectLevelMenu" type="Control" node_paths=PackedStringArray("button_sound_player")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_cwigf")
+button_sound_player = NodePath("ButtonSound")
+
+[node name="ButtonSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_g532r")
+bus = &"sfx"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -248,9 +253,6 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_n35ux")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_fb6cq")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_2ctot")
 text = "Go Back"
-
-[node name="ButtonSound" type="AudioStreamPlayer" parent="MarginContainer"]
-stream = ExtResource("3_g532r")
 
 [connection signal="button_up" from="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/HBoxContainer/CheckpointOne" to="." method="_on_checkpoint_one_button_up"]
 [connection signal="button_up" from="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/HBoxContainer/CheckpointTwo" to="." method="_on_checkpoint_two_button_up"]

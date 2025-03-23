@@ -24,10 +24,16 @@ font_size = 65
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2ctot"]
 
-[node name="SettingsMenu" type="Control"]
+[node name="SettingsMenu" type="Control" node_paths=PackedStringArray("button_sound_player", "fullscreen_button")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_labj1")
+button_sound_player = NodePath("ButtonSound")
+fullscreen_button = NodePath("MarginContainer/GridContainer/VBoxContainer/FullscreenToggle")
+
+[node name="ButtonSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_lwwgp")
+bus = &"sfx"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -56,6 +62,7 @@ size_flags_vertical = 4
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_constants/separation = 50
 
 [node name="SelectLevelTitle" type="Label" parent="MarginContainer/GridContainer/VBoxContainer"]
 layout_mode = 2
@@ -64,57 +71,66 @@ size_flags_vertical = 8
 text = "Settings"
 label_settings = SubResource("LabelSettings_labj1")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/GridContainer/VBoxContainer"]
+[node name="SoundControlsVBoxContainer" type="VBoxContainer" parent="MarginContainer/GridContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="MasterLabel" type="Label" parent="MarginContainer/GridContainer/VBoxContainer/VBoxContainer"]
+[node name="MasterLabel" type="Label" parent="MarginContainer/GridContainer/VBoxContainer/SoundControlsVBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Master"
 label_settings = ExtResource("2_wswnh")
 horizontal_alignment = 1
 
-[node name="Master" type="HSlider" parent="MarginContainer/GridContainer/VBoxContainer/VBoxContainer"]
+[node name="Master" type="HSlider" parent="MarginContainer/GridContainer/VBoxContainer/SoundControlsVBoxContainer"]
 layout_mode = 2
 max_value = 1.0
 step = 0.001
 script = ExtResource("4_lwwgp")
 bus_name = "Master"
 
-[node name="MusicLabel" type="Label" parent="MarginContainer/GridContainer/VBoxContainer/VBoxContainer"]
+[node name="MusicLabel" type="Label" parent="MarginContainer/GridContainer/VBoxContainer/SoundControlsVBoxContainer"]
 layout_mode = 2
 text = "Music"
 label_settings = ExtResource("2_wswnh")
 horizontal_alignment = 1
 
-[node name="Music" type="HSlider" parent="MarginContainer/GridContainer/VBoxContainer/VBoxContainer"]
+[node name="Music" type="HSlider" parent="MarginContainer/GridContainer/VBoxContainer/SoundControlsVBoxContainer"]
 layout_mode = 2
 max_value = 1.0
 step = 0.001
 script = ExtResource("4_lwwgp")
 bus_name = "music"
 
-[node name="SFXLabel" type="Label" parent="MarginContainer/GridContainer/VBoxContainer/VBoxContainer"]
+[node name="SFXLabel" type="Label" parent="MarginContainer/GridContainer/VBoxContainer/SoundControlsVBoxContainer"]
 layout_mode = 2
 text = "SFX"
 label_settings = ExtResource("2_wswnh")
 horizontal_alignment = 1
 
-[node name="SFX" type="HSlider" parent="MarginContainer/GridContainer/VBoxContainer/VBoxContainer"]
+[node name="SFX" type="HSlider" parent="MarginContainer/GridContainer/VBoxContainer/SoundControlsVBoxContainer"]
 layout_mode = 2
 max_value = 1.0
 step = 0.001
 script = ExtResource("4_lwwgp")
 bus_name = "sfx"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/GridContainer"]
+[node name="FullscreenToggle" type="Button" parent="MarginContainer/GridContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 2
+size_flags_horizontal = 3
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.301961, 0.12549, 0.113725, 1)
+theme_override_fonts/font = ExtResource("1_cr101")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lwwgp")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_bgjg7")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_48ojb")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_n35ux")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_fb6cq")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2ctot")
+text = "Fullscreen"
 
-[node name="ButtonSound" type="AudioStreamPlayer" parent="MarginContainer/GridContainer/HBoxContainer"]
-stream = ExtResource("5_lwwgp")
-
-[node name="GoBack" type="Button" parent="MarginContainer/GridContainer/HBoxContainer"]
+[node name="GoBack" type="Button" parent="MarginContainer/GridContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
@@ -130,7 +146,8 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_fb6cq")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_2ctot")
 text = "Go Back"
 
-[connection signal="value_changed" from="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/Master" to="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/Master" method="_on_value_changed"]
-[connection signal="value_changed" from="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/Music" to="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/Music" method="_on_value_changed"]
-[connection signal="value_changed" from="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/SFX" to="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/SFX" method="_on_value_changed"]
-[connection signal="pressed" from="MarginContainer/GridContainer/HBoxContainer/GoBack" to="." method="_on_go_back_pressed"]
+[connection signal="value_changed" from="MarginContainer/GridContainer/VBoxContainer/SoundControlsVBoxContainer/Master" to="MarginContainer/GridContainer/VBoxContainer/SoundControlsVBoxContainer/Master" method="_on_value_changed"]
+[connection signal="value_changed" from="MarginContainer/GridContainer/VBoxContainer/SoundControlsVBoxContainer/Music" to="MarginContainer/GridContainer/VBoxContainer/SoundControlsVBoxContainer/Music" method="_on_value_changed"]
+[connection signal="value_changed" from="MarginContainer/GridContainer/VBoxContainer/SoundControlsVBoxContainer/SFX" to="MarginContainer/GridContainer/VBoxContainer/SoundControlsVBoxContainer/SFX" method="_on_value_changed"]
+[connection signal="button_up" from="MarginContainer/GridContainer/VBoxContainer/FullscreenToggle" to="." method="_on_fullscreen_toggle_button_up"]
+[connection signal="button_up" from="MarginContainer/GridContainer/VBoxContainer/GoBack" to="." method="_on_go_back_button_up"]

@@ -5,11 +5,10 @@ signal checkpoint_selected
 
 @export var start_button: Button
 @export var death_count_label: Label
-@export var setting_menu: Control
-@export var select_level_menu: Control
-@export var how_to_play_menu: Control
-@export var button_sound: AudioStreamPlayer
-
+@export var setting_menu: SettingsMenu
+@export var select_level_menu: SelectLevelMenu
+@export var how_to_play_menu: HowToPlayMenu
+@export var button_sound_player: AudioStreamPlayer
 
 @onready var original_start_button_text := start_button.text
 
@@ -22,8 +21,8 @@ func show_menu(is_player_pause: bool):
 		start_button.text = original_start_button_text
 
 func _on_start_game_pressed():
+	button_sound_player.play()
 	start_button_pressed.emit()
-	
 
 func _ready():
 	death_count_label.text = "Death Count: 0"

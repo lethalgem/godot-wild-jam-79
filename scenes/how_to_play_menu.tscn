@@ -27,7 +27,7 @@ corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_itw7n"]
 
-[node name="HowToPlayMenu" type="CenterContainer"]
+[node name="HowToPlayMenu" type="CenterContainer" node_paths=PackedStringArray("button_sound_player")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -36,6 +36,11 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_tl7pv")
+button_sound_player = NodePath("ButtonSound")
+
+[node name="ButtonSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_rkd4o")
+bus = &"sfx"
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 2
@@ -77,8 +82,5 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_6jc1p")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_0864l")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_itw7n")
 text = "Go Back"
-
-[node name="ButtonSound" type="AudioStreamPlayer" parent="PanelContainer"]
-stream = ExtResource("2_rkd4o")
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
