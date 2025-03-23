@@ -36,7 +36,7 @@ func _ready() -> void:
 	bottom_mesh_instance.mesh.inner_radius = bottom_mesh_instance.mesh.outer_radius - 1.0
 	bottom_mesh_instance.mesh.surface_set_material(0, preload("res://themes/static_platform_3D.tres"))
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		if mesh_instance.mesh.height != height:
 			mesh_instance.mesh.height = height

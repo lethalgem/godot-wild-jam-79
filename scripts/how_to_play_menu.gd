@@ -1,8 +1,5 @@
 class_name HowToPlayMenu extends Control
 
-signal checkpoint_selected
-
-@onready var dim_rect = $"../PanelContainer"
 @export var start_menu : Control
 	
 func toggle_menu():

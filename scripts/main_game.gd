@@ -63,7 +63,6 @@ func jump_to_section(num: int):
 
 ## Ensures that the music is only interrupted when we respawn and not before
 func respawn(section: PlatformingSection):
-	print(section)
 	section.reset_and_respawn()
 	$AudioStreamPlayer.play(section.song_start)
 	death_count += 1
