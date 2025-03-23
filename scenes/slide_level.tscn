@@ -46,21 +46,21 @@ visible = false
 size = Vector3(100, 1, 100)
 
 [node name="Elevator" parent="." instance=ExtResource("6_6kj16")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -29.2063, 27.5985)
-move_time = 2.5
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -29.206, 24)
+move_time = 3.0
 movement_delay = 1.5
-final_relative_pos = Vector3(0, 360, 0)
+final_relative_pos = Vector3(0, 420, 0)
 initial_size = Vector3(10, 10, 10)
 grow_to_size = Vector3(10, 10, 10)
 done_growing_percentage = 0.15
-begin_shrinking_percentage = 0.85
+begin_shrinking_percentage = 0.95
 
 [node name="Slide1" parent="." instance=ExtResource("6_6kj16")]
 transform = Transform3D(1, 0, 0, 0, 0.603208, -0.797584, 0, 0.797584, 0.603208, 0, 250, 103.645)
-move_time = 3.0
+move_time = 4.0
 movement_delay = 5.25
+appear_from_height_offset = 0
 final_relative_pos = Vector3(0, 0, 0)
-initial_size = Vector3(0, 0, 0)
 grow_to_size = Vector3(5, 0.5, 220)
 done_growing_percentage = 0.1
 begin_shrinking_percentage = 0.99
@@ -69,8 +69,8 @@ begin_shrinking_percentage = 0.99
 transform = Transform3D(0.788011, 0.457526, 0.411958, 0, 0.669131, -0.743145, -0.615662, 0.585606, 0.527282, 29.6625, 5.62299, 214.851)
 move_time = 3.0
 movement_delay = 7.5
+appear_from_height_offset = 0
 final_relative_pos = Vector3(0, 0, 0)
-initial_size = Vector3(0, 0, 0)
 grow_to_size = Vector3(25, 0.5, 220)
 done_growing_percentage = 0.1
 begin_shrinking_percentage = 0.99
@@ -79,37 +79,31 @@ begin_shrinking_percentage = 0.99
 transform = Transform3D(0.87462, -0.360284, -0.324401, 0, 0.669131, -0.743145, 0.48481, 0.649969, 0.585235, 17.9091, -356.528, 403.826)
 move_time = 4.0
 movement_delay = 8.75
+appear_from_height_offset = 0
 final_relative_pos = Vector3(0, 0, 0)
-initial_size = Vector3(0, 0, 0)
 grow_to_size = Vector3(75, 20, 660)
 done_growing_percentage = 0.1
 begin_shrinking_percentage = 0.99
 
 [node name="Slide4" parent="." instance=ExtResource("6_6kj16")]
 transform = Transform3D(0.22325, 0.724389, 0.652242, 0, 0.669131, -0.743145, -0.974761, 0.165907, 0.149383, 262.941, -1326.71, 734.093)
+move_time = 15.0
 movement_delay = 10.5
+appear_from_height_offset = 0
 final_relative_pos = Vector3(0, 0, 0)
-initial_size = Vector3(0, 0, 0)
 grow_to_size = Vector3(200, 20, 1500)
 done_growing_percentage = 0.1
 begin_shrinking_percentage = 0.99
 
-[node name="Mini Landing" parent="." instance=ExtResource("6_6kj16")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 817.674, -1930.75, 844.878)
-final_relative_pos = Vector3(0, 0, 0)
-initial_size = Vector3(25, 5, 25)
-grow_to_size = Vector3(25, 5, 25)
-done_growing_percentage = 0.15
-begin_shrinking_percentage = 0.85
-
 [node name="Landing" parent="." instance=ExtResource("6_6kj16")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 817.674, -1935.75, 844.878)
-move_time = 30.0
-movement_delay = 16.0
+transform = Transform3D(0.965016, 0, -0.262189, 0, 1, 0, 0.262189, 0, 0.965016, 750.424, -1889.74, 944.436)
+move_time = 3.0
+movement_delay = 18.0
+appear_from_height_offset = 0
 final_relative_pos = Vector3(0, 0, 0)
-initial_size = Vector3(150, 10, 150)
-grow_to_size = Vector3(25, 10, 25)
-done_growing_percentage = 0.01
-begin_shrinking_percentage = 0.99
+initial_size = Vector3(40, 10, 40)
+grow_to_size = Vector3(50, 10, 50)
+done_growing_percentage = 0.1
+begin_shrinking_percentage = 0.9
 
 [connection signal="player_entered" from="CheckpointRespawn3D" to="." method="_on_checkpoint_respawn_3d_player_entered"]
