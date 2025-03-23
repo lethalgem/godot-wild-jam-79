@@ -41,10 +41,6 @@ environment = ExtResource("2_d2op2")
 
 [node name="Player3D" parent="." instance=ExtResource("3_0rdsr")]
 
-[node name="DeathPlane3D" parent="." instance=ExtResource("5_ipu61")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -375.801, -19, 419)
-size = Vector3(1000, 1, 1000)
-
 [node name="FPSCounter" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
@@ -85,6 +81,14 @@ player = NodePath("../Player3D")
 [node name="Stair_Level" parent="." node_paths=PackedStringArray("player") instance=ExtResource("16_ihbck")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -506.147, -2889.35, 1744.06)
 player = NodePath("../Player3D")
+
+[node name="DeathPlane3D" parent="." instance=ExtResource("5_ipu61")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -375.801, -19, 419)
+size = Vector3(1000, 1, 1000)
+
+[node name="DeathPlane3D_Branching_Level" parent="." instance=ExtResource("5_ipu61")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 231.199, -19, 139)
+size = Vector3(500, 1, 500)
 
 [node name="DeathPlane_Mid_Level" parent="." instance=ExtResource("5_ipu61")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 237.553, -1014.21, 419)
