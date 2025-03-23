@@ -125,6 +125,7 @@ func start_timers():
 		if movement_delay - hover_buffer > 0.05:
 			start_move_timer.wait_time = movement_delay - hover_buffer - move_buffer
 			start_move_timer.start()
+			global_position.y = start_pos.y
 			global_position.y -= appear_from_height_offset
 		else:
 			print_debug("hover_buffer and move_buffer would have the platform appear before 0 seconds from the checkpoint so it is not being used, ignore if this is intended")
