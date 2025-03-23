@@ -53,3 +53,6 @@ func _on_checkpoint_six_button_up() -> void:
 	
 func _on_checkpoint_seven_button_up() -> void:
 	checkpoint_selected.emit(7)
+
+func _on_checkpoint_eight_button_up() -> void:
+	checkpoint_selected.emit(8)

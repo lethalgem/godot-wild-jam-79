@@ -194,6 +194,8 @@ text = "Checkpoint 6"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/GridContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 50
 
 [node name="CheckpointSeven" type="Button" parent="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
@@ -210,6 +212,22 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_y3dgh")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_8c73j")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_bt7ls")
 text = "Checkpoint 7"
+
+[node name="CheckpointEight" type="Button" parent="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.301961, 0.12549, 0.113725, 1)
+theme_override_fonts/font = ExtResource("2_y3dgh")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cheir")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_g532r")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_cwigf")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_y3dgh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_8c73j")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bt7ls")
+text = "Checkpoint 8"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/GridContainer"]
 layout_mode = 2
@@ -241,4 +259,5 @@ stream = ExtResource("3_g532r")
 [connection signal="button_up" from="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/HBoxContainer2/CheckpointFive" to="." method="_on_checkpoint_five_button_up"]
 [connection signal="button_up" from="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/HBoxContainer2/CheckpointSix" to="." method="_on_checkpoint_six_button_up"]
 [connection signal="button_up" from="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/HBoxContainer3/CheckpointSeven" to="." method="_on_checkpoint_seven_button_up"]
+[connection signal="button_up" from="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/HBoxContainer3/CheckpointEight" to="." method="_on_checkpoint_eight_button_up"]
 [connection signal="pressed" from="MarginContainer/GridContainer/HBoxContainer/GoBack" to="." method="_on_go_back_pressed"]
