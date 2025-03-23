@@ -1,0 +1,1 @@
+class_name FallBody3D extends RigidBody3D

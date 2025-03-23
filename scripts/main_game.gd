@@ -3,6 +3,7 @@ class_name MainGame extends Node3D
 @export var start_menu: StartMenu
 @export var player: Player3D
 @export var world_environment: WorldEnvironment
+@export var fall_body_spawner: FallSpawner3D
 
 @onready var return_to_camera_anchor_rotation := player.camera_anchor.rotation
 @onready var return_to_camera_3D_fov := player.camera_3D.fov
@@ -22,6 +23,8 @@ var time_between_beats = 0.375 # seconds
 var time_to_first_beat = 1.25 # seconds
 var starting_fresh_game = true
 var color_tween: Tween
+var end_game_screen: EndGameScreen
+
 
 func _ready() -> void:
 	# Listen to all sections to know when the player has entered
@@ -123,12 +126,25 @@ func _on_start_menu_canvas_checkpoint_selected(num: int) -> void:
 	jump_to_section(num)
 
 
-func _on_stair_level_end_game_reached():
-	$AudioStreamPlayer.stream = preload("res://assets/audio/music/rocket-phonk-music-141359.mp3")
-	$AudioStreamPlayer.play()
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+func _on_stair_level_end_game_reached(screen: EndGameScreen):
+	if end_game_screen == null:
+		end_game_screen = screen
+		end_game_screen.set_death_count(death_count)
+		
+		$AudioStreamPlayer.stream = preload("res://assets/audio/music/rocket-phonk-music-141359.mp3")
+		$AudioStreamPlayer.play()
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		
+		var tween = create_tween()
+		tween.parallel().tween_property(player.camera_anchor, "rotation", in_menu_camera_anchor_rotation, menu_animation_time).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		tween.parallel().tween_property(player.camera_3D, "fov", in_menu_camera_3D_fov, menu_animation_time).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+		fall_body_spawner._start_spawns()
+
+func _on_fall_spawner_3d_spawned_body() -> void:
+	if end_game_screen != null:
+		end_game_screen.set_death_count(death_count)
+		death_count -= 1
 	
-	var tween = create_tween()
-	tween.parallel().tween_property(player.camera_anchor, "rotation", in_menu_camera_anchor_rotation, menu_animation_time).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	tween.parallel().tween_property(player.camera_3D, "fov", in_menu_camera_3D_fov, menu_animation_time).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	
+	if death_count < 0:
+		fall_body_spawner._stop_spawns()
