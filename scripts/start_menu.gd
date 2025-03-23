@@ -1,6 +1,7 @@
 class_name StartMenu extends CanvasLayer
 
 signal start_button_pressed
+signal checkpoint_selected
 
 @export var start_button: Button
 @export var death_count_label: Label
@@ -32,3 +33,7 @@ func dismiss_menu():
 	setting_menu._on_go_back_pressed()
 	select_level_menu._on_go_back_pressed()
 	
+
+
+func _on_select_level_menu_checkpoint_selected(num: int) -> void:
+	checkpoint_selected.emit(num)

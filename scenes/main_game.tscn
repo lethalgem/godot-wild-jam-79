@@ -71,4 +71,5 @@ player = NodePath("../Player3D")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 237.553, -1014.21, 419)
 size = Vector3(1000, 1, 1000)
 
+[connection signal="checkpoint_selected" from="StartMenuCanvas" to="." method="_on_start_menu_canvas_checkpoint_selected"]
 [connection signal="start_button_pressed" from="StartMenuCanvas" to="." method="_on_start_menu_canvas_start_button_pressed"]

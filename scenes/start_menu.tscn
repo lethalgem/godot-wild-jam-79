@@ -236,3 +236,4 @@ start_menu = NodePath("../../StartMenu")
 [connection signal="pressed" from="StartMenu/MarginContainer/VBoxContainer/Settings" to="SettingMenuCanvas/SettingsMenu" method="_on_settings_pressed"]
 [connection signal="pressed" from="StartMenu/MarginContainer/VBoxContainer/SelectCheckpoint" to="SelectMenuCanvas/SelectLevelMenu" method="_on_select_checkpoint_pressed"]
 [connection signal="pressed" from="StartMenu/MarginContainer/VBoxContainer/StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="checkpoint_selected" from="SelectMenuCanvas/SelectLevelMenu" to="." method="_on_select_level_menu_checkpoint_selected"]

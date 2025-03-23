@@ -195,4 +195,9 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_fb6cq")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_2ctot")
 text = "Go Back"
 
+[connection signal="button_up" from="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/HBoxContainer/CheckpointOne" to="." method="_on_checkpoint_one_button_up"]
+[connection signal="button_up" from="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/HBoxContainer/CheckpointTwo" to="." method="_on_checkpoint_two_button_up"]
+[connection signal="button_up" from="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/HBoxContainer/CheckpointThree" to="." method="_on_checkpoint_three_button_up"]
+[connection signal="button_up" from="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/HBoxContainer2/CheckpointFour" to="." method="_on_checkpoint_four_button_up"]
+[connection signal="button_up" from="MarginContainer/GridContainer/VBoxContainer/VBoxContainer/HBoxContainer2/CheckpointFive" to="." method="_on_checkpoint_five_button_up"]
 [connection signal="pressed" from="MarginContainer/GridContainer/HBoxContainer/GoBack" to="." method="_on_go_back_pressed"]
